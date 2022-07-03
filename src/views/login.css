@@ -1,0 +1,414 @@
+@media all and (min-width: 1080px ) {
+    .Login {
+      padding: 50px;
+    }
+  
+    .Login form {
+      margin: 0 auto;
+      max-width: 320px;
+    }
+  }
+
+  /*@import url('https://fonts.googleapis.com/css?family=Roboto');*/
+@import url("https://fonts.googleapis.com/css?family=Montserrat:400,800");
+* {
+  box-sizing: border-box;
+  outline: none;
+  outline-style: none;
+}
+
+*:focus {
+  outline: none;
+  outline-style: none;
+}
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+  box-sizing: border-box;
+}
+
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+  display: block;
+}
+
+a {
+  outline: 0;
+  border: none;
+  outline-style: 0;
+  -moz-outline-style: 0;
+}
+
+body {
+  background-color: #f6f5f7;
+  font-weight: 400;
+  color: #2e2f3e;
+  font-family: "Montserrat", sans-serif;
+  font-size: 14px;
+  line-height: 18px;
+}
+
+ol, ul {
+  list-style: none;
+}
+
+blockquote, q {
+  quotes: none;
+}
+
+blockquote:before, blockquote:after,
+q:before, q:after {
+  content: "";
+  content: none;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+textarea {
+  white-space: normal;
+  font-size: inherit;
+  padding: 0;
+}
+
+select {
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  text-align: center;
+}
+
+.auth-wrapper {
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+  padding: 1em;
+  background-color: #fff;
+  width: 70%;
+  margin: 10% auto;
+  top: 5em;
+  position: relative;
+  border-radius: 8px;
+  padding: 30px;
+}
+
+.auth-form-wrapper {
+  display: inline-flex;
+  width: 100%;
+}
+
+.auth-media {
+  width: 360px;
+}
+
+.auth-media > img {
+  width: inherit;
+  height: 360px;
+}
+
+.auth-form {
+  width: 65%;
+  padding: 8px 0px 8px 0px;
+  margin: 0 auto;
+}
+
+.text {
+  width: 100%;
+  padding: 12px 15px;
+  border: none;
+  background-color: #eee;
+  margin-bottom: 10px;
+  letter-spacing: 0.2px;
+  border-radius: 10px;
+}
+
+.password {
+  width: 100%;
+  padding: 12px 15px;
+  border: none;
+  background-color: #eee;
+  margin-bottom: 10px;
+  letter-spacing: 0.2px;
+  border-radius: 10px;
+}
+
+.submit {
+  width: 60%;
+  padding: 10px 0 10px 0;
+  border: none;
+  background-color: #007BFF;
+  border-radius: 3pc;
+  color: #fff;
+  margin: 0 auto;
+  display: block;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+.button{
+  width: 60%;
+  padding: 10px 0 10px 0;
+  border: none;
+  background-color: #007BFF;
+  border-radius: 3pc;
+  color: #fff;
+  margin: 0 auto;
+  display: block;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+.select{
+  width: 100%;
+  padding: 12px 15px;
+  border: none;
+  background-color: #eee;
+  margin-bottom: 10px;
+  letter-spacing: 0.2px;
+  border-radius: 10px;
+}
+
+.auth-form-label {
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.primary-label {
+  font-size: 28px;
+  font-weight: 700;
+}
+
+.social-container a {
+  border: 1px solid #DDDDDD;
+  border-radius: 50%;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 5px;
+  height: 40px;
+  width: 40px;
+}
+
+.social-container {
+  margin: 20px 0;
+  text-align: center;
+}
+
+.auth-links-container {
+  margin-bottom: 8px;
+}
+
+.auth-fp-link {
+  font-size: small;
+  text-align: center;
+}
+@media only screen and (min-width: 1290px){
+  .auth-wrapper {
+    width: 80%;
+  }
+}
+@media only screen and (max-width: 1289px) {
+  .auth-wrapper {
+    width: 80%;
+  }
+}
+@media only screen and (max-width: 991px) {
+  .auth-wrapper {
+    width: 90%;
+    top: 3em;
+  }
+
+  .auth-form-wrapper {
+    display: block;
+  }
+
+  .auth-media {
+    width: 100%;
+  }
+
+  .auth-form {
+    width: 100%;
+    padding: 22px 0px 8px 0px;
+  }
+}
+@media only screen and (max-width: 829px) {
+  .auth-wrapper {
+    width: 90%;
+    top: 3em;
+  }
+
+  .auth-form-wrapper {
+    display: block;
+  }
+
+  .auth-media {
+    width: 100%;
+  }
+
+  .auth-form {
+    width: 100%;
+    padding: 22px 0px 8px 0px;
+  }
+}
+@media only screen and (max-width: 775px) {
+  .auth-wrapper {
+    width: 90%;
+    top: 3em;
+  }
+
+  .auth-form-wrapper {
+    display: block;
+  }
+
+  .auth-media {
+    width: 100%;
+  }
+
+  .auth-form {
+    width: 100%;
+    padding: 22px 0px 8px 0px;
+  }
+}
+
+@media only screen and (max-width: 620px) {
+  .auth-wrapper {
+    width: 90%;
+    top: 3em;
+  }
+
+  .auth-form-wrapper {
+    display: block;
+  }
+
+  .auth-media {
+    width: 100%;
+  }
+
+  .auth-form {
+    width: 100%;
+    padding: 22px 0px 8px 0px;
+  }
+}
+
+
+
+#snackbar {
+  visibility: hidden; /* Hidden by default. Visible on click */
+  min-width: 250px; /* Set a default minimum width */
+  margin-left: -125px; /* Divide value of min-width by 2 */
+  background-color: rgb(221, 38, 38); /* Black background color */
+  color: #fff; /* White text color */
+  text-align: center; /* Centered text */
+  border-radius: 2px; /* Rounded borders */
+  padding: 16px; /* Padding */
+  position: fixed; /* Sit on top of the screen */
+  z-index: 1; /* Add a z-index if needed */
+  left: 50%; /* Center the snackbar */
+  top: 30px; /* 30px from the bottom */
+}
+
+/* Show the snackbar when clicking on a button (class added with JavaScript) */
+#snackbar.show {
+  visibility: visible; /* Show the snackbar */
+  /* Add animation: Take 0.5 seconds to fade in and out the snackbar.
+  However, delay the fade out process for 2.5 seconds */
+  -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+  animation: fadein 0.5s, fadeout 0.5s 2.5s;
+}
+
+/* Animations to fade the snackbar in and out */
+@-webkit-keyframes fadein {
+  from {top: 0; opacity: 0;}
+  to {top: 30px; opacity: 1;}
+}
+
+@keyframes fadein {
+  from {top: 0; opacity: 0;}
+  to {top: 30px; opacity: 1;}
+}
+
+@-webkit-keyframes fadeout {
+  from {top: 30px; opacity: 1;}
+  to {top: 0; opacity: 0;}
+}
+
+@keyframes fadeout {
+  from {top: 30px; opacity: 1;}
+  to {top: 0; opacity: 0;}
+}
+
+#snackbar2 {
+  visibility: hidden; /* Hidden by default. Visible on click */
+  min-width: 250px; /* Set a default minimum width */
+  margin-left: -125px; /* Divide value of min-width by 2 */
+  background-color: rgb(221, 38, 38); /* Black background color */
+  color: #fff; /* White text color */
+  text-align: center; /* Centered text */
+  border-radius: 2px; /* Rounded borders */
+  padding: 16px; /* Padding */
+  position: fixed; /* Sit on top of the screen */
+  z-index: 1; /* Add a z-index if needed */
+  left: 50%; /* Center the snackbar */
+  top: 30px; /* 30px from the bottom */
+}
+
+/* Show the snackbar when clicking on a button (class added with JavaScript) */
+#snackbar2.show {
+  visibility: visible; /* Show the snackbar */
+  /* Add animation: Take 0.5 seconds to fade in and out the snackbar.
+  However, delay the fade out process for 2.5 seconds */
+  -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+  animation: fadein 0.5s, fadeout 0.5s 2.5s;
+}
+
+/* Animations to fade the snackbar in and out */
+@-webkit-keyframes fadein {
+  from {top: 0; opacity: 0;}
+  to {top: 30px; opacity: 1;}
+}
+
+@keyframes fadein {
+  from {top: 0; opacity: 0;}
+  to {top: 30px; opacity: 1;}
+}
+
+@-webkit-keyframes fadeout {
+  from {top: 30px; opacity: 1;}
+  to {top: 0; opacity: 0;}
+}
+
+@keyframes fadeout {
+  from {top: 30px; opacity: 1;}
+  to {top: 0; opacity: 0;}
+}
+
+.loginform{
+  background: rgb(0,0,0);
+background: linear-gradient(90deg, rgba(0,0,0,1) 28%, rgba(0,0,0,1) 30%, rgba(29,29,29,1) 91%);
+}
+
+.loginbutton{
+  background: rgb(34,33,0);
+background: radial-gradient(circle, rgba(34,33,0,1) 0%, rgba(224,161,22,1) 0%, rgba(184,142,2,1) 100%);
+color: black;
+}

@@ -1,0 +1,9 @@
+{
+    "welcome_to_react": "Biienvenue a React et react-i18next",
+    "sign_in": "تسجيل الدخول",
+    "email_placeholder": "البريد الإلكتروني",
+    "password_placeholder": "كلمة المرور",
+    "language": "English",
+    "employee_page_heading": "إدارة الموظفين",
+    "customer_page_heading": "إدارة العملاء"
+}

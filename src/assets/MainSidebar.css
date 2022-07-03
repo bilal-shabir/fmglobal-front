@@ -1,0 +1,13 @@
+.collapsed{
+    max-width: 95% !important;
+    flex:95% !important;
+    margin-left: 5% !important;
+    width:5% !important ;
+}
+.bg{
+    background: linear-gradient(180deg, rgba(231,55,115,1) 0%, rgba(0,0,0,0.6334908963585435) 0%);
+}
+
+.mainsidebarbg{
+    background-color: black;
+}

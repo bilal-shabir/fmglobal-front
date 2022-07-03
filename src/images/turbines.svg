@@ -1,0 +1,70 @@
+<svg id='solar-wind-combi' xmlns='http://www.w3.org/2000/svg' width='100' height='168.19'>
+    <defs>
+        <style>
+            .cls-1{fill:#cdc3b9;mix-blend-mode:multiply}.cls-1,.cls-10,.cls-11,.cls-2,.cls-3,.cls-4,.cls-8{fill-rule:evenodd}
+            .cls-2{fill:#cdd7dc}.cls-3{fill:#b2bbc0}.cls-4{fill:#c3cacd}.cls-11,.cls-5,.cls-8{fill:#fff}.cls-10{fill:#26478a}.cls-11{opacity:.2}
+        </style>
+    </defs>
+    <g id='turbines'>
+        <path id='Shape_552_copy' data-name='Shape 552 copy' class='cls-1' d='M2063 1058l81 14 .96 14.08z' transform='translate(-2063 -875)'/>
+        <path class='cls-2' d='M2146.27 962.136l.98 123.164a17.318 17.318 0 0 1-13.29 0l5.51-122.84z' transform='translate(-2063 -875)'/>
+        <path class='cls-3' d='M2149.19 963.433h-13.93v-12.646s1.09-4.216 6.8-4.216 7.13 3.891 7.13 3.891v12.971z' transform='translate(-2063 -875)'/>
+       
+        <circle class='cls-5' cx='79.62' cy='80.062' r='6'/>
+    </g>
+    <g id='anim'>
+            <path class='cls-4' d='M2147.19 959.417l.79 2.125s6.74 2.127 10.83 2.257c0 0 16.62 55.631 16.93 60.751.18 2.78-1.81 2.78-2.38 1.94s-29.62-66.126-29.62-66.126z' 
+            transform='translate(-2063 -875)'/>
+            <path id='Shape_526_copy' data-name='Shape 526 copy' class='cls-4' 
+                d='M2137.18 955.162l-2.23-.373s-5.45 4.924-7.61 8.408c0 0-56.19-13.56-60.79-15.849-2.49-1.24-1.49-2.963-.48-3.039s72.02 7.387 72.02 7.387z'
+                transform='translate(-2063 -875)'
+            />
+            <path id='Shape_526_copy_2' data-name='Shape 526 copy 2' class='cls-4' d='M2145.28 949.452l1.45-1.747s-2.03-7.341-3.95-10.962c0 0 40.5-41.6 44.79-44.423 
+            2.33-1.527 3.31.2 2.87 1.115s-42.62 58.544-42.62 58.544z' transform='translate(-2063 -875)'/>
+
+            <animateTransform id="1" attributeName="transform"
+                attributeType="XML"
+                type="rotate"
+                from="0 79.620003 80.061996"
+                to="360 79.620003 80.061996"
+                dur="10s"
+                repeatCount="indefinite"
+            />
+    </g>
+    <g id='solar'>
+        <path class='cls-1' d='M2073 1150l53-21-9.04 34.08z' transform='translate(-2063 -875)'/>
+        <path d='M2117.43 1163.18l-22.98-39.92 1.71-5.5 23.25 36.55z' transform='translate(-2063 -875)' 
+        fill='#93a5b1' fill-rule='evenodd'/>
+        <path d='M2282.56 1106.28l-1.82 5.97-163.2 50.46 1.87-8.4z' transform='translate(-2063 -875)' 
+        fill='#ebedfc' fill-rule='evenodd'/>
+        <path class='cls-8' d='M2258.9 1067.19l-163.31 50.93 23.19 38.99 163.57-49.89z' transform='translate(-2063 -875)'/>
+        <path d='M2257.6 1070.83l-156.51 49.01 18.84 32.13 157.38-46.36z' transform='translate(-2063 -875)' fill='#395bb4' fill-rule='evenodd'/>
+        <path class='cls-10' d='M2268.51 1091.75s-22-3.1-35.99 10.27-29.29 17.24-45.32 11.97-19.25-13.44-40.79 7.1-30.97 22.57-30.97 22.57l4.73 7.53 156.89-45.93z' 
+        transform='translate(-2063 -875)'/>
+        <path class='cls-10' d='M2260.76 1076.89s-14.66.69-25.01 8.92-29.11 20.66-53.67 16.49-34.71 2.8-41.11 8.51S2106 1128 2106 1128l-4.06-7.95L2257 1071z' 
+        transform='translate(-2063 -875)'/>
+        <path class='cls-8' d='M2230.71 1077.1l20.34 36.39-1.72 1.09-20.23-36.86z' transform='translate(-2063 -875)'/>
+        <path class='cls-11' d='M2274.98 1100.68l-158.43 46.62-.72-1.14 159.46-46.88z' transform='translate(-2063 -875)'/>
+     
+        <path id='Shape_551_copy' data-name='Shape 551 copy' class='cls-11' d='M2271.35 1094.97l-158.43 46.62-.72-1.14 159.46-46.88z' transform='translate(-2063 -875)'/>
+        <path id='Shape_551_copy_3' data-name='Shape 551 copy 3' class='cls-11' d='M2264.65 1083.18l-158.84 48.49-.72-1.14 159.88-48.75z' transform='translate(-2063 -875)'/>
+        <path id='Shape_551_copy_4' data-name='Shape 551 copy 4' class='cls-11' d='M2261.13 1077l-159.05 49.43-.73-1.14 160.09-49.69z' transform='translate(-2063 -875)'/>
+        <path id='Shape_551_copy_2' data-name='Shape 551 copy 2' class='cls-11' d='M2267.82 1088.79l-158.84 48.49-.73-1.14 159.88-48.75z' transform='translate(-2063 -875)'/>
+        <path id='Shape_550_copy' data-name='Shape 550 copy' class='cls-8' d='M2200.97 1085.19l20.33 36.39-1.71 1.09-20.23-36.86z' transform='translate(-2063 -875)'/>
+        <path id='Shape_550_copy_2' data-name='Shape 550 copy 2' class='cls-8' d='M2169.35 1097.28l20.34 36.39-1.71 1.09-20.24-36.86z' transform='translate(-2063 -875)'/>
+        <path id='Shape_550_copy_2-2' data-name='Shape 550 copy 2' class='cls-8' d='M2134.42 1106.66l20.34 36.39-1.72 1.09-20.23-36.86z' transform='translate(-2063 -875)'/>
+        <path id='Shape_550_copy_3' data-name='Shape 550 copy 3' class='cls-11' d='M2111.06 1114.7l21.27 36.6-.31 1.4-21.63-37.17z' transform='translate(-2063 -875)'/>
+        <path id='Shape_550_copy_4' data-name='Shape 550 copy 4' class='cls-11' d='M2120.92 1110.03l21.27 36.6-.31 1.4-21.63-37.17z' transform='translate(-2063 -875)'/>
+        <path id='Shape_550_copy_5' data-name='Shape 550 copy 5' class='cls-11' d='M2145.11 1102.67l21.27 36.6-.31 1.4-21.63-37.17z' transform='translate(-2063 -875)'/>
+        <path id='Shape_550_copy_5-2' data-name='Shape 550 copy 5' class='cls-11' d='M2154.98 1098l21.27 36.6-.31 1.4-21.64-37.17z' transform='translate(-2063 -875)'/>
+        <path id='Shape_550_copy_6' data-name='Shape 550 copy 6' class='cls-11' d='M2179.48 1093.64l21.27 36.6-.31 1.4-21.64-37.16z' transform='translate(-2063 -875)'/>
+        <path id='Shape_550_copy_6-2' data-name='Shape 550 copy 6' class='cls-11' d='M2189.34 1088.98l21.27 36.59-.31 1.41-21.64-37.17z' transform='translate(-2063 -875)'/>
+        <path id='Shape_550_copy_7' data-name='Shape 550 copy 7' class='cls-11' d='M2211.19 1085.5l21.27 36.6-.31 1.4-21.63-37.17z' transform='translate(-2063 -875)'/>
+        <path id='Shape_550_copy_7-2' data-name='Shape 550 copy 7' class='cls-11' d='M2221.06 1080.84l21.27 36.59-.32 1.41-21.63-37.17z' transform='translate(-2063 -875)'/>
+        <path id='Shape_550_copy_8' data-name='Shape 550 copy 8' class='cls-11' d='M2238.19 1074.35l21.27 36.6-.32 1.4-21.63-37.17z' transform='translate(-2063 -875)'/>
+        <path id='Shape_550_copy_8-2' data-name='Shape 550 copy 8' class='cls-11' d='M2248.05 1069.68l21.27 36.6-.31 1.4-21.64-37.17z' transform='translate(-2063 -875)'/>
+
+       
+        
+    </g>
+</svg>

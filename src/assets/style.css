@@ -1,0 +1,1394 @@
+body {
+	overflow-x: hidden;
+  }
+@keyframes float {
+	0% {
+		/* box-shadow: 0 5px 15px 0px rgba(0,0,0,0.6); */
+		transform: translatey(0px);
+	}
+	50% {
+		/* box-shadow: 0 25px 15px 0px rgba(0,0,0,0.2); */
+		transform: translatey(-20px);
+	}
+	100% {
+		/* box-shadow: 0 5px 15px 0px rgba(0,0,0,0.6); */
+		transform: translatey(0px);
+	}
+}
+
+.avatar {
+	/* box-sizing: border-box;
+	border: 5px white solid;
+	border-radius: 50%; */
+	overflow: hidden;
+	/* box-shadow: 0 5px 15px 0px rgba(0,0,0,0.6); */
+	transform: translatey(0px);
+	animation: float 6s ease-in-out infinite;
+}
+
+
+.card_font{
+	font-size: "26px"
+}
+
+
+.hourlypowerchart0{
+	/* background: #BDAC37; */
+	background: #BDAC37;
+	
+	border-radius: 15px;
+	margin-right: 12px;
+	margin-left: 15px;
+	margin-bottom: 10px;
+	box-shadow: 1px 3px 8px -2px rgba(0,0,0,0.69);
+-webkit-box-shadow: 1px 3px 8px -2px rgba(0,0,0,0.69);
+-moz-box-shadow: 1px 3px 8px -2px rgba(0,0,0,0.69);
+}
+.hourlypowerchart1{
+	background: #f4f4f4;
+	border-radius: 15px;
+	margin-right: 12px;
+	margin-left: 15px;
+	margin-bottom: 10px;
+	box-shadow: 0px 1px 10px 0px rgba(0,0,0,0.34);
+-webkit-box-shadow: 0px 1px 10px 0px rgba(0,0,0,0.34);
+-moz-box-shadow: 0px 1px 10px 0px rgba(0,0,0,0.34);
+}
+.hourlypowerchart2{
+	background: rgb(198,183,84);
+	background: linear-gradient(0deg, rgba(198,183,84,1) 42%, rgba(222,206,99,1) 73%);
+	border-radius: 15px;
+	margin-right: 12px;
+	margin-left: 15px;
+	margin-bottom: 10px;
+}
+.hourlypowerchart3{
+	background: linear-gradient(180deg, rgba(58,58,64,1) 1%, rgba(33,33,35,1) 100%);
+	border-radius: 15px;
+	margin-right: 12px;
+	margin-left: 15px;
+	margin-bottom: 10px;
+}
+.hourlypowerchart4{
+	background: linear-gradient(180deg, rgba(61,151,238,1) 1%, rgba(32,121,233,1) 100%);
+	border-radius: 15px;
+	
+}
+.powercards{
+	background:linear-gradient(180deg, rgba(61,151,238,1) 1%, rgba(32,121,233,1) 100%);
+	box-shadow: 0px 3px 11px 0px rgba(0,0,0,0.14);
+-webkit-box-shadow: 0px 3px 11px 0px rgba(0,0,0,0.14);
+-moz-box-shadow: 0px 3px 11px 0px rgba(0,0,0,0.14);
+}
+.powercards1{
+	background:linear-gradient(180deg, rgba(58,58,64,1) 1%, rgba(33,33,35,1) 100%);
+	box-shadow: 0px 3px 11px 0px rgba(0,0,0,0.14);
+-webkit-box-shadow: 0px 3px 11px 0px rgba(0,0,0,0.14);
+-moz-box-shadow: 0px 3px 11px 0px rgba(0,0,0,0.14);
+}
+.powercards2{
+	background:linear-gradient(180deg, rgba(231,55,115,1) 1%, rgba(220,35,101,1) 100%);
+	box-shadow: 0px 3px 11px 0px rgba(0,0,0,0.14);
+-webkit-box-shadow: 0px 3px 11px 0px rgba(0,0,0,0.14);
+-moz-box-shadow: 0px 3px 11px 0px rgba(0,0,0,0.14);
+}
+.powercards3{
+	/* background:linear-gradient(180deg, rgba(227,213,111,1) 1%, rgba(199,186,94,1) 100%); */
+	background: linear-gradient(180deg, rgba(222,202,67,1) 0%, rgba(189,172,55,1) 100%);
+	box-shadow: 0px 3px 11px 0px rgba(0,0,0,0.14);
+-webkit-box-shadow: 0px 3px 11px 0px rgba(0,0,0,0.14);
+-moz-box-shadow: 0px 3px 11px 0px rgba(0,0,0,0.14);
+}
+.powercards4{
+	background:linear-gradient(180deg, rgba(93,180,97,1) 1%, rgba(74,165,78,1) 100%);
+	box-shadow: 0px 3px 11px 0px rgba(0,0,0,0.14);
+-webkit-box-shadow: 0px 3px 11px 0px rgba(0,0,0,0.14);
+-moz-box-shadow: 0px 3px 11px 0px rgba(0,0,0,0.14);
+}
+.powercards5{
+	background:linear-gradient(180deg, rgba(61,151,238,1) 1%, rgba(32,121,233,1) 100%);
+	box-shadow: 0px 3px 11px 0px rgba(0,0,0,0.14);
+-webkit-box-shadow: 0px 3px 11px 0px rgba(0,0,0,0.14);
+-moz-box-shadow: 0px 3px 11px 0px rgba(0,0,0,0.14);
+}
+/* .item{
+	
+} */
+.item:hover {
+
+	background-color: #001A26 !important;
+  }
+
+  @media only screen and (max-width: 992px){
+	#hamburger {
+	  visibility: hidden;
+	}
+  }
+  @media only screen and (min-width: 993px){
+	#hamburger {
+	  visibility: visible;
+	}
+  }
+
+  @media only screen and (min-width: 1880px){
+	.cardtext {
+		font-size:19px; 
+		font-weight:500;
+		color:white;
+		margin-top:40px;
+		margin-left:10px;
+		margin-right: 20px;
+	}
+  }
+  @media only screen and (min-width: 1880px){
+	.cardtext1 {
+		font-size:19px; 
+		font-weight:500;
+		color:white;
+		margin-top:40px !important;
+		
+	}
+  }
+  @media only screen and (max-width: 1879px){
+	.cardtext {
+		font-size:19px; 
+		font-weight:500;
+		color:white;
+		margin-top:40px;
+		margin-left:10px;
+		margin-right: 20px;
+	}
+  }
+  @media only screen and (max-width: 1879px){
+	.cardtext1 {
+		font-size:19px; 
+		font-weight:500;
+		color:white;
+		margin-top:40px !important;
+	}
+  }
+  @media only screen and (max-width: 1631px){
+	.cardtext {
+		font-size:18px; 
+		font-weight:500;
+		color:white;
+		margin-top:40px;
+		margin-left:10px;
+		margin-right: 20px;
+	}
+  }
+  @media only screen and (max-width: 1631px){
+	.cardtext1 {
+		font-size:18px; 
+		font-weight:500;
+		color:white;
+		margin-top:40px !important;
+	}
+  }
+  @media only screen and (max-width: 1400px){
+	.cardtext {
+		font-size:18px; 
+		font-weight:500;
+		color:white;
+		margin-top:40px;
+		margin-left:10px;
+		margin-right: 20px;
+	}
+  }
+  @media only screen and (max-width: 1400px){
+	.cardtext1 {
+		font-size:15px; 
+		font-weight:500;
+		color:white;
+		margin-top:40px !important;
+	}
+  }
+  
+  /* @media only screen and (min-width: 1686px){ */
+	.cardcontainer {
+		display: flex;
+		text-align:'center';
+		margin-top:'30px'
+	}
+  /* } */
+  /* @media only screen and (max-width: 1686px){
+	.cardcontainer {
+		display:'block'; 
+		text-align:'center';
+		margin-top:'30px'
+	}
+  } */
+ .sp{
+	 margin-top: 10px;
+ }
+ .responsive {  
+    display: grid;  
+    grid-gap: 5px;  
+    grid-template-columns: repeat(auto-fit, 100px);
+    grid-template-rows: repeat(2, 100px);
+ }
+ .card2{
+	background: #BDAC37;
+	border-radius: 10px;
+	/* margin-right: 12px;
+	margin-left: 15px;
+	margin-bottom: 10px; */
+	box-shadow: 1px 3px 8px -2px rgba(0,0,0,0.69);
+-webkit-box-shadow: 1px 3px 8px -2px rgba(0,0,0,0.69);
+-moz-box-shadow: 1px 3px 8px -2px rgba(0,0,0,0.69);
+	
+ }
+ @media only screen and (min-width: 1700px){
+	.cardcontainer {
+		visibility: visible;
+	}
+  }
+  @media only screen and (max-width: 1699px){
+	.cardcontainer {
+		visibility: hidden;
+		display: none;
+	}
+  }
+  @media only screen and (min-width: 1700px){
+	.cardcontainer2 {
+		visibility: hidden;
+		display: none;
+	}
+  }
+  @media only screen and (max-width: 1699px){
+	.cardcontainer2 {
+		visibility: visible;
+	}
+  }
+  /* @media only screen and (min-width: 1680px){
+	.cardtxt {
+		font-size: 18px;
+		font-weight: 500;
+		padding-bottom: 30px;
+	}
+  } */
+
+  @media only screen and (max-width: 1699px){
+	.cardtxt {
+		font-size: 15px;
+		font-weight: 500;
+		padding-bottom: 50px;
+	}
+  }
+  @media only screen and (max-width: 1611px){
+	.cardtxt {
+		font-size: 15px;
+		font-weight: 500;
+		padding-bottom: 70px;
+	}
+  }
+  @media only screen and (max-width: 1518px){
+	.cardtxt {
+		font-size: 15px;
+		font-weight: 500;
+		padding-bottom: 70px;
+	}
+  }
+  @media only screen and (max-width: 1440px){
+	.cardtxt {
+		font-size: 15px;
+		font-weight: 500;
+		padding-bottom: 50px;
+	}
+  }
+  @media only screen and (max-width: 1385px){
+	.cardtxt {
+		font-size: 15px;
+		font-weight: 500;
+		padding-bottom: 50px;
+	}
+  }
+  @media only screen and (max-width: 1250px){
+	.cardtxt {
+		font-size: 15px;
+		font-weight: 500;
+		padding-bottom: 50px;
+	}
+  }
+  @media only screen and (max-width: 1200px){
+	.cardtxt {
+		font-size: 14px;
+		font-weight: 500;
+		padding-bottom: 50px;
+	}
+  }
+  @media only screen and (max-width: 1139px){
+	.cardtxt {
+		font-size: 13px;
+		font-weight: 500;
+		padding-bottom: 50px;
+	}
+  }
+  @media only screen and (max-width: 1081px){
+	.cardtxt {
+		font-size: 12px;
+		font-weight: 500;
+		padding-bottom: 50px;
+	}
+  }
+  @media only screen and (max-width: 1022px){
+	.cardtxt {
+		font-size: 11px;
+		font-weight: 500;
+		padding-bottom: 50px;
+	}
+  }
+  @media only screen and (max-width: 991px){
+	.cardtxt {
+		font-size: 20px;
+		font-weight: 500;
+		padding-bottom: 30px;
+		padding-top: 50px;
+	}
+  }
+  /* @media only screen and (min-width: 1680px){
+	.cardtxt1 {
+		font-size: 18px;
+		font-weight: 500;
+		padding-bottom: 30px;
+	}
+  } */
+  @media only screen and (max-width: 1699px){
+	.cardtxt1 {
+		font-size: 15px;
+		font-weight: 500;
+		padding-bottom: 30px;
+	}
+  }
+  @media only screen and (max-width: 1611px){
+	.cardtxt1 {
+		font-size: 15px;
+		font-weight: 500;
+		padding-bottom: 50px;
+	}
+  }
+  @media only screen and (max-width: 1518px){
+	.cardtxt1 {
+		font-size: 15px;
+		font-weight: 500;
+		padding-bottom: 50px;
+	}
+  }
+  
+  @media only screen and (max-width: 1249px){
+	.cardtxt1 {
+		font-size: 15px;
+		font-weight: 500;
+		padding-bottom: 30px;
+	}
+  }
+  @media only screen and (max-width: 1200px){
+	.cardtxt1 {
+		font-size: 14px;
+		font-weight: 500;
+		padding-bottom: 50px;
+	}
+  }
+  
+  @media only screen and (max-width: 1187px){
+	.cardtxt1 {
+		font-size: 14px;
+		font-weight: 500;
+		padding-bottom: 30px;
+	}
+  }
+  
+  @media only screen and (max-width: 1139px){
+	.cardtxt1 {
+		font-size: 13px;
+		font-weight: 500;
+		padding-bottom: 50px;
+	}
+  }
+  @media only screen and (max-width: 1126px){
+	.cardtxt1 {
+		font-size: 13px;
+		font-weight: 500;
+		padding-bottom: 30px;
+	}
+  }
+  @media only screen and (max-width: 1081px){
+	.cardtxt1 {
+		font-size: 12px;
+		font-weight: 500;
+		padding-bottom: 50px;
+	}
+  }
+  
+  @media only screen and (max-width: 1065px){
+	.cardtxt1 {
+		font-size: 12px;
+		font-weight: 500;
+		padding-bottom: 30px;
+	}
+  }
+  @media only screen and (max-width: 1022px){
+	.cardtxt1 {
+		font-size: 11px;
+		font-weight: 500;
+		padding-bottom: 50px;
+	}
+  }
+  @media only screen and (max-width: 1004px){
+	.cardtxt1 {
+		font-size: 11px;
+		font-weight: 500;
+		padding-bottom: 33px;
+	}
+  }
+  
+  @media only screen and (max-width: 991px){
+	.cardtxt1 {
+		font-size: 20px;
+		font-weight: 500;
+		padding-Top: 30px;
+		padding-bottom: 30px;
+	}
+  }
+  @media only screen and (max-width: 1699px){
+	.cardtxt2 {
+		font-size: 15px;
+		font-weight: 500;
+		padding-bottom: 30px;
+	}
+  }
+  @media only screen and (max-width: 1611px){
+	.cardtxt2 {
+		font-size: 15px;
+		font-weight: 500;
+		padding-bottom: 50px;
+	}
+  }
+  @media only screen and (max-width: 1518px){
+	.cardtxt2 {
+		font-size: 15px;
+		font-weight: 500;
+		padding-bottom: 50px;
+	}
+  }
+  @media only screen and (max-width: 1392px){
+	.cardtxt2 {
+		font-size: 15px;
+		font-weight: 500;
+		padding-bottom: 50px;
+	}
+  }
+  @media only screen and (max-width: 1289px){
+	.cardtxt2 {
+		font-size: 15px;
+		font-weight: 500;
+		padding-bottom: 30px;
+	}
+  }
+  @media only screen and (max-width: 1200px){
+	.cardtxt2 {
+		font-size: 14px;
+		font-weight: 500;
+		padding-bottom: 30px;
+	}
+  }
+  @media only screen and (max-width: 1139px){
+	.cardtxt2 {
+		font-size: 13px;
+		font-weight: 500;
+		padding-bottom: 30px;
+	}
+  }
+  @media only screen and (max-width: 1081px){
+	.cardtxt2 {
+		font-size: 12px;
+		font-weight: 500;
+		padding-bottom: 31px;
+	}
+  }
+  @media only screen and (max-width: 1022px){
+	.cardtxt2 {
+		font-size: 11px;
+		font-weight: 500;
+		padding-bottom: 33px;
+	}
+  }
+  @media only screen and (max-width: 991px){
+	.cardtxt2 {
+		font-size: 20px;
+		font-weight: 500;
+		padding-bottom: 30px;
+		padding-top: 50px;
+	}
+  }
+  @media only screen and (max-width: 1699px){
+	.cardtxt3 {
+		font-size: 15px;
+		font-weight: 500;
+		padding-bottom: 30px;
+	}
+  }
+  @media only screen and (max-width: 1504px){
+	.cardtxt3 {
+		font-size: 15px;
+		font-weight: 500;
+		padding-bottom: 30px;
+	}
+  }
+  @media only screen and (max-width: 1200px){
+	.cardtxt3 {
+		font-size: 14px;
+		font-weight: 500;
+		padding-bottom: 30px;
+	}
+  }
+  @media only screen and (max-width: 1139px){
+	.cardtxt3 {
+		font-size: 13px;
+		font-weight: 500;
+		padding-bottom: 30px;
+	}
+  }
+  @media only screen and (max-width: 1081px){
+	.cardtxt3 {
+		font-size: 12px;
+		font-weight: 500;
+		padding-bottom: 31px;
+	}
+  }
+  @media only screen and (max-width: 1022px){
+	.cardtxt3 {
+		font-size: 11px;
+		font-weight: 500;
+		padding-bottom: 35px;
+	}
+  }
+  @media only screen and (max-width: 991px){
+	.cardtxt3 {
+		font-size: 20px;
+		font-weight: 500;
+		padding-bottom: 30px;
+		padding-top: 50px;
+	}
+  }
+  @media only screen and (max-width: 1699px){
+	.cardtxt4 {
+		font-size: 15px;
+		font-weight: 500;
+		padding-bottom: 30px;
+	}
+  }
+  @media only screen and (max-width: 1611px){
+	.cardtxt4 {
+		font-size: 15px;
+		font-weight: 500;
+		padding-bottom: 50px;
+	}
+  }
+  @media only screen and (max-width: 1518px){
+	.cardtxt4 {
+		font-size: 15px;
+		font-weight: 500;
+		padding-bottom: 50px;
+	}
+  }
+  @media only screen and (max-width: 1397px){
+	.cardtxt4 {
+		font-size: 15px;
+		font-weight: 500;
+		padding-bottom: 30px;
+	}
+  }
+  @media only screen and (max-width: 1385px){
+	.cardtxt4 {
+		font-size: 15px;
+		font-weight: 500;
+		padding-bottom: 30px;
+	}
+  }
+  @media only screen and (max-width: 1200px){
+	.cardtxt4 {
+		font-size: 14px;
+		font-weight: 500;
+		padding-bottom: 30px;
+	}
+  }
+  @media only screen and (max-width: 1139px){
+	.cardtxt4 {
+		font-size: 13px;
+		font-weight: 500;
+		padding-bottom: 30px;
+	}
+  }
+  @media only screen and (max-width: 1081px){
+	.cardtxt4 {
+		font-size: 12px;
+		font-weight: 500;
+		padding-bottom: 31px;
+	}
+  }
+  @media only screen and (max-width: 1022px){
+	.cardtxt4 {
+		font-size: 11px;
+		font-weight: 500;
+		padding-bottom: 31px;
+	}
+  }
+  @media only screen and (max-width: 991px){
+	.cardtxt4 {
+		font-size: 20px;
+		font-weight: 500;
+		padding-bottom: 30px;
+		padding-top: 50px;
+	}
+  }
+ 
+  .txt{
+	  font-size: 16px;
+	  font-weight: 500;
+	  color: white;
+  }
+  @media only screen and (max-width: 1500px){
+	.txt {
+		font-size: 14px;
+	  font-weight: 500;
+	  color: white;
+		
+	}
+  }
+  @media only screen and (max-width: 1345px){
+	.txt {
+		font-size: 13px;
+	  font-weight: 500;
+	  color: white;
+		
+	}
+  }
+  @media only screen and (max-width: 1280px){
+	.txt {
+		font-size: 12px;
+	  font-weight: 500;
+	  color: white;
+		
+	}
+  }
+  @media only screen and (max-width: 1200px){
+	.txt {
+		font-size: 11px;
+	  font-weight: 500;
+	  color: white;
+		
+	}
+  }
+  @media only screen and (max-width: 1124px){
+	.txt {
+		font-size: 10px;
+	  font-weight: 500;
+	  color: white;
+		
+	}
+  }
+  @media only screen and (max-width: 1108px){
+	.txt {
+		font-size: 10px;
+	  font-weight: 500;
+	  color: white;
+		
+	}
+  }
+  @media only screen and (max-width: 1055px){
+	.txt {
+		font-size: 09px;
+	  font-weight: 500;
+	  color: white;
+		
+	}
+  }
+  @media only screen and (max-width: 1015px){
+	.txt {
+		font-size: 9px;
+	  font-weight: 500;
+	  color: white;
+		
+	}
+  }
+  @media only screen and (max-width: 991px){
+	.txt {
+		font-size: 16px;
+	  font-weight: 500;
+	  color: white;
+		
+	}
+  }
+
+
+
+  /* invoice css */
+  #snackbar_invc {
+	visibility: hidden; /* Hidden by default. Visible on click */
+	min-width: 250px; /* Set a default minimum width */
+	margin-left: 0px; /* Divide value of min-width by 2 */
+	background-color: rgb(0, 130, 4); /* Black background color */
+	color: #fff; /* White text color */
+	text-align: center; /* Centered text */
+	border-radius: 2px; /* Rounded borders */
+	padding: 16px; /* Padding */
+	position: fixed; /* Sit on top of the screen */
+	z-index: 1; /* Add a z-index if needed */
+	left: 50%; /* Center the snackbar */
+	top: 30px; /* 30px from the bottom */
+  }
+  
+  /* Show the snackbar when clicking on a button (class added with JavaScript) */
+  #snackbar_invc.show {
+	visibility: visible; /* Show the snackbar */
+	/* Add animation: Take 0.5 seconds to fade in and out the snackbar.
+	However, delay the fade out process for 2.5 seconds */
+	-webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+	animation: fadein 0.5s, fadeout 0.5s 2.5s;
+  }
+  #generated{
+	display: none; /* Hidden by default. Visible on click */
+  }
+  #generated.show{
+	display: block; /* Show the snackbar */
+	/* Add animation: Take 0.5 seconds to fade in and out the snackbar.
+	However, delay the fade out process for 2.5 seconds */
+	-webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+	animation: fadein 0.5s, fadeout 0.5s 2.5s;
+  }
+  #not_generated{
+	display: block; /* Hidden by default. Visible on click */
+  }
+  #not_generated.hide{
+	display: none; /* Show the snackbar */
+	/* Add animation: Take 0.5 seconds to fade in and out the snackbar.
+	However, delay the fade out process for 2.5 seconds */
+	/* -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+	animation: fadein 0.5s, fadeout 0.5s 2.5s; */
+  }
+  #snackbar_invc2 {
+	visibility: hidden; /* Hidden by default. Visible on click */
+	min-width: 250px; /* Set a default minimum width */
+	margin-left: 0px; /* Divide value of min-width by 2 */
+	background-color: rgb(0, 130, 4); /* Black background color */
+	color: #fff; /* White text color */
+	text-align: center; /* Centered text */
+	border-radius: 2px; /* Rounded borders */
+	padding: 16px; /* Padding */
+	position: fixed; /* Sit on top of the screen */
+	z-index: 1; /* Add a z-index if needed */
+	left: 50%; /* Center the snackbar */
+	top: 30px; /* 30px from the bottom */
+  }
+  
+  /* Show the snackbar when clicking on a button (class added with JavaScript) */
+  #snackbar_invc2.show {
+	visibility: visible; /* Show the snackbar */
+	/* Add animation: Take 0.5 seconds to fade in and out the snackbar.
+	However, delay the fade out process for 2.5 seconds */
+	-webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+	animation: fadein 0.5s, fadeout 0.5s 2.5s;
+  }
+  
+  /* Animations to fade the snackbar in and out */
+  @-webkit-keyframes fadein {
+	from {top: 0; opacity: 0;}
+	to {top: 30px; opacity: 1;}
+  }
+  
+  @keyframes fadein {
+	from {top: 0; opacity: 0;}
+	to {top: 30px; opacity: 1;}
+  }
+  
+  @-webkit-keyframes fadeout {
+	from {top: 30px; opacity: 1;}
+	to {top: 0; opacity: 0;}
+  }
+  
+  @keyframes fadeout {
+	from {top: 30px; opacity: 1;}
+	to {top: 0; opacity: 0;}
+  }
+
+  /* invoice status styling */
+  .New{
+	  padding: 5px 13px;
+	  border-radius: 5px;
+	  background-color: #56F000;
+  }
+  
+  .Pending{
+	padding: 5px 13px;
+	border-radius: 5px;
+	background-color: #FCE83A;
+	
+  }
+  .Approved{
+	padding: 5px 13px;
+	border-radius: 5px;
+	background-color: #389c00;
+  }
+  .Invoiced{
+	padding: 5px 13px;
+	border-radius: 5px;
+	background-color: #028bcc;
+  }
+  .Rejected{
+	padding: 5px 13px;
+	border-radius: 5px;
+	background-color: #FF3838;
+	
+  }
+  .Reversed{
+	padding: 5px 13px;
+	border-radius: 5px;
+	background-color: #FFB302;
+	
+  }
+
+  .Paid{
+	padding: 5px 13px;
+	border-radius: 5px;
+	background-color: #ab009a;
+	
+  }
+  .progress {
+  background: rgba(255,255,255,0.1);
+  justify-content: flex-start;
+  align-items: center;
+  position: relative;
+  padding: 0 5px;
+  display: flex;
+  height: 40px;
+  width: 500px;
+}
+
+.progress-value {
+  animation: load 10s normal forwards;
+  box-shadow: 0 10px 40px -10px #004769;
+  background: #004769;
+  height: 30px;
+  width: 0;
+}
+.progressreport {
+	background: rgba(255,255,255,0.1);
+	justify-content: flex-start;
+	align-items: center;
+	position: relative;
+	padding: 0 5px;
+	display: flex;
+	height: 40px;
+	width: 500px;
+  }
+  
+  .progress-valuereport {
+	animation: load 100s normal forwards;
+	box-shadow: 0 10px 40px -10px #004769;
+	background: #004769;
+	height: 30px;
+	width: 0;
+  }
+
+@keyframes load {
+  0% { width: 0; }
+  100% { width: 100%; }
+}
+
+[data-column-id="Customer"].rdt_TableCol {
+	background-color: green;
+  }
+
+  
+  /* new dashboard cards responsiveness */
+  .cardheading{
+	font-size: 14px;
+	color: black;
+	font-weight: 500;
+	}
+
+  @media only screen and (max-width: 1750px){
+	.cardheading {
+		font-size: 11px;
+	}
+  }
+
+  @media only screen and (max-width: 1500px){
+	.cardheading {
+		font-size: 8px;
+	}
+  }
+  @media only screen and (max-width: 1250px){
+	.cardheading {
+		font-size: 7px;
+	}
+  }
+  @media only screen and (max-width: 900px){
+	.cardheading {
+		font-size: 20px;
+	}
+  }
+  .cardstats{
+	margin-top:10px;
+	color:#BCAB37;
+	font-size: 15px;
+	font-weight: 500;
+	}
+
+  @media only screen and (max-width: 1700px){
+	.cardstats {
+		font-size: 13px;
+	}
+  }
+
+  @media only screen and (max-width: 1500px){
+	.cardstats {
+		font-size: 11px;
+	}
+  }
+  @media only screen and (max-width: 1250px){
+	.cardstats {
+		font-size: 9px;
+	}
+  }
+  @media only screen and (max-width: 900px){
+	.cardstats {
+		font-size: 20px;
+	}
+  }
+  
+
+  
+
+  .cardtip .tip {
+	  display: none;
+	color: #000;
+	opacity: 0;
+	-webkit-animation: fadein 0.8s, fadeout 0.8s 2.5s;
+	animation: fadein 0.8s, fadeout 0.8s 2.5s;
+	
+
+	
+  }
+  .cardtip:hover .tip{
+display: block;
+	top: 100%;
+	opacity: 1;
+  }
+
+  .cardtip:hover .tipfirstshow{
+	display: none;
+	  }
+/*  */
+.cardtip1 .tip1 {
+	
+	display: none;
+  color: #000;
+  opacity: 0;
+  -webkit-animation: fadein 0.8s, fadeout 0.8s 2.5s;
+  animation: fadein 0.8s, fadeout 0.8s 2.5s;
+  margin-top:-40px;
+  
+
+  
+}
+.cardtip1:hover .tip1{
+display: block;
+  top: 100%;
+  opacity: 1;
+}
+
+.cardtip1:hover .tipfirstshow1{
+  display: none;
+	}
+	  
+  /*  */
+
+  .cardtip2 .tip2 {
+	display: none;
+  color: #000;
+  opacity: 0;
+  -webkit-animation: fadein 0.8s, fadeout 0.8s 2.5s;
+  animation: fadein 0.8s, fadeout 0.8s 2.5s;
+  margin-top:-40px;
+
+}
+.cardtip2:hover .tip2{
+display: block;
+  top: 100%;
+  opacity: 1;
+}
+
+.cardtip2:hover .tipfirstshow2{
+  display: none;
+	}
+	/*  */
+
+	.cardtip3 .tip3 {
+		display: none;
+	  color: #000;
+	  opacity: 0;
+	  -webkit-animation: fadein 0.8s, fadeout 0.8s 2.5s;
+	  animation: fadein 0.8s, fadeout 0.8s 2.5s;
+	  
+	
+	  
+	}
+	.cardtip3:hover .tip3{
+	display: block;
+	  top: 100%;
+	  opacity: 1;
+	}
+	
+	.cardtip3:hover .tipfirstshow3{
+	  display: none;
+		}
+
+.techcardtext{
+	font-size: 16px;
+}
+@media only screen and (max-width: 1300px){
+	.techcardtext {
+		font-size: 15px;
+	}
+  }
+  @media only screen and (max-width: 1120px){
+	.techcardtext {
+		font-size: 14px;
+	}
+  }
+
+  @media only screen and (max-width: 1050px){
+	.techcardtext {
+		font-size: 13px;
+	}
+  }
+
+  @media only screen and (max-width: 991px){
+	.techcardtext {
+		font-size: 16px;
+	}
+  }
+
+  .techcardheading{
+	  font-size: 19px;
+  }
+  @media only screen and (max-width: 1420px){
+	.techcardheading {
+		font-size: 18px;
+	}
+  }
+  @media only screen and (max-width: 1300px){
+	.techcardheading {
+		font-size: 17px;
+	}
+  }
+  @media only screen and (max-width: 1200px){
+	.techcardheading {
+		font-size: 16px;
+	}
+  }
+  @media only screen and (max-width: 1150px){
+	.techcardheading {
+		font-size: 15px;
+	}
+  }
+  @media only screen and (max-width: 1092px){
+	.techcardheading {
+		font-size: 14px;
+	}
+  }
+  @media only screen and (max-width: 1039px){
+	.techcardheading {
+		font-size: 13px;
+	}
+  }
+  @media only screen and (max-width: 991px){
+	.techcardheading {
+		font-size: 19px;
+	}
+  }
+
+  .techcardmaintext{
+	  color: black;
+  }
+  @media only screen and (max-width: 1530px){
+	.techcardmaintext {
+		font-size: 35px;
+	}
+  }
+  @media only screen and (max-width: 1430px){
+	.techcardmaintext {
+		font-size: 33px;
+	}
+  }
+  @media only screen and (max-width: 1330px){
+	.techcardmaintext {
+		font-size: 31px;
+	}
+  }
+  @media only screen and (max-width: 1230px){
+	.techcardmaintext {
+		font-size: 29px;
+	}
+  }
+  @media only screen and (max-width: 1130px){
+	.techcardmaintext {
+		font-size: 27px;
+	}
+  }
+  @media only screen and (max-width: 1030px){
+	.techcardmaintext {
+		font-size: 25px;
+	}
+  }
+  @media only screen and (max-width: 991px){
+	.techcardmaintext {
+		font-size: 40px;
+	}
+  }
+
+  .dchart{
+	box-shadow: 0px 0px 11px 0px rgba(0,0,0,0.6);
+	-webkit-box-shadow: 0px 0px 11px 0px rgba(0,0,0,0.6);
+	-moz-box-shadow: 0px 0px 11px 0px rgba(0,0,0,0.6);
+  }
+
+  @media only screen and (max-width: 1500px){
+	.weatherimageleft {
+		margin-right: 40px;
+	}
+  }
+
+  @media only screen and (max-width: 1500px){
+	.weatherimageright {
+		margin-left: 40px;
+	}
+  }
+
+  @media only screen and (max-width: 1300px){
+	.weatherimageleft {
+		margin-right: 50px;
+	}
+  }
+
+  @media only screen and (max-width: 1300px){
+	.weatherimageright {
+		margin-left: 50px;
+	}
+  }
+
+  @media only screen and (max-width: 1200px){
+	.weatherimageleft {
+		margin-right: 60px;
+	}
+  }
+
+  @media only screen and (max-width: 1200px){
+	.weatherimageright {
+		margin-left: 60px;
+	}
+  }
+
+  @media only screen and (max-width: 1100px){
+	.weatherimageleft {
+		margin-right: 70px;
+	}
+  }
+
+  @media only screen and (max-width: 1100px){
+	.weatherimageright {
+		margin-left: 70px;
+	}
+  }
+
+  @media only screen and (max-width: 1050px){
+	.weatherimageleft {
+		margin-right: 85px;
+	}
+  }
+
+  @media only screen and (max-width: 1050px){
+	.weatherimageright {
+		margin-left: 85px;
+	}
+  }
+
+  .weathertext{
+	  font-size: 15px;
+  }
+
+  @media only screen and (max-width: 1500px){
+	.weathertext {
+		font-size: 13px;
+	}
+  }
+
+  .livecharttooltip{
+	margin-left: 500px;
+  }
+
+  .invertorDetailChartToolTip{
+	  margin-top: 130px;
+  }
+  .invertorDetailChartToolTipExtra{
+	margin-top: 400px;
+  }
+  .invertorDetailChartToolTipExtraBelow{
+	margin-top: 250px;
+  }
+
+  .tooltiptext {
+	width: 120px;
+	background-color: white;
+	color: rgb(0, 0, 0);
+	text-align: center;
+	border-radius: 6px;
+	border-top-left-radius: 0;
+	padding: 5px 0;
+	position: absolute;
+	z-index: 1;
+	bottom: 0%;
+	left: 53%;
+	margin-left: -60px;
+	opacity: 0;
+	transition: opacity 0.3s;
+
+	box-shadow: 2px 3px 7px 0px rgba(0,0,0,0.75);
+-webkit-box-shadow: 2px 3px 7px 0px rgba(0,0,0,0.75);
+-moz-box-shadow: 2px 3px 7px 0px rgba(0,0,0,0.75);
+  }
+
+  
+  .btn-primary {
+    color: #fff;
+    border-color: #28a745;
+    background-color: #28a745;
+    box-shadow: none;
+}
+  
+  .toggle {
+	position : relative ;
+	display : inline-block;
+	width : 100px;
+	height : 52px;
+	background-color: red;
+	border-radius: 30px;
+	border: 2px solid gray;
+}
+	   
+/* After slide changes */
+.toggle:after {
+	content: '';
+	position: absolute;
+	width: 50px;
+	height: 50px;
+	border-radius: 50%;
+	background-color: gray;
+	top: 1px;
+	left: 1px;
+	transition:  all 0.5s;
+}
+	   
+/* Toggle text */
+p {
+	font-family: Arial, Helvetica, sans-serif;
+	font-weight: bold;
+}
+	   
+/* Checkbox checked effect */
+.checkbox:checked + .toggle::after {
+	left : 49px;
+}
+	   
+/* Checkbox checked toggle label bg color */
+.checkbox:checked + .toggle {
+	background-color: green;
+}
+	   
+/* Checkbox vanished */
+.checkbox {
+	display : none;
+}
+
+.css-b62m3t-container{
+	width: 250px;
+}
+
+@media only screen and (max-width: 992px){
+	.css-b62m3t-container{
+		width: 150px;
+	}
+}
+
+.logoimage{
+	max-width:  40px;
+}
+
+@media only screen and (max-width: 1200px){
+	.logoimage{
+		max-width:  20px;
+	}
+  }
+.menuText{
+	font-size: 15px;
+}
+
+@media only screen and (max-width: 1501px){
+	.menuText{
+		font-size: 13px;
+	}
+  }
+  .submenuText{
+	font-size: 15px;
+}
+
+@media only screen and (max-width: 1501px){
+	.submenuText{
+		font-size: 13px;
+	}
+  }
+
+  .menulogo{
+	  font-size: 25px;
+	  margin-top: 5px;
+  }
+
+  @media only screen and (max-width: 1501px){
+	.menulogo{
+		font-size: 23px;
+		margin-top: 7px;
+	}
+  }
+
+  .navlogo{
+	  max-width: 40px;
+	  margin-left: 15px;
+	  margin-top: 4px;
+  }
+
+  @media only screen and (max-width: 1501px){
+	.navlogo{
+		max-width: 35px;
+		margin-left: 5px;
+		margin-top: 7px;
+	}
+  }
+  .navlogotext{
+	  font-size: 17px;
+  }
+  @media only screen and (max-width: 1600px){
+	.navlogotext{
+		font-size: 16px;
+	}
+  }
+  @media only screen and (max-width: 1501px){
+	.navlogotext{
+		font-size: 13.5px;
+	}
+  }
+
+  .rtlmargin{
+	/* margin-right: 25%; */
+  }
