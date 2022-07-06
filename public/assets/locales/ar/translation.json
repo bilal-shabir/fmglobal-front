@@ -5,5 +5,18 @@
     "password_placeholder": "كلمة المرور",
     "language": "English",
     "employee_page_heading": "إدارة الموظفين",
-    "customer_page_heading": "إدارة العملاء"
+    "customer_page_heading": "إدارة العملاء",
+    "add_employee_button" : "موظف",
+    "edit_employee_button" : "تعديل",
+    "edit_employee_heading" : "تعديل الموظف",
+    "add_customer_button" : "عميل",
+    "edit_customer_button" : "تعديل",
+    "edit_customer_heading" : "تحرير العميل",
+    "add_customer_heading": "إضافة عميل",
+    "add_employee_heading": "إضافة موظف",
+    "manage_membership_button": "عضويه",
+    "manage_membership_heading": "إدارة العضوية",
+    "manage_customer_payment_button": "الدفعات",
+    "manage_customer_payment_heading": "مدفوعات العملاء"
+
 }

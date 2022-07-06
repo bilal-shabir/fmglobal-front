@@ -5,5 +5,17 @@
     "password_placeholder": "Password",
     "language": "العربية",
     "employee_page_heading": "Manage Employees",
-    "customer_page_heading": "Manage Customer"
+    "customer_page_heading": "Manage Customers",
+    "add_employee_button" : "Employee",
+    "edit_employee_button" : "Edit",
+    "add_customer_button" : "Customer",
+    "edit_customer_button" : "Edit",
+    "edit_customer_heading": "Edit Customer",
+    "edit_employee_heading": "Edit Employee",
+    "add_customer_heading": "Add Customer",
+    "add_employee_heading": "Add Employee",
+    "manage_membership_button": "Membership",
+    "manage_membership_heading": "Manage Membership",
+    "manage_customer_payment_button": "Payments",
+    "manage_customer_payment_heading": "Customer Payments"
 }

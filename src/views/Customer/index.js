@@ -1,144 +1,98 @@
 import React from "react";
-import {
-  Modal,
-  Button,
-  select,
-  Alert,
-  CardImg,
-  Form,
-  InputGroup,
-  FormControl,
-  Table
-} from "react-bootstrap";
-import { Tooltip, Container, Row, Col, Card, FormSelect } from "shards-react";
-import { URL3, URL2, DKEY } from "../../constants";
-
-import PageTitle from "../../components/common/PageTitle";
-import L from "../../components/components-overview/loader";
-import TimePicker from "react-bootstrap-time-picker";
-import { timeFromInt } from "time-number";
-import Spinner from "react-bootstrap/Spinner";
-import DataTable from "react-data-table-component";
-import Multiselect from "multiselect-react-dropdown";
-import ParameterTable from "../../components/components-overview/ParameterTable";
-import { ToastContainer, toast } from "react-toastify";
-import { Can } from "@casl/react";
-import setPermissions from "../defineAbility";
-import BootstrapSwitchButton from "bootstrap-switch-button-react";
+import { Container, Row, Col } from "shards-react";
 import { useTranslation } from "react-i18next";
-
-import ReactDataGrid from '@inovua/reactdatagrid-community'
-import '@inovua/reactdatagrid-community/index.css'
-
-import NumberFilter from '@inovua/reactdatagrid-community/NumberFilter'
-import SelectFilter from '@inovua/reactdatagrid-community/SelectFilter'
-import DateFilter from '@inovua/reactdatagrid-community/DateFilter'
-import moment from "moment";
+import AddEmployee from '../../components/components-overview/customer/addCustomer.js';
+import EditEmployee from '../../components/components-overview/customer/editCustomer.js';
+import ManageMembership from '../../components/components-overview/customer/manageMembership.js';
+import ManagePayments from '../../components/components-overview/customer/managePayments.js';
+import ReactDataGrid from '@inovua/reactdatagrid-community';
+import '@inovua/reactdatagrid-community/index.css';
+import '@inovua/reactdatagrid-enterprise/theme/amber-light.css';
+import '@inovua/reactdatagrid-community/base.css';
+import SelectFilter from '@inovua/reactdatagrid-community/SelectFilter';
 import Cookies from "universal-cookie";
 
-window.moment = moment
+const cookies = new Cookies();
+const currentLanguageCode = cookies.get('i18next') || 'en'
+const rtl = (currentLanguageCode=='ar')
 
 const gridStyle = { minHeight: 600 }
+const status = [
+  {
+    id: 1,
+    label: "Active"
+  },
+  {
+    id: 2,
+    label: "In-Active"
+  },
+]
+const headerStyle = {
+  backgroundColor: '#D79D12',
+  color: 'black',
+}
 
 const filterValue = [
     { name: 'name', operator: 'startsWith', type: 'string' },
-    { name: 'age', operator: 'eq', type: 'number' },
-    { name: 'city', operator: 'startsWith', type: 'string'},
-    {
-      name: 'birthDate',
-      operator: 'eq',
-      type: 'date',
-    //   value: '08-08-2022'
-    },
+    { name: 'email', operator: 'eq', type: 'string' },
+    { name: 'CPR', operator: 'eq', type: 'number'},
+    { name: 'nationality', operator: 'eq', type: 'string'},
+    { name: 'is_deleted', operator: 'eq', type: 'select', value:2},
   ];
   const columns = [
-    { name: 'id', header: 'Id', defaultVisible: false, defaultWidth: 80, type: 'number' },
-    { name: 'name', header: 'Name', defaultFlex: 1 },
-    { name: 'age', header: 'Age', defaultFlex: 1, type: 'number', filterEditor: NumberFilter },
-    {
-      name: 'birthDate',
-      header: 'Bith date',
-      defualtFlex: 1,
-      minWidth: 200,
-      filterEditor: DateFilter,
-      filterEditorProps: (props, { index }) => {
-        // for range and notinrange operators, the index is 1 for the after field
-        return {
-          dateFormat: 'MM-DD-YYYY',
-          cancelButton: false,
-          highlightWeekends: false,
-          placeholder: index == 1 ? 'Created date is before...': 'Created date is after...'
-        }
+    { name: 'id', header: 'Id', defaultVisible: false, defaultWidth: 80, type: 'number',  },
+    { name: 'name', header: 'Name', defaultFlex: 1 ,headerProps: { style: headerStyle }},
+    { name: 'email', header: 'Email', defaultFlex: 1,headerProps: { style: headerStyle } },
+    { name: 'CPR', header: 'CPR', defaultFlex: 1,headerProps: { style: headerStyle } },
+    { name: 'nationality', header: 'Nationality', defaultFlex: 1,headerProps: { style: headerStyle } },
+    { name: 'is_deleted', header: 'Status', defaultFlex: 1, filterEditor: SelectFilter,headerProps: { style: headerStyle },
+      filterEditorProps: {
+        placeholder: 'All',
+        dataSource: status
       },
-      render: ({ value, cellProps }) => {
-        return moment(value).format('MM-DD-YYYY')
-      }
+      render: ({ value })=> value === 2 ? "In-Active": "Active"
     },
-    { name: 'city', header: 'City', defaultFlex: 1 },
-    { name: 'name2', header: 'Actions', defaultFlex: 1,  render: ({ value })=> <div style={{textAlign:'center'}}><button onClick={()=>{console.log(value)}}>Hello</button></div> },
+    { 
+      name: 'row', 
+      header: ()=> (<div style={{width:'100%', textAlign:'center'}}>Actions</div>), headerProps: { style: headerStyle },width: rtl ? 270 : 300,
+      render: ({ value })=> 
+        <div style={{textAlign:'center', display:'flex', justifyContent:'space-between', alignItems:'center', }}>
+          <EditEmployee />
+          <ManageMembership />
+          <ManagePayments />
+        </div>
+    },
   ];
 
   const data = [
     {
-        id:"1",
-        name:"bilal",
-        age: "23",
-        birthDate: moment("08-07-2022").format('MM-DD-YYYY'),
-        city: "Muahrraq"
-
+      id:"1",
+      name:"bilal",
+      email: "bilal@gmail.com",
+      CPR: "981009662",
+      nationality: "Bahrain",
+      is_deleted: 1
     },
     {
-        id:"2",
-        name:"farhan",
-        age: "23",
-        birthDate: moment("08-07-2022").format('MM-DD-YYYY'),
-        city: "Muahrraq"
-
+      id:"2",
+      name:"farhan",
+      email: "farhan@gmail.com",
+      CPR: "980567435",
+      nationality: "Pakistan",
+      is_deleted: 2
     }
   ];
-const cookies = new Cookies();
-const currentLanguageCode = cookies.get('i18next') || 'en'
-const rtl = (currentLanguageCode=='ar')
-function Customer () {
+function Employee () {
   
   const {t} = useTranslation()
   return (
-    <>
       <Container fluid className="main-content-container px-4">
         <Row noGutters className="page-header py-4">
-            {/* <Col sm={10} md={10} lg={10} > */}
             <h4 style={{fontWeight:'600', color:'black'}}>{t('customer_page_heading')}</h4>
-            {/* </Col> */}
-            {/* <Col style={{textAlign: 'right'}}>
-            {this.state.user_type== "Employee" ? 
-            (<button
-              className="btn btn-primary"
-              onClick={this.handleClick}
-              style={{
-                backgroundColor: "#004769",
-                borderColor: "#004769",
-                float: "right",
-                fontSize: "20px",
-              }}
-            >
-              Add
-            </button>):
-            (<button
-              className="btn btn-primary"
-              onClick={this.handleCustomerClick}
-              style={{
-                backgroundColor: "#004769",
-                borderColor: "#004769",
-                float: "right",
-                fontSize: "20px",
-              }}
-            >
-              Add
-            </button>)
-            }
-            </Col> */}
-            
         </Row>
+        <div style={{padding:'10px 10px', textAlign: rtl ? 'left' : 'right', width:'100%'}}>
+          <AddEmployee />
+        </div>
         <Row style={{padding:'0 20px'}}>
         <ReactDataGrid
             idProperty="id"
@@ -147,12 +101,14 @@ function Customer () {
             columns={columns}
             dataSource={data}
             rtl={rtl}
+            theme="amber-light"
+            rowHeight={'50px'}
+            pagination
+            
         />
         </Row>
  
-      </Container>
-    </>
-              
+      </Container>        
   );
 }
-export default Customer;
+export default Employee;

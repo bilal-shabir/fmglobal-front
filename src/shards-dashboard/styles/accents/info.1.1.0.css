@@ -4249,7 +4249,7 @@ a.text-accent:hover, a.text-accent:focus {
   .main-sidebar .nav .nav-item .nav-link {
     border-bottom: 1px solid #e1e5eb;
     font-weight: 400;
-    color: #3D5170;
+    color: #000;
     padding: 0.9375rem 1.5625rem; }
     .main-sidebar .nav .nav-item .nav-link i {
       min-width: 1.25rem;

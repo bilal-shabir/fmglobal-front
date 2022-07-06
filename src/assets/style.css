@@ -111,12 +111,22 @@ body {
 -webkit-box-shadow: 0px 3px 11px 0px rgba(0,0,0,0.14);
 -moz-box-shadow: 0px 3px 11px 0px rgba(0,0,0,0.14);
 }
-/* .item{
+.item{
+	padding: 10px 20px;
+	border-radius: 20px;
+	margin: 0px 5px;
 	
-} */
+}
+.itemlink{
+	color: #D79D12 !important;
+}
 .item:hover {
 
 	background-color: #001A26 !important;
+  }
+  .itemactive{
+	background-color: #001A26;
+	color: #D79D12;
   }
 
   @media only screen and (max-width: 992px){
@@ -1389,6 +1399,9 @@ p {
 	}
   }
 
-  .rtlmargin{
-	/* margin-right: 25%; */
+  .standardButton{
+	background-color: #2A2D36;
+	color: #D79D12;
+	border: 1px solid #2A2D36;
+	border-radius: 5px;
   }

@@ -1355,11 +1355,27 @@
     "gud" "^1.0.0"
     "warning" "^4.0.3"
 
-"@inovua/reactdatagrid-community@^4.20.1":
+"@inovua/reactdatagrid-community@^4.20.1", "@inovua/reactdatagrid-community@4.20.1":
   "integrity" "sha512-upqbwyzHan+bBQ+6lu+W9sgsnMZD6MyHHdpQhkRUTPuCryPaE564dYso6XreZJb+QyF1WmsPHsivQ0aDeZ8dYA=="
   "resolved" "https://registry.npmjs.org/@inovua/reactdatagrid-community/-/reactdatagrid-community-4.20.1.tgz"
   "version" "4.20.1"
   dependencies:
+    "@types/lodash.debounce" "^4.0.6"
+    "@types/lodash.throttle" "^4.1.6"
+    "eventemitter3" "^4.0.7"
+    "fast-deep-equal" "^3.1.1"
+    "lodash.debounce" "^4.0.8"
+    "lodash.throttle" "^4.1.1"
+    "object-assign" "^4.1.1"
+    "resize-observer-polyfill" "^1.5.1"
+    "shallowequal" "0.2.2"
+
+"@inovua/reactdatagrid-enterprise@^4.20.1":
+  "integrity" "sha512-TO8Nc+RJKEg9sOi/RYLYypfUtqagvaoHctkK24O65e6t0LA+ZKGuLszGXFIx9w5Rn+oiADqkxJihg8GI2i7Fnw=="
+  "resolved" "https://registry.npmjs.org/@inovua/reactdatagrid-enterprise/-/reactdatagrid-enterprise-4.20.1.tgz"
+  "version" "4.20.1"
+  dependencies:
+    "@inovua/reactdatagrid-community" "4.20.1"
     "@types/lodash.debounce" "^4.0.6"
     "@types/lodash.throttle" "^4.1.6"
     "eventemitter3" "^4.0.7"
