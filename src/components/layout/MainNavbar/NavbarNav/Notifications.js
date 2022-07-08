@@ -1,13 +1,11 @@
 import React from "react";
-import { NavItem, NavLink, Badge, Collapse, DropdownItem } from "shards-react";
-import { URL } from "../../../../constants";
-import audio from "../../../../sound.mp3";
+import { NavItem } from "shards-react";
+
 import {
   NotificationContainer,
-  NotificationManager,
+
 } from "react-notifications";
 import "react-notifications/lib/notifications.css";
-import useSound from "use-sound";
 // import boopSfx from 'sounds/boop.mp3';
 
 export default class Notifications extends React.Component {

@@ -1,12 +1,12 @@
-import React, { Suspense, useState } from "react";
-import { Container, Row, Col } from "shards-react";
+import React, { Suspense } from "react";
+import { Container, Row } from "shards-react";
 import { useTranslation } from "react-i18next";
 import '@inovua/reactdatagrid-community/index.css';
 import '@inovua/reactdatagrid-enterprise/theme/amber-light.css';
 import '@inovua/reactdatagrid-community/base.css';
 import SelectFilter from '@inovua/reactdatagrid-community/SelectFilter';
 import Cookies from "universal-cookie";
-import { ToastContainer, toast } from 'react-toastify';
+import { ToastContainer } from 'react-toastify';
 import './style.css';
 import L from "../../components/components-overview/loader";
 import { URL2 } from "../../constants.js";
@@ -40,11 +40,11 @@ const filterValue = [
   ];
 const cookies = new Cookies();
 const currentLanguageCode = cookies.get('i18next') || 'en'
-const rtl = (currentLanguageCode=='ar')
+const rtl = (currentLanguageCode==='ar')
 function Employee () {
   const {t} = useTranslation()
   const controller = new AbortController();
-  const [url, setUrl] = useState(URL2+"employee")
+  const url= URL2+"employee"
   const [employees, refetch] = useGetFetch(controller, url)
   const columns = [
     { name: 'id', header: 'Id', defaultVisible: false, defaultWidth: 80, type: 'number',  },

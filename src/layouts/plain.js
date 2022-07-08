@@ -1,7 +1,5 @@
-import React, { useEffect } from "react";
-import PropTypes from "prop-types";
+import React from "react";
 import { Container, Row, Col } from "shards-react";
-import banner from '../images/loginbanner.JPG'
 import Cookies from "universal-cookie";
 
 

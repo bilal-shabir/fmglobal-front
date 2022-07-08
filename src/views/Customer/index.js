@@ -1,12 +1,12 @@
-import React, { Suspense, useEffect, useState } from "react";
-import { Container, Row, Col } from "shards-react";
+import React, { Suspense } from "react";
+import { Container, Row } from "shards-react";
 import { useTranslation } from "react-i18next";
 import ReactDataGrid from '@inovua/reactdatagrid-community';
 import '@inovua/reactdatagrid-community/index.css';
 import '@inovua/reactdatagrid-enterprise/theme/amber-light.css';
 import '@inovua/reactdatagrid-community/base.css';
 import SelectFilter from '@inovua/reactdatagrid-community/SelectFilter';
-import { ToastContainer, toast } from 'react-toastify';
+import { ToastContainer } from 'react-toastify';
 import Cookies from "universal-cookie";
 import AddCustomer from '../../components/components-overview/customer/addCustomer.js';
 import EditCustomer from '../../components/components-overview/customer/editCustomer.js';
@@ -18,7 +18,7 @@ import { useGetFetch } from "../../hooks/useGetFetch.js";
 
 const cookies = new Cookies();
 const currentLanguageCode = cookies.get('i18next') || 'en'
-const rtl = (currentLanguageCode=='ar')
+const rtl = (currentLanguageCode==='ar')
 
 const gridStyle = { minHeight: 600 }
 const status = [
@@ -46,7 +46,7 @@ const filterValue = [
 
 function Customer () {
   const controller = new AbortController();
-  const [url, setUrl] = useState(URL2+"customer")
+  const url= URL2+"customer"
   const [customers, refetch] = useGetFetch(controller, url)
   const {t} = useTranslation()
   const columns = [

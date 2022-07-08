@@ -38,7 +38,7 @@ class SidebarMainNavbar extends React.Component {
             
 
           >
-            {this.state.direction == 'en' ? (<div  className="d-table" style={{marginLeft:'25%'}} >
+            {this.state.direction === 'en' ? (<div  className="d-table" style={{marginLeft:'25%'}} >
               {/* {this.state.show?<i id='hamburger' style={{color:'white', marginLeft:'15px', fontSize:'23px'}} onClick = {this.props.toggleSideNavBar} className="material-icons menulogo" >menu</i> : <div></div> } */}
               
               <img
