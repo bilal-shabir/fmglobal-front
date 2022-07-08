@@ -78,6 +78,7 @@ export default () => {
                               placeholder="Mobile Number"
                               aria-label="Username"
                               aria-describedby="basic-addon1"
+                              autoComplete="off"
                             />{" "}
                           </div>
                         </div>
@@ -103,7 +104,7 @@ export default () => {
                               placeholder="Nationality"
                               aria-label="Username"
                               aria-describedby="basic-addon1"
-                              aria-autocomplete="off"
+                              autoComplete="off"
                             />{" "}
                           </div>
                         </div>

@@ -51,7 +51,7 @@ class L extends Component {
             }}>
                 <Loader
                     type="Oval"
-                    color="#007BFF"
+                    color="black"
                     height={50}
                     width={50}
                     // timeout={3000} //3 secs

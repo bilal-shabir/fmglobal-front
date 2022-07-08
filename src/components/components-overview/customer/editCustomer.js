@@ -3,8 +3,19 @@ import {
   Modal,
 } from "react-bootstrap";
 import { useTranslation } from "react-i18next";
+import { toast } from 'react-toastify';
+import { URL2 } from "../../../constants";
+import { useInputValue } from "../../../hooks/useInputValue";
 
-export default () => {
+
+export default ({data, refetch}) => {
+    const name = useInputValue(data.name)
+    const email = useInputValue(data.email)
+    const mobile = useInputValue(data.mobile)
+    const nationality = useInputValue(data.nationality)
+    const CPR = useInputValue(data.CPR)
+    const is_deleted = useInputValue(data.is_deleted)
+
     const [edit, setEdit] = useState(false);
     const {t} = useTranslation()
     const show_edit_modal = () => {
@@ -12,6 +23,59 @@ export default () => {
     }
     const close_edit_modal =()=>{
         setEdit(false)
+    }
+    const handleEdit = async() =>{
+      refetch({})
+      close_edit_modal()
+      const body ={
+        id: data.id,
+        name: name.value,
+        email: email.value,
+        mobile: mobile.value,
+        nationality: nationality.value,
+        CPR: CPR.value
+      }
+      const options = {
+        headers: {
+          "Content-Type": "application/json",
+          "Accept": "application/json",
+        },
+        credentials: "include",
+        method: "PUT",
+        mode: "cors",
+        body: JSON.stringify(body)
+      }
+      await fetch(URL2+"customer", options)
+      .then((res) =>  {
+        if(!res.ok){
+          throw Error(res.statusText)
+        }
+        return res.json()
+      })
+      .then((res) => {
+        refetch({})
+        toast.success('Customer Details Updated', {
+          position: "top-center",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: false,
+          draggable: true,
+          progress: undefined,
+          });
+      })
+      .catch((err) => {
+        toast.error('Error: Failed to Update Details', {
+          position: "top-center",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: false,
+          draggable: true,
+          progress: undefined,
+          });
+      });
+      close_edit_modal()
     }
     return (
         <div>
@@ -29,6 +93,7 @@ export default () => {
                 size="lg"
                 aria-labelledby="contained-modal-title-vcenter"
                 centered
+                style={{marginLeft:'6%'}}
             >
                 <Modal.Header closeButton>
                 <Modal.Title id="contained-modal-title-vcenter">
@@ -49,6 +114,8 @@ export default () => {
                               placeholder="Full Name*"
                               aria-label="Username"
                               aria-describedby="basic-addon1"
+                              defaultValue={data.name}
+                              onChange={name.onChange}
                             />{" "}
                           </div>
                         </div>
@@ -66,6 +133,8 @@ export default () => {
                               aria-label="email"
                               aria-describedby="basic-addon1"
                               autoComplete="off"
+                              defaultValue={data.email}
+                              onChange= {email.onChange}
                             />{" "}
                           </div>
                         </div>
@@ -78,6 +147,8 @@ export default () => {
                               placeholder="Mobile Number"
                               aria-label="Username"
                               aria-describedby="basic-addon1"
+                              defaultValue={data.mobile}
+                              onChange= {mobile.onChange}
                             />{" "}
                           </div>
                         </div>
@@ -85,7 +156,7 @@ export default () => {
                         <div class="form-group">
                           <div class="input-group mb-3">
                             <select class="form-control ">
-                              <option selected>Role</option>
+                              <option>Role</option>
                               <option>...</option>
                             </select>
                           </div>
@@ -103,11 +174,13 @@ export default () => {
                               placeholder="Nationality"
                               aria-label="Username"
                               aria-describedby="basic-addon1"
-                              aria-autocomplete="off"
+                              autoComplete="off"
+                              defaultValue={data.nationality}
+                              onChange= {nationality.onChange}
                             />{" "}
                           </div>
                         </div>
-                        <div class="form-group">
+                        {/* <div class="form-group">
                           <input
                             type="password"
                             class="form-control"
@@ -115,7 +188,7 @@ export default () => {
                             placeholder="Password*"
                             autoComplete="off"
                           />{" "}
-                        </div>
+                        </div> */}
                         <div class="form-group">
                           <div class="input-group mb-3">
                             <input
@@ -124,6 +197,8 @@ export default () => {
                               placeholder="CPR"
                               aria-label="Username"
                               aria-describedby="basic-addon1"
+                              defaultValue={data.CPR}
+                              onChange= {CPR.onChange}
                             />{" "}
                           </div>
                         </div>
@@ -135,6 +210,14 @@ export default () => {
               </ul>
                 </Modal.Body>
                 <Modal.Footer>
+                <button 
+                    onClick={()=>handleEdit(data.id)} 
+                    class="btn btn-dark"  
+                    type="button" 
+                    style={{ color:'#D79D12'}}
+                >
+                   {t('save')}
+                </button>
                 </Modal.Footer>
             </Modal>
         </div>

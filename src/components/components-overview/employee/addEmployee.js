@@ -3,15 +3,111 @@ import {
   Modal,
 } from "react-bootstrap";
 import { useTranslation } from "react-i18next";
+import { toast } from 'react-toastify';
+import { URL2 } from "../../../constants";
+import { useInputValue } from "../../../hooks/useInputValue";
 
-export default () => {
+export default ({refetch}) => {
     const [show, setShow] = useState(false);
     const {t} = useTranslation()
+    const name = useInputValue("")
+    const email = useInputValue("")
+    const mobile = useInputValue("")
+    const nationality = useInputValue("")
+    const CPR = useInputValue("")
+    const password = useInputValue("")
     const show_add_modal = () => {
         setShow(true)
     }
     const close_add_modal =()=>{
         setShow(false)
+    }
+    const handleSubmit =async () => {
+      if(!name.value){
+        toast.info('Please insert name', {
+          position: "top-center",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: false,
+          draggable: true,
+          progress: undefined,
+          });
+          return
+      }
+      else if(!email.value){
+        toast.info('Please insert name', {
+          position: "top-center",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: false,
+          draggable: true,
+          progress: undefined,
+          });
+          return
+      }
+      if(!password.value){
+        toast.info('Please insert name', {
+          position: "top-center",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: false,
+          draggable: true,
+          progress: undefined,
+          });
+          return
+      }
+      const body ={
+        name: name.value,
+        email: email.value,
+        password: password.value,
+        nationality: nationality.value,
+        CPR: CPR.value,
+        mobile: mobile.value
+      }
+      const options = {
+        headers: {
+          "Content-Type": "application/json",
+          "Accept": "application/json",
+        },
+        credentials: "include",
+        method: "POST",
+        mode: "cors",
+        body: JSON.stringify(body)
+      }
+      await fetch(URL2+"employee", options)
+      .then((res) =>  {
+        if(!res.ok){
+          throw Error(res.statusText)
+        }
+        return res.json()
+      })
+      .then((res) => {
+        refetch({})
+        toast.success('Employee created successfully', {
+          position: "top-center",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: false,
+          draggable: true,
+          progress: undefined,
+          });
+      })
+      .catch((err) => {
+        toast.error('Error: Failed to create Empoyee', {
+          position: "top-center",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: false,
+          draggable: true,
+          progress: undefined,
+          });
+      });
+      close_add_modal()
     }
     return (
         <div>
@@ -29,6 +125,7 @@ export default () => {
                 size="lg"
                 aria-labelledby="contained-modal-title-vcenter"
                 centered
+                style={{marginLeft:'6%'}}
             >
                 <Modal.Header closeButton>
                 <Modal.Title id="contained-modal-title-vcenter">
@@ -49,6 +146,8 @@ export default () => {
                               placeholder="Full Name*"
                               aria-label="Username"
                               aria-describedby="basic-addon1"
+                              autoComplete="off"
+                              onChange={name.onChange}
                             />{" "}
                           </div>
                         </div>
@@ -66,6 +165,7 @@ export default () => {
                               aria-label="email"
                               aria-describedby="basic-addon1"
                               autoComplete="off"
+                              onChange={email.onChange}
                             />{" "}
                           </div>
                         </div>
@@ -78,6 +178,8 @@ export default () => {
                               placeholder="Mobile Number"
                               aria-label="Username"
                               aria-describedby="basic-addon1"
+                              autoComplete="off"
+                              onChange={mobile.onChange}
                             />{" "}
                           </div>
                         </div>
@@ -103,7 +205,8 @@ export default () => {
                               placeholder="Nationality"
                               aria-label="Username"
                               aria-describedby="basic-addon1"
-                              aria-autocomplete="off"
+                              autoComplete="off"
+                              onChange={nationality.onChange}
                             />{" "}
                           </div>
                         </div>
@@ -114,6 +217,7 @@ export default () => {
                             id="inputPassword4"
                             placeholder="Password*"
                             autoComplete="off"
+                            onChange={password.onChange}
                           />{" "}
                         </div>
                         <div class="form-group">
@@ -124,6 +228,7 @@ export default () => {
                               placeholder="CPR"
                               aria-label="Username"
                               aria-describedby="basic-addon1"
+                              onChange={CPR.onChange}
                             />{" "}
                           </div>
                         </div>
@@ -135,6 +240,14 @@ export default () => {
               </ul>
                 </Modal.Body>
                 <Modal.Footer>
+                <button 
+                onClick={handleSubmit} 
+                class="btn btn-dark"  
+                type="button" 
+                style={{ color:'#D79D12'}}
+              >
+                {t('save')}
+              </button>
                 </Modal.Footer>
             </Modal>
         </div>

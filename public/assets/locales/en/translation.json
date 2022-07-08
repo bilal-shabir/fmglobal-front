@@ -17,5 +17,6 @@
     "manage_membership_button": "Membership",
     "manage_membership_heading": "Manage Membership",
     "manage_customer_payment_button": "Payments",
-    "manage_customer_payment_heading": "Customer Payments"
+    "manage_customer_payment_heading": "Customer Payments",
+    "save": "Save"
 }
