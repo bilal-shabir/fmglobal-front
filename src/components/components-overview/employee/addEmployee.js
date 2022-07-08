@@ -22,43 +22,8 @@ export default ({refetch}) => {
     const close_add_modal =()=>{
         setShow(false)
     }
-    const handleSubmit =async () => {
-      if(!name.value){
-        toast.info('Please insert name', {
-          position: "top-center",
-          autoClose: 3000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: false,
-          draggable: true,
-          progress: undefined,
-          });
-          return
-      }
-      else if(!email.value){
-        toast.info('Please insert name', {
-          position: "top-center",
-          autoClose: 3000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: false,
-          draggable: true,
-          progress: undefined,
-          });
-          return
-      }
-      if(!password.value){
-        toast.info('Please insert name', {
-          position: "top-center",
-          autoClose: 3000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: false,
-          draggable: true,
-          progress: undefined,
-          });
-          return
-      }
+    function handleSubmit(event) {
+      event.preventDefault(); 
       const body ={
         name: name.value,
         email: email.value,
@@ -77,7 +42,7 @@ export default ({refetch}) => {
         mode: "cors",
         body: JSON.stringify(body)
       }
-      await fetch(URL2+"employee", options)
+      fetch(URL2+"employee", options)
       .then((res) =>  {
         if(!res.ok){
           throw Error(res.statusText)
@@ -132,12 +97,14 @@ export default ({refetch}) => {
                     <span style={{color:'black'}}>{t('add_employee_heading')}</span>
                 </Modal.Title>
                 </Modal.Header>
+                <form onSubmit={handleSubmit }>
                 <Modal.Body>
+                
                 <ul class="list-group list-group-flush">
                 <li class="list-group-item p-3">
                   <div class="row">
                     <div class="col-sm-12 col-md-6">
-                      <form>
+                      <div>
                         <div class="form-group">
                           <div class="input-group mb-3">
                             <input
@@ -147,6 +114,7 @@ export default ({refetch}) => {
                               aria-label="Username"
                               aria-describedby="basic-addon1"
                               autoComplete="off"
+                              required
                               onChange={name.onChange}
                             />{" "}
                           </div>
@@ -165,6 +133,7 @@ export default ({refetch}) => {
                               aria-label="email"
                               aria-describedby="basic-addon1"
                               autoComplete="off"
+                              required
                               onChange={email.onChange}
                             />{" "}
                           </div>
@@ -193,10 +162,10 @@ export default ({refetch}) => {
                           </div>
                         </div>
                         
-                      </form>
+                      </div>
                     </div>
                     <div class="col-sm-12 col-md-6">
-                      <form>
+                      <div>
                         <div class="form-group">
                           <div class="input-group mb-3">
                             <input
@@ -216,7 +185,8 @@ export default ({refetch}) => {
                             class="form-control"
                             id="inputPassword4"
                             placeholder="Password*"
-                            autoComplete="off"
+                            autocomplete="new-password"
+                            required
                             onChange={password.onChange}
                           />{" "}
                         </div>
@@ -233,7 +203,7 @@ export default ({refetch}) => {
                           </div>
                         </div>
                         
-                      </form>
+                      </div>
                     </div>
                   </div>
                 </li>
@@ -241,14 +211,14 @@ export default ({refetch}) => {
                 </Modal.Body>
                 <Modal.Footer>
                 <button 
-                onClick={handleSubmit} 
                 class="btn btn-dark"  
-                type="button" 
+                type="submit" 
                 style={{ color:'#D79D12'}}
               >
                 {t('save')}
               </button>
                 </Modal.Footer>
+                </form>
             </Modal>
         </div>
         
