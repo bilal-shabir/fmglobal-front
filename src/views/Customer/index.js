@@ -11,7 +11,7 @@ import Cookies from "universal-cookie";
 import AddCustomer from '../../components/components-overview/customer/addCustomer.js';
 import EditCustomer from '../../components/components-overview/customer/editCustomer.js';
 import ManageMembership from '../../components/components-overview/customer/manageMembership.js';
-import ManagePayments from '../../components/components-overview/customer/managePayments.js';
+// import ManagePayments from '../../components/components-overview/customer/managePayments.js';
 import L from "../../components/components-overview/loader";
 import { URL2 } from "../../constants.js";
 import { useGetFetch } from "../../hooks/useGetFetch.js";
@@ -45,9 +45,11 @@ const filterValue = [
 ];
 
 function Customer () {
+
   const controller = new AbortController();
   const url= URL2+"customer"
   const [customers, refetch] = useGetFetch(controller, url)
+  const [memberships] = useGetFetch(controller, URL2+"membership")
   const {t} = useTranslation()
   const columns = [
     { name: 'id', header: 'Id', defaultVisible: false, type: 'number',  },
@@ -66,12 +68,12 @@ function Customer () {
       name: 'data',
       defaultVisible: true,
       header: ()=> (<div style={{width:'100%', textAlign:'center'}}>Actions</div>), headerProps: { style: headerStyle },
-      width: rtl ? 270 : 300,
+      width: rtl ? 180 : 200,
       render: ({ value })=> 
         <div style={{textAlign:'center', display:'flex', justifyContent:'space-between', alignItems:'center', }}>
-          <EditCustomer data={value} refetch={refetch}> </EditCustomer>
+          <EditCustomer data={value} refetch={refetch} />
           <ManageMembership />
-          <ManagePayments />
+          {/* <ManagePayments /> */}
         </div>
     },
   ];
@@ -82,7 +84,7 @@ function Customer () {
               <h4 style={{fontWeight:'600', color:'black'}}>{t('customer_page_heading')}</h4>
           </Row>
           <div style={{padding:'10px 10px', textAlign: rtl ? 'left' : 'right', width:'100%'}}>
-            <AddCustomer />
+            <AddCustomer memberships = {memberships} refetch={refetch} />
           </div>
           <Row style={{padding:'0 20px'}}>
           <ReactDataGrid

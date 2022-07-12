@@ -37,8 +37,8 @@ const filterValue = [
     { name: 'lodgings', operator: 'eq', type: 'number'},
     { name: 'is_deleted', operator: 'eq', type: 'select', value:false},
     { name: 'contract_duration',operator: 'eq', type: 'number'},
-    { name: 'employee_commision',operator: 'eq', type: 'number'},
-    { name: 'supervisor_commision ',operator: 'eq', type: 'number'},
+    { name: 'supervisor_commision',operator: 'eq', type: 'number'},
+    { name: 'employee_commision',operator: 'eq', type: 'number'}
   ];
 const cookies = new Cookies();
 const currentLanguageCode = cookies.get('i18next') || 'en'
@@ -58,7 +58,7 @@ function Membership () {
     { name: 'lodgings', header: rtl ? 'غرف مفروشة' : 'Lodgings', defaultFlex: 1,headerProps: { style: headerStyle } },
     { name: 'contract_duration', header: rtl ? 'مدة العقد' : 'Contract Duration', defaultFlex: 1,headerProps: { style: headerStyle } },
     { name: 'employee_commision', header: rtl ? 'عمولة الموظف' : 'Employee Commission', defaultFlex: 1,headerProps: { style: headerStyle } },
-    { name: 'supervisor_commision', header: rtl ? 'عمولة المشرف' : 'Supervison Commission', defaultFlex: 1,headerProps: { style: headerStyle } },
+    { name: 'supervisor_commision', header: rtl ? 'عمولة المشرف' : 'Supervisor Commission', defaultFlex: 1,headerProps: { style: headerStyle } },
     { name: 'is_deleted', header: rtl ? 'الحالة': 'Status', defaultFlex: 1, filterEditor: SelectFilter,headerProps: { style: headerStyle },
       filterEditorProps: {
         placeholder: 'All',
