@@ -36,7 +36,7 @@ export const  useGetFetch =  (controller, url) => {
           if (err.name === "AbortError") {
             console.log("successfully aborted");
           } else {
-            toast.error('Error: Failed to fetch customers', {
+            toast.error('Error: Failed to fetch data', {
               position: "top-center",
               autoClose: 3000,
               hideProgressBar: false,

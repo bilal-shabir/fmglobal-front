@@ -7,11 +7,10 @@ import '@inovua/reactdatagrid-community/base.css';
 import SelectFilter from '@inovua/reactdatagrid-community/SelectFilter';
 import Cookies from "universal-cookie";
 import { ToastContainer } from 'react-toastify';
-import './style.css';
 import L from "../../components/components-overview/loader";
 import { URL2 } from "../../constants.js";
-import AddEmployee from '../../components/components-overview/employee/addEmployee.js';
-import EditEmployee from '../../components/components-overview/employee/editEmployee.js'
+import AddMembership from '../../components/components-overview/membership/addMembership';
+import EditMembership from '../../components/components-overview/membership/editMembership';
 import ReactDataGrid from '@inovua/reactdatagrid-community';
 import { useGetFetch } from "../../hooks/useGetFetch.js";
 
@@ -33,26 +32,33 @@ const headerStyle = {
 
 const filterValue = [
     { name: 'name', operator: 'startsWith', type: 'string' },
-    { name: 'email', operator: 'eq', type: 'string' },
-    { name: 'CPR', operator: 'eq', type: 'number'},
-    { name: 'nationality', operator: 'eq', type: 'string'},
+    { name: 'downpayment', operator: 'eq', type: 'number' },
+    { name: 'cost', operator: 'eq', type: 'number'},
+    { name: 'lodgings', operator: 'eq', type: 'number'},
     { name: 'is_deleted', operator: 'eq', type: 'select', value:false},
+    { name: 'contract_duration',operator: 'eq', type: 'number'},
+    { name: 'employee_commision',operator: 'eq', type: 'number'},
+    { name: 'supervisor_commision ',operator: 'eq', type: 'number'},
   ];
 const cookies = new Cookies();
 const currentLanguageCode = cookies.get('i18next') || 'en'
 const rtl = (currentLanguageCode==='ar')
-function Employee () {
+
+
+function Membership () {
   const {t} = useTranslation()
   const controller = new AbortController();
-  const url= URL2+"employee"
-  const [employees, refetch] = useGetFetch(controller, url)
+  const url= URL2+"membership"
+  const [memberships, refetch] = useGetFetch(controller, url)
   const columns = [
     { name: 'id', header: 'Id', defaultVisible: false, defaultWidth: 80, type: 'number',  },
     { name: 'name', header: rtl ? 'اسم' : 'Name', defaultFlex: 1 ,headerProps: { style: headerStyle }},
-    { name: 'email', header: rtl ? 'البريد الإلكتروني' : 'Email', defaultFlex: 1,headerProps: { style: headerStyle } },
-    { name: 'CPR', header: 'CPR', defaultFlex: 1,headerProps: { style: headerStyle } },
-    { name: 'nationality', header: rtl ? 'جنسية' : 'Nationality', defaultFlex: 1,headerProps: { style: headerStyle } },
-    { name: 'mobile', header: rtl ? 'رقم الهاتف' : 'Mobile', defaultFlex: 1,headerProps: { style: headerStyle } },
+    { name: 'downpayment', header: rtl ? 'الدفع لأسفل' : 'Down Payment', defaultFlex: 1,headerProps: { style: headerStyle } },
+    { name: 'cost', header: rtl ? 'قدر': 'Cost', defaultFlex: 1,headerProps: { style: headerStyle } },
+    { name: 'lodgings', header: rtl ? 'غرف مفروشة' : 'Lodgings', defaultFlex: 1,headerProps: { style: headerStyle } },
+    { name: 'contract_duration', header: rtl ? 'مدة العقد' : 'Contract Duration', defaultFlex: 1,headerProps: { style: headerStyle } },
+    { name: 'employee_commision', header: rtl ? 'عمولة الموظف' : 'Employee Commission', defaultFlex: 1,headerProps: { style: headerStyle } },
+    { name: 'supervisor_commision', header: rtl ? 'عمولة المشرف' : 'Supervison Commission', defaultFlex: 1,headerProps: { style: headerStyle } },
     { name: 'is_deleted', header: rtl ? 'الحالة': 'Status', defaultFlex: 1, filterEditor: SelectFilter,headerProps: { style: headerStyle },
       filterEditorProps: {
         placeholder: 'All',
@@ -66,7 +72,7 @@ function Employee () {
       width: 100,
       render: ({ value })=> 
         <div style={{textAlign:'center'}}>
-          <EditEmployee data={value} refetch={refetch} />
+          <EditMembership data={value} refetch={refetch} rtl={rtl} />
         </div>
     },
   ];
@@ -74,10 +80,10 @@ function Employee () {
     <Suspense fallback={<L />}>
       <Container fluid className="main-content-container px-4">
         <Row noGutters className="page-header py-4">
-            <h4 style={{fontWeight:'600', color:'black'}}>{t('employee_page_heading')}</h4>
+            <h4 style={{fontWeight:'600', color:'black'}}>{t('membership_page_heading')}</h4>
         </Row>
         <div style={{padding:'10px 10px', textAlign: rtl ? 'left' : 'right', width:'100%'}}>
-          <AddEmployee refetch = {refetch} />
+          <AddMembership refetch = {refetch} rtl={rtl} />
         </div>
         <Row style={{padding:'0 20px'}}>
         <ReactDataGrid
@@ -85,7 +91,7 @@ function Employee () {
             style={gridStyle}
             defaultFilterValue={filterValue}
             columns={columns}
-            dataSource={employees}
+            dataSource={memberships}
             rtl={rtl}
             theme="amber-light"
             rowHeight={50}
@@ -103,10 +109,10 @@ function Employee () {
               pauseOnFocusLoss={false}
               draggable
               pauseOnHover={false}
-              style={{marginLeft:'6%'}}
+              style={!rtl ? {marginLeft:'6%'} : {marginLeft:'-6%'}}
             />
       </Container>
       </Suspense>     
   );
 }
-export default Employee;
+export default Membership;

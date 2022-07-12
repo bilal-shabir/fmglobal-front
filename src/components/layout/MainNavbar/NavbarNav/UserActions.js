@@ -36,10 +36,10 @@ class UserActions extends React.Component{
          {/* <span className="d-none d-md-inline-block" style={{color:'white',fontSize:17, paddingLeft:'5px'  }}>{this.state.Email}</span> */}
         </DropdownToggle>
         <Collapse tag={DropdownMenu}small open={this.state.visible} >
-        <DropdownItem tag={Link} to="/UserProfile">
+        <DropdownItem tag={(props) => <Link {...props} />} to="/UserProfile">
             <i className="material-icons" style={{color:'black'}} >account_circle</i> Profile
           </DropdownItem>
-          <DropdownItem tag={Link} to="/logout" className="text-danger">
+          <DropdownItem tag={(props) => <Link {...props} />} to="/logout" className="text-danger">
             <i className="material-icons text-danger" >&#xE879;</i> Logout
           </DropdownItem>
         </Collapse>

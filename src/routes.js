@@ -10,6 +10,8 @@ import { Plain } from "./layouts";
 import Employee from "./views/Employee";
 import Customer from "./views/Customer";
 import EmployeeLogin from "./views/EmployeeLogin";
+import Membership from "./views/Membership";
+import ReservationVoucherPDF from "./views/PDF/reservationVoucher";
 
 export default [
   {
@@ -35,5 +37,17 @@ export default [
     exact: true,
     layout: DefaultLayout,
     component: Customer,
+  },
+  {
+    path: "/Membership",
+    exact: true,
+    layout: DefaultLayout,
+    component: Membership,
+  },
+  {
+    path: "/ReservationVoucherPDF",
+    exact: true,
+    layout: DefaultLayout,
+    component: ReservationVoucherPDF,
   },
 ];

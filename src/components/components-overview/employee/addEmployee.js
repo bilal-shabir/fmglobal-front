@@ -3,9 +3,10 @@ import {
   Modal,
 } from "react-bootstrap";
 import { useTranslation } from "react-i18next";
-import { toast } from 'react-toastify';
+import { FormGroup, FormInput, FormSelect } from "shards-react";
 import { URL2 } from "../../../constants";
 import { useInputValue } from "../../../hooks/useInputValue";
+import { POST } from "../../API calls/POST";
 
 export default ({refetch}) => {
     const [show, setShow] = useState(false);
@@ -32,57 +33,19 @@ export default ({refetch}) => {
         CPR: CPR.value,
         mobile: mobile.value
       }
-      const options = {
-        headers: {
-          "Content-Type": "application/json",
-          "Accept": "application/json",
-        },
-        credentials: "include",
-        method: "POST",
-        mode: "cors",
-        body: JSON.stringify(body)
-      }
-      fetch(URL2+"employee", options)
-      .then((res) =>  {
-        if(!res.ok){
-          throw Error(res.statusText)
-        }
-        return res.json()
-      })
-      .then((res) => {
-        refetch({})
-        toast.success('Employee created successfully', {
-          position: "top-center",
-          autoClose: 3000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: false,
-          draggable: true,
-          progress: undefined,
-          });
-      })
-      .catch((err) => {
-        toast.error('Error: Failed to create Empoyee', {
-          position: "top-center",
-          autoClose: 3000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: false,
-          draggable: true,
-          progress: undefined,
-          });
-      });
+      POST(URL2+"employee",body)
+      refetch({})
       close_add_modal()
     }
     return (
         <div>
             <button 
                 onClick={show_add_modal} 
-                class="btn btn-dark"  
+                className="btn btn-dark"  
                 type="button" 
                 style={{ color:'#D79D12'}}
             >
-                <i class="large material-icons">add</i>{t('add_employee_button')}
+                <i className="large material-icons">add</i>{t('add_employee_button')}
             </button>
             <Modal
                 show={show}
@@ -100,109 +63,79 @@ export default ({refetch}) => {
                 <form onSubmit={handleSubmit }>
                 <Modal.Body>
                 
-                <ul class="list-group list-group-flush">
-                <li class="list-group-item p-3">
-                  <div class="row">
-                    <div class="col-sm-12 col-md-6">
+                <ul className="list-group list-group-flush">
+                <li className="list-group-item p-3">
+                  <div className="row">
+                    <div className="col-sm-12 col-md-6">
                       <div>
-                        <div class="form-group">
-                          <div class="input-group mb-3">
-                            <input
-                              type="text"
-                              class="form-control"
-                              placeholder="Full Name*"
-                              aria-label="Username"
-                              aria-describedby="basic-addon1"
-                              autoComplete="off"
-                              required
-                              onChange={name.onChange}
-                            />{" "}
-                          </div>
-                        </div>
-                        <div class="form-group">
-                          <div class="input-group mb-3">
-                            <div class="input-group-prepend">
-                              <span class="input-group-text" id="basic-addon1">
-                                @
-                              </span>
-                            </div>
-                            <input
-                              type="email"
-                              class="form-control"
-                              placeholder="Email*"
-                              aria-label="email"
-                              aria-describedby="basic-addon1"
-                              autoComplete="off"
-                              required
-                              onChange={email.onChange}
-                            />{" "}
-                          </div>
-                        </div>
-
-                        <div class="form-group">
-                          <div class="input-group mb-3">
-                            <input
-                              type="text"
-                              class="form-control"
-                              placeholder="Mobile Number"
-                              aria-label="Username"
-                              aria-describedby="basic-addon1"
-                              autoComplete="off"
-                              onChange={mobile.onChange}
-                            />{" "}
-                          </div>
-                        </div>
-
-                        <div class="form-group">
-                          <div class="input-group mb-3">
-                            <select class="form-control ">
-                              <option selected>Role</option>
-                              <option>...</option>
-                            </select>
-                          </div>
-                        </div>
+                      <FormGroup>
+                        <label htmlFor="#fullname">Full Name</label>
+                        <FormInput 
+                          type= "text"
+                          id="#fullname"
+                          placeholder="Full Name" 
+                          autoComplete="off"
+                          onChange={name.onChange}
+                          required
+                        />
+                      </FormGroup>
+                      <FormGroup>
+                        <label htmlFor="#email">Email</label>
+                        <FormInput 
+                          type= "email"
+                          id="#email"
+                          placeholder="Email*" 
+                          autoComplete="off"
+                          onChange= {email.onChange}
+                          required
+                        />
+                      </FormGroup>
+                      <FormGroup>
+                        <label htmlFor="#mobile">Mobile</label>
+                        <FormInput 
+                          type= "text"
+                          id="#mobile"
+                          placeholder="Mobile*" 
+                          autoComplete="off"
+                          onChange= {mobile.onChange}
+                          required
+                        />
+                      </FormGroup>    
+                        
                         
                       </div>
                     </div>
-                    <div class="col-sm-12 col-md-6">
+                    <div className="col-sm-12 col-md-6">
                       <div>
-                        <div class="form-group">
-                          <div class="input-group mb-3">
-                            <input
-                              type="text"
-                              class="form-control"
-                              placeholder="Nationality"
-                              aria-label="Username"
-                              aria-describedby="basic-addon1"
-                              autoComplete="off"
-                              onChange={nationality.onChange}
-                            />{" "}
-                          </div>
-                        </div>
-                        <div class="form-group">
-                          <input
-                            type="password"
-                            class="form-control"
-                            id="inputPassword4"
-                            placeholder="Password*"
-                            autocomplete="new-password"
-                            required
-                            onChange={password.onChange}
-                          />{" "}
-                        </div>
-                        <div class="form-group">
-                          <div class="input-group mb-3">
-                            <input
-                              type="number"
-                              class="form-control"
-                              placeholder="CPR"
-                              aria-label="Username"
-                              aria-describedby="basic-addon1"
-                              onChange={CPR.onChange}
-                            />{" "}
-                          </div>
-                        </div>
-                        
+                      <FormGroup>
+                        <label htmlFor="#nationality">Nationality</label>
+                        <FormInput 
+                          type= "text"
+                          id="#nationality"
+                          placeholder="Nationality*" 
+                          autoComplete="off"
+                          onChange= {nationality.onChange}
+                          required
+                        />
+                      </FormGroup>
+                      <FormGroup>
+                        <label htmlFor="#password">Password</label>
+                        <FormInput 
+                          type= "password"
+                          id="#password"
+                          placeholder="Nationality*" 
+                          autoComplete="new-password"
+                          onChange= {password.onChange}
+                          required
+                        />
+                      </FormGroup>  
+                      <FormGroup>
+                        <label htmlFor="#role">Role</label>
+                          <FormSelect id="#role">
+                            <option>Role</option>
+                            <option>...</option>
+                          </FormSelect>
+                      </FormGroup>
                       </div>
                     </div>
                   </div>
@@ -211,7 +144,7 @@ export default ({refetch}) => {
                 </Modal.Body>
                 <Modal.Footer>
                 <button 
-                class="btn btn-dark"  
+                className="btn btn-dark"  
                 type="submit" 
                 style={{ color:'#D79D12'}}
               >

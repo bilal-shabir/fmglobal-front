@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { NavLink as RouteNavLink } from "react-router-dom";
-import { NavItem, NavLink } from "shards-react";
+import { NavItem, NavLink as Link } from "shards-react";
 import Cookies from "universal-cookie";
 
 const cookies = new Cookies();
@@ -9,7 +9,7 @@ const currentLanguageCode = cookies.get('i18next') || 'en'
 
 const SidebarNavItem = ({ item }) => (
   <NavItem  style={{textAlign: currentLanguageCode === 'ar' ? 'right' : 'left'}}>
-    <NavLink tag={RouteNavLink} to={item.to}>
+    <Link tag={(props) => <RouteNavLink {...props} />} to={item.to}>
       {item.htmlBefore && (
         <div
           className="d-inline-block item-icon-wrapper"
@@ -24,7 +24,7 @@ const SidebarNavItem = ({ item }) => (
           dangerouslySetInnerHTML={{ __html: item.htmlAfter }}
         />
       )}
-    </NavLink>
+    </Link>
   </NavItem>
 );
 

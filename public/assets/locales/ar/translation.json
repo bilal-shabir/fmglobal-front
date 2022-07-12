@@ -18,6 +18,11 @@
     "manage_membership_heading": "إدارة العضوية",
     "manage_customer_payment_button": "الدفعات",
     "manage_customer_payment_heading": "مدفوعات العملاء",
-    "save": "حفظ"
+    "save": "حفظ",
+    "membership_page_heading": "إدارة العضويات",
+    "edit_membership_button": "تعديل",
+    "edit_membership_heading": "تحرير العضوية",
+    "add_membership_button": "عضوية",
+    "add_membership_heading": "أضف عضوية"
 
 }

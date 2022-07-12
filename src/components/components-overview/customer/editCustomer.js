@@ -25,8 +25,6 @@ export default ({data, refetch}) => {
         setEdit(false)
     }
     const handleEdit = async() =>{
-      refetch({})
-      close_edit_modal()
       const body ={
         id: data.id,
         name: name.value,
