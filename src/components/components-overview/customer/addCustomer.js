@@ -33,7 +33,7 @@ export default ({memberships,refetch}) => {
     const close_add_modal =()=>{
         setShow(false)
     }
-    function handleSubmit(event) {
+    async function handleSubmit(event) {
       event.preventDefault();
       let array = []
       if(downpayment1date.value){
@@ -52,16 +52,16 @@ export default ({memberships,refetch}) => {
         nationality: nationality.value,
         CPR: CPR.value,
         mobile: mobile.value,
-        membership: membership.value,
+        membership: membership.value.id,
         downpayment_paid: downpaymentpaid.value,
         downpayments: array,
         installments_amount: installment_amount.value,
         installment_date: installment_date.value
       }
       // console.log(body)
-      POST(URL2+"customer",body, "Error: Failed to add customer", "Customer added successfully")
+      const insert = await POST(URL2+"customer",body, "Error: Failed to add customer", "Customer added successfully")
       refetch({})
-      close_add_modal()
+      insert && close_add_modal()
     }
     return (
         <div>
@@ -138,7 +138,7 @@ export default ({memberships,refetch}) => {
                           <FormSelect id="#membership" onChange={membership.onChange} required>
                             <option value = ''>---Select Membership---</option>
                               {memberships.map(membership => 
-                              <option key={membership.id } value={membership.id}>   
+                              <option key={membership.id } value={membership}>   
                                 { membership.name}
                               </option>
                             )}

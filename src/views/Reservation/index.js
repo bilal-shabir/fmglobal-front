@@ -1,4 +1,4 @@
-import React, { Suspense } from "react";
+import React, { Suspense, useEffect, useState } from "react";
 import { Container, Row } from "shards-react";
 import { useTranslation } from "react-i18next";
 import '@inovua/reactdatagrid-community/index.css';
@@ -7,14 +7,16 @@ import '@inovua/reactdatagrid-community/base.css';
 import SelectFilter from '@inovua/reactdatagrid-community/SelectFilter';
 import DateFilter from '@inovua/reactdatagrid-community/DateFilter'
 import moment from "moment";
+import { Link } from "react-router-dom";
 import ReactDataGrid from '@inovua/reactdatagrid-community';
 import { ToastContainer } from 'react-toastify';
 import L from "../../components/components-overview/loader";
 import { URL2 } from "../../constants.js";
 import AddReservation from '../../components/components-overview/reservation/addReservation';
-import EditMembership from '../../components/components-overview/membership/editMembership';
+import EditReservation from '../../components/components-overview/reservation/editReservation';
 import { useGetFetch } from "../../hooks/useGetFetch.js";
 import { checkLanguage } from "../../utils";
+import { GET } from "../../components/API calls/GET";
 
 
 window.moment = moment
@@ -38,7 +40,7 @@ const filterValue = [
     { name: 'name', operator: 'startsWith', type: 'string' },
     { name: 'hotel_name', operator: 'eq', type: 'string' },
     { name: 'start_date', operator: 'eq', type: 'date'},
-    { name: 'end_date', operator: 'eq', type: 'number'},
+    { name: 'end_date', operator: 'eq', type: 'date'},
     { name: 'is_deleted', operator: 'eq', type: 'select', value:false},
     { name: 'description',operator: 'eq', type: 'string'},
     { name: 'customerId',operator: 'eq', type: 'number'},
@@ -50,7 +52,17 @@ function Reservation () {
   const {t} = useTranslation()
   const controller = new AbortController();
   const url= URL2+"reservation"
-  const [memberships, refetch] = useGetFetch(controller, url)
+  const [reservations, refetch] = useGetFetch(controller, url)
+  const[customers , setCustomers] = useState([])
+  useEffect(() => {
+    async function fetchCustomers() {
+      let response = await GET(URL2+'customer', "Error: Failed to fetch customers")
+      if(response){
+        setCustomers(response)
+      }
+    }
+    fetchCustomers()
+  }, []);
   const columns = [
     { name: 'id', header: 'Id', defaultVisible: false, defaultWidth: 80, type: 'number',  },
     { name: 'hotel_name', header: rtl ? 'الدفع لأسفل' : 'Hotel Name', defaultFlex: 1,headerProps: { style: headerStyle } },
@@ -97,7 +109,7 @@ function Reservation () {
         }
     },
     { name: 'description', header: rtl ? 'تفصيل' : 'Description', defaultFlex: 1,headerProps: { style: headerStyle } },
-    { name: 'customerId', header: rtl ? 'عميل' : 'Customer', defaultFlex: 1,headerProps: { style: headerStyle } },
+    // { name: 'customerId', header: rtl ? 'عميل' : 'Customer', defaultFlex: 1,headerProps: { style: headerStyle } },
     { name: 'is_deleted', header: rtl ? 'الحالة': 'Status', defaultFlex: 1, filterEditor: SelectFilter,headerProps: { style: headerStyle },
       filterEditorProps: {
         placeholder: 'All',
@@ -107,12 +119,21 @@ function Reservation () {
     },
     { 
       name: 'data', 
-      header: ()=> (<div style={{width:'100%', textAlign:'center'}}>{rtl ? 'أجراءات' : 'Actions'}</div>), headerProps: { style: headerStyle },
-      width: 100,
+      header:rtl ? 'أجراءات' : 'Actions',
+      width: 160,
+      headerProps: { style: headerStyle } ,
       render: ({ value })=> 
-        <div style={{textAlign:'center'}}>
-          <EditMembership data={value} refetch={refetch} rtl={rtl} />
-        </div>
+      <div style={{textAlign:'center', display:'flex', justifyContent:'space-between', alignItems:'center', }}>
+        <EditReservation customers={customers} data={value} refetch={refetch} />
+        <Link
+            to={`/ReservationVoucherPDF/${value.id}`}
+            className="btn btn-dark"  
+            type="button" 
+            style={{ color:'#D79D12'}}
+        >
+            <i className="material-icons">picture_as_pdf</i> PDF
+        </Link>
+      </div>
     },
   ];
   return (
@@ -122,7 +143,7 @@ function Reservation () {
             <h4 style={{fontWeight:'600', color:'black'}}>{t('manage_reservation_heading')}</h4>
         </Row>
         <div style={{padding:'10px 10px', textAlign: rtl ? 'left' : 'right', width:'100%'}}>
-          <AddReservation refetch = {refetch} rtl={rtl} />
+          <AddReservation customers={customers} refetch = {refetch} rtl={rtl} />
         </div>
         <Row style={{padding:'0 20px'}}>
         <ReactDataGrid
@@ -130,7 +151,7 @@ function Reservation () {
             style={gridStyle}
             defaultFilterValue={filterValue}
             columns={columns}
-            dataSource={memberships}
+            dataSource={reservations}
             rtl={rtl}
             theme="amber-light"
             rowHeight={50}

@@ -59,7 +59,7 @@ export default [
     component: Contract,
   },
   {
-    path: "/ReservationVoucherPDF",
+    path: "/ReservationVoucherPDF/:id",
     exact: true,
     layout: DefaultLayout,
     component: ReservationVoucherPDF,
