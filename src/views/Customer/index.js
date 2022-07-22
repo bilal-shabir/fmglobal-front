@@ -100,7 +100,8 @@ function Customer () {
     { 
       name: 'data',
       defaultVisible: true,
-      header: ()=> (<div style={{width:'100%', textAlign:'center'}}>Actions</div>), headerProps: { style: headerStyle },
+      header: rtl ? 'أجراءات' : 'Actions',
+      headerProps: { style: headerStyle },
       width: rtl ? 180 : 200,
       render: ({ value })=> 
         <div style={{textAlign:'center', display:'flex', justifyContent:'space-between', alignItems:'center', }}>

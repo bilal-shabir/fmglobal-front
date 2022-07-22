@@ -27,5 +27,9 @@
     "contracts_page_heading": "انكماش",
     "manage_reservation_heading" : "إدارة الحجوزات",
     "add_reservation_button" : "تحفظ",
-    "add_reservation_heading" : "تحفظ"
+    "add_reservation_heading" : "تحفظ",
+    "manage_payment_heading" : "إدارة المدفوعات",
+    "add_payment_button" : "دفع",
+    "add_payment_heading" : "إضافة المدفوعات"
+
 }

@@ -14,6 +14,7 @@ import Membership from "./views/Membership";
 import ReservationVoucherPDF from "./views/PDF/reservationVoucher";
 import Reservation from "./views/Reservation";
 import Contract from "./views/Contracts";
+import Payment from "./views/Payment";
 
 export default [
   {
@@ -57,6 +58,12 @@ export default [
     exact: true,
     layout: DefaultLayout,
     component: Contract,
+  },
+  {
+    path: "/Payments",
+    exact: true,
+    layout: DefaultLayout,
+    component: Payment,
   },
   {
     path: "/ReservationVoucherPDF/:id",

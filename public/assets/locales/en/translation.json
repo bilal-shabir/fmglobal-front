@@ -27,5 +27,8 @@
     "contracts_page_heading": "Contracts",
     "manage_reservation_heading" : "Manage Reservations",
     "add_reservation_button" : "Reservation",
-    "add_reservation_heading" : "Add Reservation"
+    "add_reservation_heading" : "Add Reservation",
+    "manage_payment_heading" : "Manage Payments",
+    "add_payment_button" : "Payment",
+    "add_payment_heading" : "Add Payment"
 }

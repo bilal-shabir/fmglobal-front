@@ -60,7 +60,8 @@ function Employee () {
     },
     { 
       name: 'data', 
-      header: ()=> (<div style={{width:'100%', textAlign:'center'}}>{rtl ? 'أجراءات' : 'Actions'}</div>), headerProps: { style: headerStyle },
+      header: rtl ? 'أجراءات' : 'Actions',
+      headerProps: { style: headerStyle },
       width: 100,
       render: ({ value })=> 
         <div style={{textAlign:'center'}}>
