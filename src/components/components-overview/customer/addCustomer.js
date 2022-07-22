@@ -59,7 +59,7 @@ export default ({memberships,refetch}) => {
         installment_date: installment_date.value
       }
       // console.log(body)
-      POST(URL2+"customer",body)
+      POST(URL2+"customer",body, "Error: Failed to add customer", "Customer added successfully")
       refetch({})
       close_add_modal()
     }
@@ -254,7 +254,7 @@ export default ({memberships,refetch}) => {
                     </thead>
                     <tbody>
                         <tr>
-                          <td>Down Payment 1</td>
+                          <td>First Down Payment</td>
                           <td>
                           <FormGroup>
                               <div className="row">
@@ -285,7 +285,7 @@ export default ({memberships,refetch}) => {
                           </td>
                         </tr>
                         <tr>
-                          <td>Down Payment 2</td>
+                          <td>Second Down Payment</td>
                           <td>
                           <FormGroup>
                               <div className="row">
@@ -316,7 +316,7 @@ export default ({memberships,refetch}) => {
                           </td>
                         </tr>
                         <tr>
-                          <td>Down Payment 3</td>
+                          <td>Third Down Payment</td>
                           <td>
                           <FormGroup>
                               <div className="row">

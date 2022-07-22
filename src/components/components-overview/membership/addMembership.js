@@ -24,7 +24,7 @@ export default ({refetch, rtl}) => {
     const close_add_modal =()=>{
         setShow(false)
     }
-    function handleSubmit(event) {
+    async function handleSubmit(event) {
       event.preventDefault(); 
       const body ={
         name: name.value,
@@ -35,7 +35,7 @@ export default ({refetch, rtl}) => {
         supervisor_commision: supervisor_commision.value ? supervisor_commision.value : null,
         employee_commision: employee_commision.value ? employee_commision.value : null
       }
-      POST(URL2+"membership", body )
+      await POST(URL2+"membership", body ,"Error: Failed to create membership","Membership created successfully")
       refetch({})
       close_add_modal()
     }

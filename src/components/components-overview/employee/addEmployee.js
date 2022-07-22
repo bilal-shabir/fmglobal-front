@@ -14,8 +14,6 @@ export default ({refetch}) => {
     const name = useInputValue("")
     const email = useInputValue("")
     const mobile = useInputValue("")
-    const nationality = useInputValue("")
-    const CPR = useInputValue("")
     const password = useInputValue("")
     const show_add_modal = () => {
         setShow(true)
@@ -23,17 +21,15 @@ export default ({refetch}) => {
     const close_add_modal =()=>{
         setShow(false)
     }
-    function handleSubmit(event) {
+    async function handleSubmit(event) {
       event.preventDefault(); 
       const body ={
         name: name.value,
         email: email.value,
         password: password.value,
-        nationality: nationality.value,
-        CPR: CPR.value,
         mobile: mobile.value
       }
-      POST(URL2+"employee",body)
+      await POST(URL2+"employee",body, "Error: Failed to add employee" ,"Employee added successfully")
       refetch({})
       close_add_modal()
     }
@@ -108,15 +104,11 @@ export default ({refetch}) => {
                     <div className="col-sm-12 col-md-6">
                       <div>
                       <FormGroup>
-                        <label htmlFor="#nationality">Nationality</label>
-                        <FormInput 
-                          type= "text"
-                          id="#nationality"
-                          placeholder="Nationality*" 
-                          autoComplete="off"
-                          onChange= {nationality.onChange}
-                          required
-                        />
+                        <label htmlFor="#role">Role</label>
+                          <FormSelect id="#role">
+                            <option>Role</option>
+                            <option>...</option>
+                          </FormSelect>
                       </FormGroup>
                       <FormGroup>
                         <label htmlFor="#password">Password</label>
@@ -129,13 +121,7 @@ export default ({refetch}) => {
                           required
                         />
                       </FormGroup>  
-                      <FormGroup>
-                        <label htmlFor="#role">Role</label>
-                          <FormSelect id="#role">
-                            <option>Role</option>
-                            <option>...</option>
-                          </FormSelect>
-                      </FormGroup>
+                      
                       </div>
                     </div>
                   </div>

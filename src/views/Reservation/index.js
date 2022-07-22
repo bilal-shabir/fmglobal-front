@@ -43,10 +43,10 @@ const filterValue = [
 const rtl = checkLanguage()
 
 
-function Membership () {
+function Reservation () {
   const {t} = useTranslation()
   const controller = new AbortController();
-  const url= URL2+"membership"
+  const url= URL2+"reservation"
   const [memberships, refetch] = useGetFetch(controller, url)
   const columns = [
     { name: 'id', header: 'Id', defaultVisible: false, defaultWidth: 80, type: 'number',  },
@@ -113,4 +113,4 @@ function Membership () {
       </Suspense>     
   );
 }
-export default Membership;
+export default Reservation;

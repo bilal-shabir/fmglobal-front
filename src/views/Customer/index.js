@@ -7,7 +7,6 @@ import '@inovua/reactdatagrid-enterprise/theme/amber-light.css';
 import '@inovua/reactdatagrid-community/base.css';
 import SelectFilter from '@inovua/reactdatagrid-community/SelectFilter';
 import { ToastContainer } from 'react-toastify';
-import Cookies from "universal-cookie";
 import AddCustomer from '../../components/components-overview/customer/addCustomer.js';
 import EditCustomer from '../../components/components-overview/customer/editCustomer.js';
 import ManageMembership from '../../components/components-overview/customer/manageMembership.js';
@@ -15,11 +14,9 @@ import ManageMembership from '../../components/components-overview/customer/mana
 import L from "../../components/components-overview/loader";
 import { URL2 } from "../../constants.js";
 import { useGetFetch } from "../../hooks/useGetFetch.js";
+import { checkLanguage } from "../../utils.js";
 
-const cookies = new Cookies();
-const currentLanguageCode = cookies.get('i18next') || 'en'
-const rtl = (currentLanguageCode==='ar')
-
+const rtl = checkLanguage()
 const gridStyle = { minHeight: 600 }
 const status = [
   {
@@ -49,7 +46,7 @@ function Customer () {
   const controller = new AbortController();
   const url= URL2+"customer"
   const [customers, refetch] = useGetFetch(controller, url)
-  const [memberships] = useGetFetch(controller, URL2+"membership")
+  const [memberships] = useGetFetch(controller, URL2+"membership", "Error: Failed to fetch memberships for creating customer")
   const {t} = useTranslation()
   const columns = [
     { name: 'id', header: 'Id', defaultVisible: false, type: 'number',  },
@@ -106,7 +103,7 @@ function Customer () {
               hideProgressBar={false}
               newestOnTop={false}
               closeOnClick
-              rtl={false}
+              rtl={rtl}
               pauseOnFocusLoss={false}
               draggable
               pauseOnHover={false}

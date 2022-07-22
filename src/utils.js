@@ -1,4 +1,5 @@
 // import namor from 'namor'
+import Cookies from 'universal-cookie';
 import {DKEY} from './constants'
 
 
@@ -14,7 +15,12 @@ export var checkpermision =function(input) {
       }
 }
 
-// const range = len => {
+export const checkLanguage = () => {
+  const cookies = new Cookies();
+  const currentLanguageCode = cookies.get('i18next') || 'en'
+  return (currentLanguageCode==='ar')
+}
+ // const range = len => {
 //   const arr = []
 //   for (let i = 0; i < len; i++) {
 //     arr.push(i)

@@ -5,23 +5,12 @@ import {
 import { useTranslation } from "react-i18next";
 import { FormGroup, FormInput } from "shards-react";
 import { URL2 } from "../../../constants";
-import { useInputValue } from "../../../hooks/useInputValue";
 import { PUT } from "../../API calls/PUT";
 
 
 export default ({data, refetch, rtl}) => {
-  const {t} = useTranslation()
-    const name = useInputValue(data.name)
-    const cost = useInputValue(data.cost)
-    const lodgings = useInputValue(data.lodgings)
-    const contract_duration = useInputValue(data.contract_duration)
-    const downpayment = useInputValue(data.downpayment)
-    const employee_commision = useInputValue(data.employee_commision)
-    const supervisor_commision = useInputValue(data.supervisor_commision)
-    // const is_deleted = useInputValue(data.is_deleted)
-
+    const {t} = useTranslation()
     const [edit, setEdit] = useState(false);
-    
     const show_edit_modal = () => {
         setEdit(true)
     }
@@ -32,15 +21,15 @@ export default ({data, refetch, rtl}) => {
       event.preventDefault(); 
       const body = {
         id: data.id,
-        name: name.value,
-        cost: cost.value,
-        contract_duration: contract_duration.value,
-        lodgings: lodgings.value,
-        downpayment: downpayment.value,
-        supervisor_commision: supervisor_commision.value ? supervisor_commision.value : null,
-        employee_commision: employee_commision.value ? employee_commision.value : null
+        name: document.getElementById("#name").value,
+        cost: document.getElementById("#cost").value,
+        contract_duration: document.getElementById("#contract_duration").value,
+        lodgings: document.getElementById("#lodgings").value,
+        downpayment: document.getElementById("#downpayment").value,
+        supervisor_commision: document.getElementById("#supervisor_commision").value,
+        employee_commision: document.getElementById("#employee_commision").value
       }
-      PUT(URL2+"membership",body)
+      PUT(URL2+"membership",body, "Error: Failed to update membership details", "Details updated successfully")
       refetch({})
       close_edit_modal()
     }
@@ -80,7 +69,6 @@ export default ({data, refetch, rtl}) => {
                           placeholder="Name" 
                           autoComplete="off"
                           required
-                          onChange={name.onChange}
                           defaultValue ={data.name}
                         />
                       </FormGroup>
@@ -92,7 +80,6 @@ export default ({data, refetch, rtl}) => {
                           placeholder="Cost" 
                           autoComplete="off"
                           required
-                          onChange={cost.onChange}
                           defaultValue ={data.cost}
                         />
                       </FormGroup>
@@ -104,7 +91,6 @@ export default ({data, refetch, rtl}) => {
                           placeholder="Down Payment" 
                           autoComplete="off"
                           required
-                          onChange={downpayment.onChange}
                           defaultValue ={data.downpayment}
                         />
                       </FormGroup> 
@@ -115,7 +101,6 @@ export default ({data, refetch, rtl}) => {
                           id="#supervisor_commision"
                           placeholder="Supervisor Commission" 
                           autoComplete="off"
-                          onChange={supervisor_commision.onChange}
                           defaultValue ={data.supervisor_commision}
                         />
                       </FormGroup>                   
@@ -129,7 +114,6 @@ export default ({data, refetch, rtl}) => {
                           placeholder="Loadgings" 
                           autoComplete="off"
                           required
-                          onChange={lodgings.onChange}
                           defaultValue ={data.lodgings}
                         />
                       </FormGroup>    
@@ -141,7 +125,6 @@ export default ({data, refetch, rtl}) => {
                           placeholder="Contract Duration" 
                           autoComplete="off"
                           required
-                          onChange={contract_duration.onChange}
                           defaultValue ={data.contract_duration}
                         />
                       </FormGroup>
@@ -152,7 +135,6 @@ export default ({data, refetch, rtl}) => {
                           id="#employee_commision"
                           placeholder="Employee Commission" 
                           autoComplete="off"
-                          onChange={employee_commision.onChange}
                           defaultValue ={data.employee_commision}
                         />
                       </FormGroup>

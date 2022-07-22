@@ -1,46 +1,47 @@
-import { useState } from 'react';
-import { toast } from 'react-toastify';
+import axios from "axios";
 
-export const GET = (url) => {
-    const [data,setData] = useState()
-    const options = {
-        headers: {
-        "Content-Type": "application/json",
-        "Accept": "application/json",
-        },
-        credentials: "include",
-        mode: "cors",
+export function GET(url) {
+    let dataPromise = fetchData(url);
+    return {
+      data: wrapPromise(dataPromise),
+    };
+  }
+  
+  // Suspense integrations like Relay implement
+  // a contract like this to integrate with React.
+  // Real implementations can be significantly more complex.
+  // Don't copy-paste this into your project!
+  function wrapPromise(promise) {
+    let status = "pending";
+    let result;
+    let suspender = promise.then(
+      (r) => {
+        status = "success";
+        result = r;
+      },
+      (e) => {
+        status = "error";
+        result = e;
+      }
+    );
+    return {
+      read() {
+        if (status === "pending") {
+          throw suspender;
+        } else if (status === "error") {
+          throw result;
+        } else if (status === "success") {
+          return result;
+        }
+      }
+    };
+  }
+  
+  function fetchData(url) {
+    return axios
+        .get(url)
+        .then(res => res.data)
+        .catch(err => console.log(err))
     }
-    fetch(url, options)
-    .then((res) =>  {
-          if(!res.ok){
-            throw Error(res.statusText)
-          }
-          return res.json()
-    })
-    .then((res) => {
-        // console.log(res)
-        setData(res)
-    })
-    .catch((err) => {
-        if (err.name === "AbortError") {
-            console.log("successfully aborted");
-        } else {
-            toast.error('Error: Failed to insert data', {
-              position: "top-center",
-              autoClose: 3000,
-              hideProgressBar: false,
-              closeOnClick: true,
-              pauseOnHover: false,
-              draggable: true,
-              progress: undefined,
-              });
-          }
-    });
-    return data
-}
-
-
-    
-    
+  
   

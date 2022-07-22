@@ -1,6 +1,6 @@
 import { toast } from 'react-toastify';
 
-export const PUT =  (url, body) => {
+export const PUT =  (url, body, errorMessage, successMessage) => {
     const options = {
         headers: {
         "Content-Type": "application/json",
@@ -19,29 +19,33 @@ export const PUT =  (url, body) => {
           return res.json()
     })
     .then((res) => {
-        toast.success('Details updated successfully', {
-            position: "top-center",
-            autoClose: 3000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: false,
-            draggable: true,
-            progress: undefined,
-        });
+        if(successMessage){
+            toast.success(successMessage, {
+                position: "top-center",
+                autoClose: 3000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: false,
+                draggable: true,
+                progress: undefined,
+            });
+        }    
     })
     .catch((err) => {
         if (err.name === "AbortError") {
             console.log("successfully aborted");
         } else {
-            toast.error('Error: Failed to Update Details', {
-              position: "top-center",
-              autoClose: 3000,
-              hideProgressBar: false,
-              closeOnClick: true,
-              pauseOnHover: false,
-              draggable: true,
-              progress: undefined,
-              });
+            if(errorMessage){
+                toast.error(errorMessage, {
+                    position: "top-center",
+                    autoClose: 3000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: false,
+                    draggable: true,
+                    progress: undefined,
+                });
+            }   
           }
     });
 }

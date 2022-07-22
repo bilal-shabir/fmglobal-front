@@ -5,7 +5,6 @@ import '@inovua/reactdatagrid-community/index.css';
 import '@inovua/reactdatagrid-enterprise/theme/amber-light.css';
 import '@inovua/reactdatagrid-community/base.css';
 import SelectFilter from '@inovua/reactdatagrid-community/SelectFilter';
-import Cookies from "universal-cookie";
 import { ToastContainer } from 'react-toastify';
 import './style.css';
 import L from "../../components/components-overview/loader";
@@ -14,6 +13,7 @@ import AddEmployee from '../../components/components-overview/employee/addEmploy
 import EditEmployee from '../../components/components-overview/employee/editEmployee.js'
 import ReactDataGrid from '@inovua/reactdatagrid-community';
 import { useGetFetch } from "../../hooks/useGetFetch.js";
+import { checkLanguage } from "../../utils";
 
 const gridStyle = { minHeight: 600 }
 const status = [
@@ -30,7 +30,6 @@ const headerStyle = {
   backgroundColor: '#D79D12',
   color: 'black',
 }
-
 const filterValue = [
     { name: 'name', operator: 'startsWith', type: 'string' },
     { name: 'email', operator: 'eq', type: 'string' },
@@ -38,9 +37,8 @@ const filterValue = [
     { name: 'nationality', operator: 'eq', type: 'string'},
     { name: 'is_deleted', operator: 'eq', type: 'select', value:false},
   ];
-const cookies = new Cookies();
-const currentLanguageCode = cookies.get('i18next') || 'en'
-const rtl = (currentLanguageCode==='ar')
+const rtl = checkLanguage()
+
 function Employee () {
   const {t} = useTranslation()
   const controller = new AbortController();
@@ -106,7 +104,7 @@ function Employee () {
               style={{marginLeft:'6%'}}
             />
       </Container>
-      </Suspense>     
+    </Suspense>     
   );
 }
 export default Employee;

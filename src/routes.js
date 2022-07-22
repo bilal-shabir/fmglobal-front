@@ -12,6 +12,8 @@ import Customer from "./views/Customer";
 import EmployeeLogin from "./views/EmployeeLogin";
 import Membership from "./views/Membership";
 import ReservationVoucherPDF from "./views/PDF/reservationVoucher";
+import Reservation from "./views/Reservation";
+import Contract from "./views/Contracts";
 
 export default [
   {
@@ -43,6 +45,18 @@ export default [
     exact: true,
     layout: DefaultLayout,
     component: Membership,
+  },
+  {
+    path: "/Reservations",
+    exact: true,
+    layout: DefaultLayout,
+    component: Reservation,
+  },
+  {
+    path: "/Contracts",
+    exact: true,
+    layout: DefaultLayout,
+    component: Contract,
   },
   {
     path: "/ReservationVoucherPDF",

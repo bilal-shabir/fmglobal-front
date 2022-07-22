@@ -3,11 +3,15 @@ import logo from '../images/PavilionLogo.png';
 import banner from '../images/login.jpg'
 import "./login.css";
 import Cookies from 'universal-cookie';
-import { ToastContainer } from 'react-toastify';
+import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useTranslation } from "react-i18next";
 import i18next from "i18next";
-import { useHistory } from "react-router-dom";
+// import { useHistory } from "react-router-dom";
+import { useInputValue } from "../hooks/useInputValue";
+// import { POST } from "../components/API calls/POST";
+import { URL2 } from "../constants";
+import { GET } from "../components/API calls/GET";
 
 const GlobeIcon = ({width = 20, height = 20}) =>(
   <svg xmlns="http://www.w3.org/2000/svg" width={width} height={height} fill="currentColor" className="bi bi-globe" viewBox="0 0 16 16">
@@ -16,7 +20,9 @@ const GlobeIcon = ({width = 20, height = 20}) =>(
 )
 
 function EmployeeLogin(){
-  let history = useHistory(); 
+  const email = useInputValue("")
+  const password = useInputValue("")
+  // let history = useHistory(); 
   const {t} = useTranslation()
   const languages = [
     {
@@ -39,9 +45,49 @@ function EmployeeLogin(){
     document.body.dir = currentLanguage.dir || 'ltr'
   },[currentLanguage])
 
-  const routeChange = () =>{ 
-    let path = `Roles`; 
-    history.push(path);
+  function handleSubmit(event){ 
+    event.preventDefault();
+    const body = {
+      email: email.value,
+      password: password.value
+    }
+    const options = {
+      headers: {
+      "Content-Type": "application/json",
+      "Accept": "application/json",
+      },
+      credentials: "include",
+      mode: "cors",
+      method: "POST",
+      body: JSON.stringify(body)
+    }
+    fetch(URL2+'login', options)
+    .then((res) =>  {
+          if(!res.ok){
+            throw Error(res.statusText)
+          }
+          return res.json()
+    })
+    .then((res) => {
+        const profile = GET(URL2+'profile')
+        console.log(profile)
+    })
+    .catch((err) => {
+        if (err.name === "AbortError") {
+            console.log("successfully aborted");
+        } else {
+            toast.error("Invalid email or password", {
+                position: "top-center",
+                autoClose: 3000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: false,
+                draggable: true,
+                progress: undefined,
+            });   
+          }
+    });
+    // history.push(path);
   }
 
   return (
@@ -61,12 +107,13 @@ function EmployeeLogin(){
         <p className="primary-label" style={{fontSize:13, color:'#C9C9C9'}}>&#160;</p>
         </div>
       <div style={{paddingLeft: '25px', paddingRight:'25px'}}  >
+        <form onSubmit={handleSubmit}>
           <div>
-            <input type="text" name="Email" placeholder={t('email_placeholder')} id="Email" className="text" />
+            <input type="email" name="Email" placeholder={t('email_placeholder')} id="Email" className="text" onChange={email.onChange} required />
           </div>
 
           <div>
-            <input type="password" name="Password" placeholder={t('password_placeholder')} id="Password" className="password"/>
+            <input type="password" name="Password" placeholder={t('password_placeholder')} id="Password" className="password" onChange={password.onChange} required/>
           </div>
           <div>
           {/* <select class="select" name="company" id="Company">
@@ -80,7 +127,7 @@ function EmployeeLogin(){
           </select> */}
           </div>
           <div style={{marginTop:'10px'}}>
-          <button className="button loginbutton"  onClick={routeChange} >
+          <button className="button loginbutton" typr="submit">
                         {/* {
                             this.state.show_loading  &&
                             <div style={{display:'inline-block',paddingRight:'5px'}}><Spinner as="span" animation="border" size="sm" role="status" aria-hidden="true"/><span className="sr-only">Loading...</span></div>
@@ -88,23 +135,14 @@ function EmployeeLogin(){
                         {t('sign_in')}
          </button>
           </div>
+          </form>
         </div> 
       </div>
       
     </div>
     <div style={{display:'flex', justifyContent:'flex-end'}}>
-
-      {/* <select class="form-control" name="lng" id="lng" style={{width:'50px', textAlign:'center'}} onChange={()=>i18next.changeLanguage(document.getElementById('lng').value)} defaultValue={currentLanguageCode}> */}
-        {/* <option disabled selected value> -- select an option -- </option> */}
-        {/* {languages.map((language) =>
-          <option key={language.code} value={language.code} >
-            {language.code}
-          </option>
-        )}
-      </select> */}
       <span onClick={()=>i18next.changeLanguage(currentLanguageCode==='en' ? 'ar' : 'en')} style={{cursor:'pointer', color:'#D79D12'}}> {t('language')} <GlobeIcon  /></span>
      
-    
       </div>
     <ToastContainer
                 position="top-center"
@@ -122,292 +160,5 @@ function EmployeeLogin(){
   
   );
 }
-
-// class EmployeeLogin extends React.Component {
-
-//   constructor(props) {
-//     super(props);
-//     const  t = useTranslation()
-//     this.state = {
-//         companies: [],
-//         name: null,
-//         data: [],
-//         per: 3,
-//         page: 1,
-//         num_rows:1,
-//         show_loading:false,
-//         hide_form:false,
-//         ability: null,
-
-//       };
-//       localStorage.removeItem('Email');
-//       localStorage.removeItem('Token');
-  
-//       localStorage.removeItem('ID');
-//       localStorage.removeItem('is_logged');
-//       localStorage.removeItem('side_menu');
-
-//       localStorage.removeItem('permissions');
-//       localStorage.removeItem('state');
-//       localStorage.removeItem('username');
-//       localStorage.removeItem('company');
-//       localStorage.removeItem('user_id');
-//       localStorage.removeItem('Name');
-//       localStorage.removeItem('Type');
-//     this.handleSubmit = this.handleSubmit.bind(this);
-//  }
-
-//  async componentDidMount(){
-//   // fetch(URL2+'company',{
-//   //   headers : { 
-//   //     'Content-Type': 'application/json',
-//   //     'Accept': 'application/json',
-//   //     // 'access_token' : json.access_token
-//   //    },
-//   //    credentials: 'include'
-//   // }).then(response => response.json())
-//   // .then((json)=>{
-//   //   console.log(json)
-//   //   this.setState({
-//   //     companies: json
-//   //   })
-//   // })
-//  }
-
-//   async handleSubmit(event) {
-//     event.preventDefault();
-//     this.setState({ show_loading: true}); 
-//     const cookies = new Cookies();
-  
-    
-//     var email=document.getElementById("Email").value;
-//     var password=document.getElementById("Password").value;
-//     // var company=document.getElementById("Company").value;
-
-//     await fetch(URL2+'login', {
-//       headers : { 
-//         'Content-Type': 'application/json',
-//         'Accept': 'application/json'
-//        },
-//        credentials: 'include',
-//       method: 'POST',
-//       mode: 'cors',
-//       body: JSON.stringify({ email: email,
-//       password: password })
-//     }).then(response => response.json())
-//     .then((json) => {
-//       if (json.statusCode == 404 || json.statusCode == 401 || json.statusCode == 500 || json.statusCode == 403 || json.statusCode == 400) { 
-//         throw Error(json.statusText)        
-//       }
-//       else{
-//       // console.log(json.message)
-//       console.log('login_response', json)
-//       if(json.message=='succeess'){
-
-//         localStorage.setItem('user_id',json.id);
-//         this.setState({
-//           name: json.name
-//         })
-
-//         fetch(URL2+'getPermissions',{
-//           headers : { 
-//             'Content-Type': 'application/json',
-//             'Accept': 'application/json',
-
-//            },
-//            credentials: 'include'
-//         }).then(response => response.json())
-//         .then((json)=>{
-
-           
-//           if (json.statusCode == 404 || json.statusCode == 401 || json.statusCode == 500 || json.statusCode == 403 || json.statusCode == 400) { 
-//             throw Error(json.statusText)        
-//           }
-//           else{
-//             console.log("here",json)
-//           // const ability = setPermissions(json);
-          
-      
-//         if(json.modules.length != 0){
-//           this.setState({
-//             show_loading: false,
-//             hide_form:true
-//           })
-//           var QR_Path = new URL(window.location).pathname;
-//           var fixURL= QR_Path.replace(/%20/g,' ');
-//           var FinalURL= fixURL.replace(/%22/g,' ');
-//           let splitUrl = FinalURL.split("/");
-//           console.log("spilit",splitUrl)
-//           var CryptoJS = require("crypto-js");
-//           var ciphertext = CryptoJS.AES.encrypt(JSON.stringify(json.modules), DKEY).toString();
-
-//           //cookies.set('permissions', ciphertext, { path: '/', secure:true} )
-//           localStorage.setItem('permissions',ciphertext);
-//           localStorage.setItem('UserType','Staff');
-//           localStorage.setItem('Name',this.state.name);
-//           localStorage.setItem('Email',email);
-//           localStorage.setItem('Type',json.user_type);
-//           localStorage.setItem('is_logged','1');
-//           localStorage.setItem('company',json.company_id);
-
-//           if(splitUrl[1] =='get_value_project'){
-//             this.props.history.push(`/Checkin?p=${QR_Path}`);
-//           }
-//           else if(json.modules[0].name =='Billing'){
-//             this.props.history.push("/ViewInvoices");
-//           }
-  
-//           else{
-//             this.props.history.push("/"+json.modules[0].name);
-//           }
-
-//         }
-//         else{
-//           toast.info('No Access', {
-//             position: "top-center",
-//             autoClose: 3000,
-//             hideProgressBar: false,
-//             closeOnClick: true,
-//             pauseOnHover: false,
-//             draggable: true,
-//             progress: undefined,
-//             });
-//           this.setState({
-//             show_loading: false,
-//             hide_form:true
-//           })
-          
-//         }
-//           }
-          
-          
-//         })
-//         .catch((e) => {
-//           // console.log(e)  
-//           toast.error('Something went wrong...', {
-//               position: "top-center",
-//               autoClose: 3000,
-//               hideProgressBar: false,
-//               closeOnClick: true,
-//               pauseOnHover: false,
-//               draggable: true,
-//               progress: undefined,
-//               });
-//               this.setState({
-//                 show_loading: false,
-//                 hide_form:true
-//               })
-//         });
-  
-        
-        
-//       }
-//       else{
-//         toast.info('Invalid Credentials', {
-//           position: "top-center",
-//           autoClose: 3000,
-//           hideProgressBar: false,
-//           closeOnClick: true,
-//           pauseOnHover: false,
-//           draggable: true,
-//           progress: undefined,
-//           });
-//         this.setState({
-//           show_loading: false,
-//           hide_form:true
-//         })
-//       }
-    
-//     }
-//   }).catch((e) => {
-//     // console.log(e)  
-//     toast.error('Something went wrong...', {
-//         position: "top-center",
-//         autoClose: 3000,
-//         hideProgressBar: false,
-//         closeOnClick: true,
-//         pauseOnHover: false,
-//         draggable: true,
-//         progress: undefined,
-//         });
-//   });
-
-// }
-  
-
-  
-  
-  
-//   render() {
-
-//   return (
-
-    
-
-//     <div class="auth-wrapper">
-//     <div class="auth-form-wrapper">
-//       <div class="auth-media">
-        
-//         <img class="card-img-top" src={banner} alt="Card image cap" style={{borderRadius: '20px'}}/>
-//       </div>
-//       <div class="auth-form">
-//         <div class="auth-form-label">
-//         <img class="card-img-top" src={logo} style={{ maxWidth: "50px"}} alt="Card image cap"/>
-//           <p class="primary-label">Pavilion Renewables</p>
-          
-//         </div>
-//         <div class="auth-form-label">
-//         <p class="primary-label" style={{fontSize:13, color:'#C9C9C9'}}>&#160;</p>
-//         </div>
-//       <form style={{paddingLeft: '25px', paddingRight:'25px'}} onSubmit={this.handleSubmit}>
-//           <div>
-//             <input type="text" name="Email" placeholder="Email" id="Email" className="text" />
-//           </div>
-
-//           <div>
-//             <input type="password" name="Password" placeholder="Password" id="Password" class="password"/>
-//           </div>
-//           <div>
-//           {/* <select class="select" name="company" id="Company">
-//               <option disabled selected value> -- select a company -- </option>
-//               {this.state.companies.map((company) => 
-//                                                <option key={company.id } value={company.id}>   
-//                                                       {  company.name}
-//                                                </option>
-//                                               )}
-              
-//           </select> */}
-//           </div>
-//           <div style={{marginTop:'10px'}}>
-//           <button class="button" type="submit" >
-//                         {
-//                             this.state.show_loading  &&
-//                             <div style={{display:'inline-block',paddingRight:'5px'}}><Spinner as="span" animation="border" size="sm" role="status" aria-hidden="true"/><span className="sr-only">Loading...</span></div>
-//                         } 
-//                         SIGN IN 
-//          </button>
-//           </div>
-//         </form> 
-//       </div>
-//     </div>
-//     <div id="snackbar">Invalid Credentials</div>
-//     <div id="snackbar2">No Access</div>
-//     <ToastContainer
-//                 position="top-center"
-//                 autoClose={3000}
-//                 hideProgressBar={false}
-//                 newestOnTop={false}
-//                 closeOnClick
-//                 rtl={false}
-//                 pauseOnFocusLoss={false}
-//                 draggable
-//                 pauseOnHover={false}
-//                 // style={{marginLeft:'6%'}}
-//                 />
-//   </div>
-  
-//   );
-// }
-// } // close for login
 
 export default EmployeeLogin;

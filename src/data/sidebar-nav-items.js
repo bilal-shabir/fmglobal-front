@@ -7,11 +7,10 @@ export default function() {
       to: "/Customer",
     },
     {
-      title: "Employees",
-      title_ar: "موظف",
-      to: "/Employee",
-      htmlBefore: '<i class="material-icons" >assignment_ind</i>',
-      htmlAfter: ""
+      title: "Reservations",
+      title_ar: "التحفظات",
+      htmlBefore: '<i class="material-icons" >event</i>',
+      to: "/Reservations",
     },
     {
       title: "Memberships",
@@ -28,20 +27,21 @@ export default function() {
     {
       title: "Contracts",
       title_ar: "انكماش",
-      htmlBefore: '<i class="material-icons" >note_add</i>',
+      htmlBefore: '<i class="material-icons" >receipt</i>',
       to: "/Contracts",
-    },
-    {
-      title: "Reservations",
-      title_ar: "التحفظات",
-      htmlBefore: '<i class="material-icons" >event</i>',
-      to: "/Reservations",
     },
     {
       title: "Payment Notes",
       title_ar: "ملاحظات الدفع",
       htmlBefore: '<i class="material-icons" >note</i>',
       to: "/Payment Notes",
+    },
+    {
+      title: "Employees",
+      title_ar: "موظف",
+      to: "/Employee",
+      htmlBefore: '<i class="material-icons" >assignment_ind</i>',
+      htmlAfter: ""
     }
   ];
 }
