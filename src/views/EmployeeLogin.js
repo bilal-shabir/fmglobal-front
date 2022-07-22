@@ -3,15 +3,14 @@ import logo from '../images/PavilionLogo.png';
 import banner from '../images/login.jpg'
 import "./login.css";
 import Cookies from 'universal-cookie';
-import { toast, ToastContainer } from 'react-toastify';
+import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useTranslation } from "react-i18next";
 import i18next from "i18next";
-// import { useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { useInputValue } from "../hooks/useInputValue";
-// import { POST } from "../components/API calls/POST";
 import { URL2 } from "../constants";
-import { GET } from "../components/API calls/GET";
+import { POST } from "../components/API calls/POST";
 
 const GlobeIcon = ({width = 20, height = 20}) =>(
   <svg xmlns="http://www.w3.org/2000/svg" width={width} height={height} fill="currentColor" className="bi bi-globe" viewBox="0 0 16 16">
@@ -22,7 +21,7 @@ const GlobeIcon = ({width = 20, height = 20}) =>(
 function EmployeeLogin(){
   const email = useInputValue("")
   const password = useInputValue("")
-  // let history = useHistory(); 
+  let history = useHistory(); 
   const {t} = useTranslation()
   const languages = [
     {
@@ -45,49 +44,17 @@ function EmployeeLogin(){
     document.body.dir = currentLanguage.dir || 'ltr'
   },[currentLanguage])
 
-  function handleSubmit(event){ 
+  async function handleSubmit(event){ 
     event.preventDefault();
     const body = {
       email: email.value,
       password: password.value
     }
-    const options = {
-      headers: {
-      "Content-Type": "application/json",
-      "Accept": "application/json",
-      },
-      credentials: "include",
-      mode: "cors",
-      method: "POST",
-      body: JSON.stringify(body)
+
+    const login = await POST(URL2+'login', body, "Invalid email or password", null)
+    if(login){
+      history.push("/customer");
     }
-    fetch(URL2+'login', options)
-    .then((res) =>  {
-          if(!res.ok){
-            throw Error(res.statusText)
-          }
-          return res.json()
-    })
-    .then((res) => {
-        const profile = GET(URL2+'profile')
-        console.log(profile)
-    })
-    .catch((err) => {
-        if (err.name === "AbortError") {
-            console.log("successfully aborted");
-        } else {
-            toast.error("Invalid email or password", {
-                position: "top-center",
-                autoClose: 3000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: false,
-                draggable: true,
-                progress: undefined,
-            });   
-          }
-    });
-    // history.push(path);
   }
 
   return (

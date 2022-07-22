@@ -24,5 +24,8 @@
     "edit_membership_heading": "Edit Membership",
     "add_membership_button": "Membership",
     "add_membership_heading": "Add Membership",
-    "contracts_page_heading": "Contracts"
+    "contracts_page_heading": "Contracts",
+    "manage_reservation_heading" : "Manage Reservations",
+    "add_reservation_button" : "Reservation",
+    "add_reservation_heading" : "Add Reservation"
 }

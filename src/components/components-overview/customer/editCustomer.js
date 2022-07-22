@@ -3,19 +3,12 @@ import {
   Modal,
 } from "react-bootstrap";
 import { useTranslation } from "react-i18next";
-import { toast } from 'react-toastify';
+import { FormGroup, FormInput } from "shards-react";
 import { URL2 } from "../../../constants";
-import { useInputValue } from "../../../hooks/useInputValue";
+import { PUT } from "../../API calls/PUT";
 
 
 export default ({data, refetch}) => {
-    const name = useInputValue(data.name)
-    const email = useInputValue(data.email)
-    const mobile = useInputValue(data.mobile)
-    const nationality = useInputValue(data.nationality)
-    const CPR = useInputValue(data.CPR)
-    // const is_deleted = useInputValue(data.is_deleted)
-
     const [edit, setEdit] = useState(false);
     const {t} = useTranslation()
     const show_edit_modal = () => {
@@ -27,53 +20,18 @@ export default ({data, refetch}) => {
     const handleEdit = async() =>{
       const body ={
         id: data.id,
-        name: name.value,
-        email: email.value,
-        mobile: mobile.value,
-        nationality: nationality.value,
-        CPR: CPR.value
+        name: document.getElementById('#fullname').value,
+        email: document.getElementById('#email').value,
+        mobile: document.getElementById('#mobile').value,
+        nationality: document.getElementById('#nationality').value,
+        CPR: document.getElementById('#CPR').value
       }
-      const options = {
-        headers: {
-          "Content-Type": "application/json",
-          "Accept": "application/json",
-        },
-        credentials: "include",
-        method: "PUT",
-        mode: "cors",
-        body: JSON.stringify(body)
-      }
-      await fetch(URL2+"customer", options)
-      .then((res) =>  {
-        if(!res.ok){
-          throw Error(res.statusText)
-        }
-        return res.json()
-      })
-      .then((res) => {
-        refetch({})
-        toast.success('Customer Details Updated', {
-          position: "top-center",
-          autoClose: 3000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: false,
-          draggable: true,
-          progress: undefined,
-          });
-      })
-      .catch((err) => {
-        toast.error('Error: Failed to Update Details', {
-          position: "top-center",
-          autoClose: 3000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: false,
-          draggable: true,
-          progress: undefined,
-          });
-      });
-      close_edit_modal()
+
+      const edit = await PUT(URL2+'customer', body, "Error: Failed to update customer", "Customer details updated" )
+      
+      edit && close_edit_modal()
+      refetch({})
+      
     }
     return (
         <div>
@@ -98,110 +56,78 @@ export default ({data, refetch}) => {
                     <span style={{color:'black'}}>{t('edit_customer_heading')}</span>
                 </Modal.Title>
                 </Modal.Header>
-                <Modal.Body>
+                <Modal.Body 
+                  style={{
+                    maxHeight: 'calc(100vh - 210px)',
+                    overflowY: 'auto'
+                  }}
+                >
                 <ul className="list-group list-group-flush">
                 <li className="list-group-item p-3">
                   <div className="row">
                     <div className="col-sm-12 col-md-6">
-                      <form>
-                        <div className="form-group">
-                          <div className="input-group mb-3">
-                            <input
-                              type="text"
-                              className="form-control"
-                              placeholder="Full Name*"
-                              aria-label="Username"
-                              aria-describedby="basic-addon1"
-                              defaultValue={data.name}
-                              onChange={name.onChange}
-                            />{" "}
-                          </div>
-                        </div>
-                        <div className="form-group">
-                          <div className="input-group mb-3">
-                            <div className="input-group-prepend">
-                              <span className="input-group-text" id="basic-addon1">
-                                @
-                              </span>
-                            </div>
-                            <input
-                              type="email"
-                              className="form-control"
-                              placeholder="Email*"
-                              aria-label="email"
-                              aria-describedby="basic-addon1"
-                              autoComplete="off"
-                              defaultValue={data.email}
-                              onChange= {email.onChange}
-                            />{" "}
-                          </div>
-                        </div>
+                      <div>
+                      <FormGroup>
+                        <label htmlFor="#fullname">Full Name</label>
+                        <FormInput 
+                          type= "text"
+                          id="#fullname"
+                          placeholder="Full Name" 
+                          autoComplete="off"
+                          defaultValue = {data.name}
+                          required
+                        />
+                      </FormGroup>
+                      <FormGroup>
+                        <label htmlFor="#email">Email</label>
+                        <FormInput 
+                          type= "email"
+                          id="#email"
+                          placeholder="Email*" 
+                          autoComplete="off"
+                          defaultValue = {data.email}
+                          required
+                        />
+                      </FormGroup>
+                      <FormGroup>
+                        <label htmlFor="#mobile">Mobile</label>
+                        <FormInput 
+                          type= "text"
+                          id="#mobile"
+                          placeholder="Mobile*" 
+                          autoComplete="off"
+                          defaultValue = {data.mobile}
+                          required
+                        />
+                      </FormGroup> 
 
-                        <div className="form-group">
-                          <div className="input-group mb-3">
-                            <input
-                              type="text"
-                              className="form-control"
-                              placeholder="Mobile Number"
-                              aria-label="Username"
-                              aria-describedby="basic-addon1"
-                              defaultValue={data.mobile}
-                              onChange= {mobile.onChange}
-                            />{" "}
-                          </div>
-                        </div>
-
-                        <div className="form-group">
-                          <div className="input-group mb-3">
-                            <select className="form-control ">
-                              <option>Role</option>
-                              <option>...</option>
-                            </select>
-                          </div>
-                        </div>
-                        
-                      </form>
+                      </div>
                     </div>
                     <div className="col-sm-12 col-md-6">
-                      <form>
-                        <div className="form-group">
-                          <div className="input-group mb-3">
-                            <input
-                              type="text"
-                              className="form-control"
-                              placeholder="Nationality"
-                              aria-label="Username"
-                              aria-describedby="basic-addon1"
-                              autoComplete="off"
-                              defaultValue={data.nationality}
-                              onChange= {nationality.onChange}
-                            />{" "}
-                          </div>
-                        </div>
-                        {/* <div className="form-group">
-                          <input
-                            type="password"
-                            className="form-control"
-                            id="inputPassword4"
-                            placeholder="Password*"
-                            autoComplete="off"
-                          />{" "}
-                        </div> */}
-                        <div className="form-group">
-                          <div className="input-group mb-3">
-                            <input
-                              type="number"
-                              className="form-control"
-                              placeholder="CPR"
-                              aria-label="Username"
-                              aria-describedby="basic-addon1"
-                              defaultValue={data.CPR}
-                              onChange= {CPR.onChange}
-                            />{" "}
-                          </div>
-                        </div>
-                        
-                      </form>
+                      <div>
+                      <FormGroup>
+                        <label htmlFor="#nationality">Nationality</label>
+                        <FormInput 
+                          type= "text"
+                          id="#nationality"
+                          placeholder="Nationality*" 
+                          autoComplete="off"
+                          defaultValue={data.nationality}
+                          required
+                        />
+                      </FormGroup>
+                      <FormGroup>
+                        <label htmlFor="#CPR">CPR</label>
+                        <FormInput 
+                          type= "number"
+                          id="#CPR"
+                          placeholder="CPR*" 
+                          autoComplete="new-password"
+                          defaultValue={data.CPR}
+                          required
+                        />
+                      </FormGroup> 
+                      </div>
                     </div>
                   </div>
                 </li>

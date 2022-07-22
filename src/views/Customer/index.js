@@ -1,4 +1,4 @@
-import React, { Suspense } from "react";
+import React, { Suspense, useEffect, useState } from "react";
 import { Container, Row } from "shards-react";
 import { useTranslation } from "react-i18next";
 import ReactDataGrid from '@inovua/reactdatagrid-community';
@@ -15,6 +15,7 @@ import L from "../../components/components-overview/loader";
 import { URL2 } from "../../constants.js";
 import { useGetFetch } from "../../hooks/useGetFetch.js";
 import { checkLanguage } from "../../utils.js";
+import { GET } from "../../components/API calls/GET.js";
 
 const rtl = checkLanguage()
 const gridStyle = { minHeight: 600 }
@@ -38,22 +39,57 @@ const filterValue = [
     { name: 'email', operator: 'eq', type: 'string' },
     { name: 'CPR', operator: 'eq', type: 'number'},
     { name: 'nationality', operator: 'eq', type: 'string'},
-    { name: 'is_deleted', operator: 'eq', type: 'select', value:false},
+    { name: 'is_deleted', operator: 'eq', type: 'select', value:null},
+    { name: 'membership', operator: 'eq', type: 'select', value: null},
 ];
 
 function Customer () {
-
+  const {t} = useTranslation()
   const controller = new AbortController();
   const url= URL2+"customer"
-  const [customers, refetch] = useGetFetch(controller, url)
-  const [memberships] = useGetFetch(controller, URL2+"membership", "Error: Failed to fetch memberships for creating customer")
-  const {t} = useTranslation()
+  let [customers, refetch] = useGetFetch(controller, url)
+  const[memberships , setMemberships] = useState([])
+  const[membershipFilterSource , setMembershipFilterSource] = useState([])
+  useEffect(() => {
+    async function fetchMemberships() {
+      let response = await GET(URL2+'membership', "Error: Failed to fetch memberhsips")
+      let membershipFilter = []
+      if(response){
+        for (let index = 0; index < response.length; index++) {
+          let obj = {
+            id: response[index].name,
+            label: response[index].name
+          }
+          membershipFilter.push(obj)
+        }
+      // membershipFilter.push({id: null, label: "No Membership"})
+      setMembershipFilterSource(membershipFilter)
+      setMemberships(response)
+      }
+      console.log(membershipFilter)
+    }
+    fetchMemberships()
+  }, []);
+  
   const columns = [
     { name: 'id', header: 'Id', defaultVisible: false, type: 'number',  },
     { name: 'name', header: 'Name', defaultFlex: 1 ,headerProps: { style: headerStyle }},
     { name: 'email', header: 'Email', defaultFlex: 1,headerProps: { style: headerStyle } },
     { name: 'CPR', header: 'CPR', defaultFlex: 1,headerProps: { style: headerStyle } },
     { name: 'nationality', header: 'Nationality', defaultFlex: 1,headerProps: { style: headerStyle } },
+    { 
+      name: 'membership', 
+      header: 'Membership', 
+      defaultFlex: 1,
+      headerProps: { style: headerStyle }, 
+      filterEditor: SelectFilter,
+      filterEditorProps: {
+        placeholder: 'All',
+        dataSource: membershipFilterSource
+      },
+      render: ({value}) => value ? value : null
+      
+    },
     { name: 'is_deleted', header: 'Status', defaultFlex: 1, filterEditor: SelectFilter,headerProps: { style: headerStyle },
       filterEditorProps: {
         placeholder: 'All',

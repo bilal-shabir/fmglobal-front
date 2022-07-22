@@ -1,6 +1,7 @@
 import { toast } from 'react-toastify';
 
-export const PUT =  (url, body, errorMessage, successMessage) => {
+export const PUT =  async (url, body, errorMessage, successMessage) => {
+    let data = null
     const options = {
         headers: {
         "Content-Type": "application/json",
@@ -11,7 +12,7 @@ export const PUT =  (url, body, errorMessage, successMessage) => {
         method: "PUT",
         body: JSON.stringify(body)
     }
-    fetch(url, options)
+    await fetch(url, options)
     .then((res) =>  {
           if(!res.ok){
             throw Error(res.statusText)
@@ -30,6 +31,7 @@ export const PUT =  (url, body, errorMessage, successMessage) => {
                 progress: undefined,
             });
         }    
+        data= res
     })
     .catch((err) => {
         if (err.name === "AbortError") {
@@ -48,6 +50,7 @@ export const PUT =  (url, body, errorMessage, successMessage) => {
             }   
           }
     });
+    return data
 }
 
 

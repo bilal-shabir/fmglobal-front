@@ -44,141 +44,19 @@ const MainNavbar = ({ layout, stickyTop }) => {
     document.body.dir = currentLanguage.dir || 'ltr'
   },[currentLanguage])
 
-//   const findDefault  = (value) => {
-//       var a = company.find(b=>
-//         b.value == company_id)
-//       return a
-//   }
- 
- 
-//  async function changeCompany (event) {
-//     console.log(event.value)
-//     const c_id = event.value
-//     await fetch(URL2+'change-company',{
-//       headers : { 
-//         'Content-Type': 'application/json',
-//         'Accept': 'application/json',
-
-//        },
-//        credentials: 'include',
-//        method: 'POST',
-//        mode: 'cors',
-//        body: JSON.stringify({ company_id: event.value})
-
-//     }).then(response => response.json())
-//     .then((json)=>{
-//       if (json.statusCode == 404 || json.statusCode == 401 || json.statusCode == 500 || json.statusCode == 400 || json.statusCode == 403 ) { 
-//         throw Error(json.statusText)        
-//       }
-//       else{
-//         fetch(URL2+'getPermissions',{
-//           headers : { 
-//             'Content-Type': 'application/json',
-//             'Accept': 'application/json',
-
-//            },
-//            credentials: 'include'
-//         }).then(response => response.json())
-//         .then((json)=>{
-//           if (json.statusCode == 404 || json.statusCode == 401 || json.statusCode == 500 || json.statusCode == 400 || json.statusCode == 403 ) { 
-//             throw Error(json.statusText)        
-//           }
-//           else{
-//             // toast.success('company changed succesfully', {
-//             //   position: "top-center",
-//             //   autoClose: 3000,
-//             //   hideProgressBar: false,
-//             //   closeOnClick: true,
-//             //   pauseOnHover: false,
-//             //   draggable: true,
-//             //   progress: undefined,
-//             //   });
-//             console.log(json)
-//             localStorage.setItem('company',c_id);
-//             localStorage.removeItem('side_menu');
-//             var CryptoJS = require("crypto-js");
-//             var ciphertext = CryptoJS.AES.encrypt(JSON.stringify(json.modules), DKEY).toString();
-      
-//             localStorage.setItem('permissions',ciphertext);
-//             window.location.replace('http://localhost:3001/'+json.modules[0].name);
-//           }
-    
-         
-//           // this.props.history.push("/"+);
-    
-//         })
-//         .catch((e) => {
-//           document.getElementById("c_name").value= {
-//             value: company_id
-//           } ;
-
-//           // console.log(e)  
-//           toast.warning('No access', {
-//               position: "top-center",
-//               autoClose: 3000,
-//               hideProgressBar: false,
-//               closeOnClick: true,
-//               pauseOnHover: false,
-//               draggable: true,
-//               progress: undefined,
-//               });
-//         })
-//       }
-//     })
-//     .catch((e) => {
-//       document.getElementById("c_name").value= company_id ;
-//       // console.log(e)  
-//       toast.warning('No access', {
-//           position: "top-center",
-//           autoClose: 3000,
-//           hideProgressBar: false,
-//           closeOnClick: true,
-//           pauseOnHover: false,
-//           draggable: true,
-//           progress: undefined,
-//           });
-//     })
-
-   
-//   }
-  
   return (
     <div className={classes} style={{backgroundImage:'linear-gradient(to right, #FFFFFF, #FFFFFF)'}}>
       <div className="p-0">
         
         <Navbar type="light" className="align-items-stretch flex-md-nowrap p-0">
           <NavbarSearch />
-          {/* <div style={{padding:'10px'}}>
-          {company.length !=0 ? (
-           <Select id="c_name" options={company} value={findDefault(company_id)} autosize={true} defaultValue={findDefault(company_id)} onChange={changeCompany} isSearchable={false} />
-          ) : (
-            <div></div>
-          )}
-        
-        </div> */}
           <NavbarNav />
-          {/* <img src={icon} width={50} height={50} style={{borderRadius:'2px', marginTop:'4px'}} ></img> */}
           
           <span  onClick={()=>{
             i18next.changeLanguage(currentLanguageCode==='en' ? 'ar' : 'en')
-            // if(currentLanguageCode === 'en' ){
               window.location.reload(false);
-            // }
-            
           }} style={{cursor:'pointer', marginTop:'13px', color:'#D79D12', padding:'0 15px'}}> {t('language')} <GlobeIcon  /></span>
           <NavbarToggle />
-          {/* <ToastContainer
-                position="top-center"
-                autoClose={3000}
-                hideProgressBar={false}
-                newestOnTop={false}
-                closeOnClick
-                rtl={false}
-                pauseOnFocusLoss={false}
-                draggable
-                pauseOnHover={false}
-                style={{marginLeft:'6%'}}
-                /> */}
         </Navbar>
         
         

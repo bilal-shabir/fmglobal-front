@@ -24,6 +24,8 @@
     "edit_membership_heading": "تحرير العضوية",
     "add_membership_button": "عضوية",
     "add_membership_heading": "أضف عضوية",
-    "contracts_page_heading": "انكماش"
-
+    "contracts_page_heading": "انكماش",
+    "manage_reservation_heading" : "إدارة الحجوزات",
+    "add_reservation_button" : "تحفظ",
+    "add_reservation_heading" : "تحفظ"
 }

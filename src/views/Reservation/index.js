@@ -5,15 +5,19 @@ import '@inovua/reactdatagrid-community/index.css';
 import '@inovua/reactdatagrid-enterprise/theme/amber-light.css';
 import '@inovua/reactdatagrid-community/base.css';
 import SelectFilter from '@inovua/reactdatagrid-community/SelectFilter';
+import DateFilter from '@inovua/reactdatagrid-community/DateFilter'
+import moment from "moment";
+import ReactDataGrid from '@inovua/reactdatagrid-community';
 import { ToastContainer } from 'react-toastify';
 import L from "../../components/components-overview/loader";
 import { URL2 } from "../../constants.js";
-import AddMembership from '../../components/components-overview/membership/addMembership';
+import AddReservation from '../../components/components-overview/reservation/addReservation';
 import EditMembership from '../../components/components-overview/membership/editMembership';
-import ReactDataGrid from '@inovua/reactdatagrid-community';
 import { useGetFetch } from "../../hooks/useGetFetch.js";
 import { checkLanguage } from "../../utils";
 
+
+window.moment = moment
 const gridStyle = { minHeight: 600 }
 const status = [
   {
@@ -32,13 +36,12 @@ const headerStyle = {
 
 const filterValue = [
     { name: 'name', operator: 'startsWith', type: 'string' },
-    { name: 'downpayment', operator: 'eq', type: 'number' },
-    { name: 'cost', operator: 'eq', type: 'number'},
-    { name: 'lodgings', operator: 'eq', type: 'number'},
+    { name: 'hotel_name', operator: 'eq', type: 'string' },
+    { name: 'start_date', operator: 'eq', type: 'date'},
+    { name: 'end_date', operator: 'eq', type: 'number'},
     { name: 'is_deleted', operator: 'eq', type: 'select', value:false},
-    { name: 'contract_duration',operator: 'eq', type: 'number'},
-    { name: 'supervisor_commision',operator: 'eq', type: 'number'},
-    { name: 'employee_commision',operator: 'eq', type: 'number'}
+    { name: 'description',operator: 'eq', type: 'string'},
+    { name: 'customerId',operator: 'eq', type: 'number'},
   ];
 const rtl = checkLanguage()
 
@@ -50,13 +53,51 @@ function Reservation () {
   const [memberships, refetch] = useGetFetch(controller, url)
   const columns = [
     { name: 'id', header: 'Id', defaultVisible: false, defaultWidth: 80, type: 'number',  },
-    { name: 'name', header: rtl ? 'اسم' : 'Name', defaultFlex: 1 ,headerProps: { style: headerStyle }},
-    { name: 'downpayment', header: rtl ? 'الدفع لأسفل' : 'Down Payment', defaultFlex: 1,headerProps: { style: headerStyle } },
-    { name: 'cost', header: rtl ? 'قدر': 'Cost', defaultFlex: 1,headerProps: { style: headerStyle } },
-    { name: 'lodgings', header: rtl ? 'غرف مفروشة' : 'Lodgings', defaultFlex: 1,headerProps: { style: headerStyle } },
-    { name: 'contract_duration', header: rtl ? 'مدة العقد' : 'Contract Duration', defaultFlex: 1,headerProps: { style: headerStyle } },
-    { name: 'employee_commision', header: rtl ? 'عمولة الموظف' : 'Employee Commission', defaultFlex: 1,headerProps: { style: headerStyle } },
-    { name: 'supervisor_commision', header: rtl ? 'عمولة المشرف' : 'Supervisor Commission', defaultFlex: 1,headerProps: { style: headerStyle } },
+    { name: 'hotel_name', header: rtl ? 'الدفع لأسفل' : 'Hotel Name', defaultFlex: 1,headerProps: { style: headerStyle } },
+    {
+        name: 'start_date',
+        header: rtl ? 'تاريخ البدء' : 'Start date',
+        defualtFlex: 1,
+        filterEditor: DateFilter,
+        // enableColumnFilterContextMenu: false,
+        width: 200,
+        headerProps: { style: headerStyle },
+        filterEditorProps: (props, { index }) => {
+          // for range and notinrange operators, the index is 1 for the after field
+          return {
+            dateFormat: 'MM-DD-YYYY',
+            cancelButton: false,
+            highlightWeekends: false,
+            placeholder: index === 1 ? 'To': 'From'
+          }
+        },
+        render: ({ value, cellProps }) => {
+          return moment(value).format('MM-DD-YYYY')
+        }
+    },
+    {
+        name: 'end_date',
+        header: rtl ? 'تاريخ الانتهاء' : 'End date',
+        defualtFlex: 1,
+        filterEditor: DateFilter,
+        // enableColumnFilterContextMenu: false,
+        width: 200,
+        headerProps: { style: headerStyle },
+        filterEditorProps: (props, { index }) => {
+          // for range and notinrange operators, the index is 1 for the after field
+          return {
+            dateFormat: 'MM-DD-YYYY',
+            cancelButton: false,
+            highlightWeekends: false,
+            placeholder: index === 1 ? 'To': 'From'
+          }
+        },
+        render: ({ value, cellProps }) => {
+          return value ? moment(value).format('MM-DD-YYYY') : "N/A"
+        }
+    },
+    { name: 'description', header: rtl ? 'تفصيل' : 'Description', defaultFlex: 1,headerProps: { style: headerStyle } },
+    { name: 'customerId', header: rtl ? 'عميل' : 'Customer', defaultFlex: 1,headerProps: { style: headerStyle } },
     { name: 'is_deleted', header: rtl ? 'الحالة': 'Status', defaultFlex: 1, filterEditor: SelectFilter,headerProps: { style: headerStyle },
       filterEditorProps: {
         placeholder: 'All',
@@ -78,10 +119,10 @@ function Reservation () {
     <Suspense fallback={<L />}>
       <Container fluid className="main-content-container px-4">
         <Row noGutters className="page-header py-4">
-            <h4 style={{fontWeight:'600', color:'black'}}>{t('membership_page_heading')}</h4>
+            <h4 style={{fontWeight:'600', color:'black'}}>{t('manage_reservation_heading')}</h4>
         </Row>
         <div style={{padding:'10px 10px', textAlign: rtl ? 'left' : 'right', width:'100%'}}>
-          <AddMembership refetch = {refetch} rtl={rtl} />
+          <AddReservation refetch = {refetch} rtl={rtl} />
         </div>
         <Row style={{padding:'0 20px'}}>
         <ReactDataGrid

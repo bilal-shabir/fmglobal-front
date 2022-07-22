@@ -1,6 +1,7 @@
 import { toast } from 'react-toastify';
 
 export const POST =  async (url, body, errorMessage, successMessage) => {
+    let data = null;
     const options = {
         headers: {
         "Content-Type": "application/json",
@@ -30,6 +31,7 @@ export const POST =  async (url, body, errorMessage, successMessage) => {
                 progress: undefined,
             });
         }
+        data = res
     })
     .catch((err) => {
         if (err.name === "AbortError") {
@@ -48,6 +50,7 @@ export const POST =  async (url, body, errorMessage, successMessage) => {
             }
           }
     });
+    return data
 }
 
 
