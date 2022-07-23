@@ -74,7 +74,7 @@ export default ({memberships,refetch}) => {
         installments_amount: +installment_amount.value,
         installment_date: installment_date.value
       }
-      // console.log(body)
+
       const insert = await POST(URL2+"customer",body, "Error: Failed to add customer", "Customer added successfully")
       refetch({})
       insert && close_add_modal()

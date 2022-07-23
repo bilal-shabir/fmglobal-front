@@ -17,6 +17,7 @@ import EditReservation from '../../components/components-overview/reservation/ed
 import { useGetFetch } from "../../hooks/useGetFetch.js";
 import { checkLanguage } from "../../utils";
 import { GET } from "../../components/API calls/GET";
+import exportCSV  from "../../components/components-overview/Data Exports/excel.js";
 
 
 window.moment = moment
@@ -37,13 +38,14 @@ const headerStyle = {
 }
 
 const filterValue = [
-    { name: 'name', operator: 'contains', type: 'string' },
-    { name: 'hotel_name', operator: 'contains', type: 'string' },
+    { name: 'name', operator: 'startsWith', type: 'string' },
+    { name: 'hotel_name', operator: 'eq', type: 'string' },
     { name: 'start_date', operator: 'eq', type: 'date'},
     { name: 'end_date', operator: 'eq', type: 'date'},
     { name: 'is_deleted', operator: 'eq', type: 'select', value:false},
-    { name: 'customer',operator: 'contains', type: 'string'},
-    { name: 'voucher_to',operator: 'contains', type: 'string'},
+    { name: 'customer',operator: 'eq', type: 'string'},
+    { name: 'voucher_to',operator: 'eq', type: 'string'},
+    { name: 'customer',operator: 'contains', type: 'string'}
   ];
 const rtl = checkLanguage()
 
@@ -53,8 +55,8 @@ function Reservation () {
   const controller = new AbortController();
   const url= URL2+"reservation"
   const [reservations, refetch] = useGetFetch(controller, url)
-  console.log(reservations)
   const[customers , setCustomers] = useState([])
+  const [gridRef, setGridRef] = useState(null);
   useEffect(() => {
     async function fetchCustomers() {
       let response = await GET(URL2+'customer', "Error: Failed to fetch customers")
@@ -65,8 +67,13 @@ function Reservation () {
     fetchCustomers()
   }, []);
   const columns = [
-    { name: 'id', header: 'Id', defaultVisible: false, defaultWidth: 80, type: 'number',  },
+    { name: 'id', header: 'Reservation Number', defaultVisible: false, defaultWidth: 80, type: 'number'  },
+    { name: 'created_at', header: 'Created on', defaultVisible: false, defaultWidth: 80, type: 'number' },
     { name: 'hotel_name', header: rtl ? 'الدفع لأسفل' : 'Hotel Name', defaultFlex: 1,headerProps: { style: headerStyle } },
+    { name: 'hotel_address', header: 'Hotel Address', defaultVisible: false },
+    { name: 'hotel_contact', header: 'Hotel Contact', defaultVisible: false },
+    { name: 'hotel_room_type', header: 'Hotel Room Type', defaultVisible: false },
+    { name: 'guests_number', header: 'Guests', defaultVisible: false },
     {
         name: 'start_date',
         header: rtl ? 'تاريخ البدء' : 'Start date',
@@ -110,6 +117,7 @@ function Reservation () {
         }
     },
     { name: 'customer', header: rtl ? 'عميل' : 'Customer', defaultFlex: 1,headerProps: { style: headerStyle } },
+    { name: 'customer_cpr', header: rtl ? 'عميل' : 'Customer CPR', defaultFlex: 1,headerProps: { style: headerStyle } },
     { name: 'voucher_to', header: rtl ? 'قسيمة ل' : 'Voucher For', defaultFlex: 1,headerProps: { style: headerStyle } },
     // { name: 'customerId', header: rtl ? 'عميل' : 'Customer', defaultFlex: 1,headerProps: { style: headerStyle } },
     { name: 'is_deleted', header: rtl ? 'الحالة': 'Status', defaultFlex: 1, filterEditor: SelectFilter,headerProps: { style: headerStyle },
@@ -138,17 +146,35 @@ function Reservation () {
       </div>
     },
   ];
+  const downloadCSV = () => {
+    gridRef.current.visibleColumns = gridRef.current.allColumns.filter(object => {
+      return object.name !== 'data' && 
+      object.name !== 'is_deleted'
+    });
+    exportCSV(gridRef)
+  }
   return (
     <Suspense fallback={<L />}>
       <Container fluid className="main-content-container px-4">
         <Row noGutters className="page-header py-4">
             <h4 style={{fontWeight:'600', color:'black'}}>{t('manage_reservation_heading')}</h4>
         </Row>
-        <div style={{padding:'10px 10px', textAlign: rtl ? 'left' : 'right', width:'100%'}}>
-          <AddReservation customers={customers} refetch = {refetch} rtl={rtl} />
+        <div className= "d-flex justify-content-end" style={{padding:'10px 10px', width:'100%'}}>
+            <div style={{width: '10px'}}></div>
+            <button 
+              className="btn btn-dark"  
+              type="button" 
+              style={{ color:'#D79D12'}} 
+              onClick={downloadCSV}
+            >
+              <i className="large material-icons">file_download</i> Export CSV
+            </button>
+            <div style={{width: 10}}></div>
+            <AddReservation customers={customers} refetch = {refetch} rtl={rtl} />
         </div>
         <Row style={{padding:'0 20px'}}>
         <ReactDataGrid
+            handle={setGridRef}
             idProperty="id"
             style={gridStyle}
             defaultFilterValue={filterValue}

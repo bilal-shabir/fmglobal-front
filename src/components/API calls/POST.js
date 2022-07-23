@@ -14,12 +14,24 @@ export const POST =  async (url, body, errorMessage, successMessage) => {
     }
     await fetch(url, options)
     .then((res) =>  {
-          if(!res.ok){
+          if(!res.ok && res.status!==404){
             throw Error(res.statusText)
           }
           return res.json()
     })
     .then((res) => {
+        if(res.statusCode === 404){
+            toast.error(res.message, {
+                position: "top-center",
+                autoClose: 3000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: false,
+                draggable: true,
+                progress: undefined,
+            });
+            return null
+        }
         if(successMessage){
             toast.success(successMessage, {
                 position: "top-center",

@@ -41,9 +41,12 @@ export default ({customers, refetch, rtl}) => {
         current_year_lodgings: +current_year_lodgings.value,
         customer: +customer.value
       }
-      await POST(URL2+"reservation", body ,"Error: Failed to create reservation","Reservation created successfully")
+      const insert = await POST(URL2+"reservation", body ,"Error: Failed to create reservation","Reservation created successfully")
+      if(insert){
+        close_add_modal()
+      }
       refetch({})
-      close_add_modal()
+      
     }
     return (
         <div>

@@ -16,6 +16,7 @@ import { URL2 } from "../../constants.js";
 import { useGetFetch } from "../../hooks/useGetFetch.js";
 import { checkLanguage } from "../../utils.js";
 import { GET } from "../../components/API calls/GET.js";
+import exportCSV  from "../../components/components-overview/Data Exports/excel.js";
 
 const rtl = checkLanguage()
 const gridStyle = { minHeight: 600 }
@@ -35,18 +36,22 @@ const headerStyle = {
 }
 
 const filterValue = [
-    { name: 'name', operator: 'contains', type: 'string' },
-    { name: 'email', operator: 'contains', type: 'string' },
+    { name: 'name', operator: 'eq', type: 'string' },
+    { name: 'email', operator: 'eq', type: 'string' },
+    { name: 'mobile', operator: 'eq', type: 'string' },
     { name: 'CPR', operator: 'eq', type: 'number'},
-    { name: 'nationality', operator: 'contains', type: 'string'},
-    { name: 'is_deleted', operator: 'contains', type: 'select', value:null},
-    { name: 'membership', operator: 'contains', type: 'select', value: null},
+    { name: 'nationality', operator: 'eq', type: 'string'},
+    { name: 'is_deleted', operator: 'eq', type: 'select', value:null},
+    { name: 'membership', operator: 'eq', type: 'select', value: null},
 ];
+
+
 
 function Customer () {
   const {t} = useTranslation()
   const controller = new AbortController();
-  const url= URL2+"customer"
+  const url= URL2+"customer";
+  const [gridRef, setGridRef] = useState(null);
   let [customers, refetch] = useGetFetch(controller, url)
   const[memberships , setMemberships] = useState([])
   const[membershipFilterSource , setMembershipFilterSource] = useState([])
@@ -76,6 +81,7 @@ function Customer () {
     { name: 'email', header: 'Email', defaultFlex: 1,headerProps: { style: headerStyle } },
     { name: 'CPR', header: 'CPR', defaultFlex: 1,headerProps: { style: headerStyle } },
     { name: 'nationality', header: 'Nationality', defaultFlex: 1,headerProps: { style: headerStyle } },
+    { name: 'mobile', header: 'Mobile', defaultFlex: 1,headerProps: { style: headerStyle }},
     { 
       name: 'membership', 
       header: 'Membership', 
@@ -110,17 +116,36 @@ function Customer () {
         </div>
     },
   ];
+  const downloadCSV = () => {
+    gridRef.current.visibleColumns = gridRef.current.allColumns.filter(object => {
+      return object.name !== 'data' && 
+      object.name !== 'id' && 
+      object.name !== 'is_deleted'
+    });
+    exportCSV(gridRef)
+  }
   return (
     <Suspense fallback={<L></L>}>
         <Container fluid className="main-content-container px-4">
           <Row noGutters className="page-header py-4">
               <h4 style={{fontWeight:'600', color:'black'}}>{t('customer_page_heading')}</h4>
           </Row>
-          <div style={{padding:'10px 10px', textAlign: rtl ? 'left' : 'right', width:'100%'}}>
+          <div className= "d-flex justify-content-end" style={{padding:'10px 10px', width:'100%'}}>
+            <div style={{width: '10px'}}></div>
+            <button 
+              className="btn btn-dark"  
+              type="button" 
+              style={{ color:'#D79D12'}} 
+              onClick={downloadCSV}
+            >
+              <i className="large material-icons">file_download</i> Export CSV
+            </button>
+            <div style={{width: 10}}></div>
             <AddCustomer memberships = {memberships} refetch={refetch} />
           </div>
           <Row style={{padding:'0 20px'}}>
           <ReactDataGrid
+              handle={setGridRef}
               idProperty="id"
               style={gridStyle}
               defaultFilterValue={filterValue}
