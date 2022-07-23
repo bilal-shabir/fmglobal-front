@@ -1,4 +1,4 @@
-import React, { Suspense } from "react";
+import React, { Suspense, useState } from "react";
 import { Container, Row } from "shards-react";
 import { useTranslation } from "react-i18next";
 import '@inovua/reactdatagrid-community/index.css';
@@ -13,6 +13,7 @@ import EditPaymentNote from '../../components/components-overview/payment_note/e
 import ReactDataGrid from '@inovua/reactdatagrid-community';
 import { useGetFetch } from "../../hooks/useGetFetch.js";
 import { checkLanguage } from "../../utils";
+import exportCSV  from "../../components/components-overview/Data Exports/excel.js";
 
 const gridStyle = { minHeight: 600 }
 const headerStyle = {
@@ -32,9 +33,10 @@ function Payment_Notes () {
   const {t} = useTranslation()
   const controller = new AbortController();
   const url= URL2+"payment-note"
-  const [memberships, refetch] = useGetFetch(controller, url)
+  const [payment_notes, refetch] = useGetFetch(controller, url)
+  const [gridRef, setGridRef] = useState(null);
   const columns = [
-    { name: 'id', header: 'Id', defaultVisible: false, defaultWidth: 80, type: 'number' },
+    { name: 'id', header: 'Payment-Note ID', defaultVisible: false, defaultWidth: 80, type: 'number' },
     {
         name: 'payment_date',
         header: rtl ? ' موعد الدفع' : 'Payment Date',
@@ -69,22 +71,40 @@ function Payment_Notes () {
         </div>
     },
   ];
+  const downloadCSV = () => {
+
+    gridRef.current.visibleColumns = gridRef.current.allColumns.filter(object => {
+      return object.name !== 'data'
+    });
+    exportCSV(gridRef)
+  }
   return (
     <Suspense fallback={<L />}>
       <Container fluid className="main-content-container px-4">
         <Row noGutters className="page-header py-4">
             <h4 style={{fontWeight:'600', color:'black'}}>{t('payment_notes_heading')}</h4>
         </Row>
-        <div style={{padding:'10px 10px', textAlign: rtl ? 'left' : 'right', width:'100%'}}>
+        <div className= "d-flex justify-content-end" style={{padding:'10px 10px', width:'100%'}}>
+            <div style={{width: '10px'}}></div>
+            <button 
+              className="btn btn-dark"  
+              type="button" 
+              style={{ color:'#D79D12'}} 
+              onClick={downloadCSV}
+            >
+              <i className="large material-icons">file_download</i> Export CSV
+            </button>
+            {/* <div style={{width: 10}}></div> */}
           {/* <AddPayment customers={customers} refetch = {refetch} rtl={rtl} /> */}
         </div>
         <Row style={{padding:'0 20px'}}>
         <ReactDataGrid
+            handle={setGridRef}
             idProperty="id"
             style={gridStyle}
             defaultFilterValue={filterValue}
             columns={columns}
-            dataSource={memberships}
+            dataSource={payment_notes}
             rtl={rtl}
             theme="amber-light"
             rowHeight={50}

@@ -4,7 +4,7 @@ import {
 } from "react-bootstrap";
 import moment from "moment";
 import { useTranslation } from "react-i18next";
-import { FormGroup, FormInput, FormSelect } from "shards-react";
+import { FormGroup, FormInput } from "shards-react";
 import { URL2 } from "../../../constants";
 import { PUT } from "../../API calls/PUT";
 
@@ -23,11 +23,9 @@ export default ({ data, refetch, rtl}) => {
       const body = {
         id: data.id,
         payment_date: document.getElementById("#payment_date").value,
-        paid: (document.getElementById("#paid").value === "true"),
         amount: +document.getElementById("#amount").value,
-        type:document.getElementById("#type").value,
       }
-      PUT(URL2+"payment",body, "Error: Failed to update payment details", "Details updated successfully")
+      PUT(URL2+"payment-note",body, "Error: Failed to update payment note details", "Details updated successfully")
       refetch({})
       close_edit_modal()
     }
@@ -71,15 +69,7 @@ export default ({ data, refetch, rtl}) => {
                           required
                           defaultValue = {moment(data.payment_date).format("YYYY-MM-DD")}
                         />
-                      </FormGroup>
-                      <FormGroup>
-                        <label htmlFor="#paid">Payment Status</label>
-                          <FormSelect id="#paid" required defaultValue={data.paid}>
-                            <option value = {false}>unpaid</option>
-                            <option value = {true}>paid</option>
-
-                          </FormSelect>
-                      </FormGroup>           
+                      </FormGroup> 
                     </div>
                     <div className="col-sm-12 col-md-6">
                     <FormGroup>
@@ -93,18 +83,6 @@ export default ({ data, refetch, rtl}) => {
                           defaultValue = {data.amount}
                         />
                     </FormGroup>
-                    <FormGroup>
-                        <label htmlFor="#type">Type</label>
-                        <FormInput 
-                          id="#type"
-                          // placeholder="Hotel Address*" 
-                          autoComplete="off"
-                          required
-                          defaultValue = {data.type}
-                        />
-                    </FormGroup>
-                    
-                    
                     </div>
                   </div>
                 </li>
