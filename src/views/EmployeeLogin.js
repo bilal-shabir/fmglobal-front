@@ -1,7 +1,4 @@
 import React, { useEffect } from "react";
-import logo from '../images/PavilionLogo.png';
-import banner from '../images/login.jpg'
-import "./login.css";
 import Cookies from 'universal-cookie';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -11,6 +8,9 @@ import { useHistory } from "react-router-dom";
 import { useInputValue } from "../hooks/useInputValue";
 import { URL2 } from "../constants";
 import { POST } from "../components/API calls/POST";
+import logo from '../images/logo_golden.jpg';
+import banner from '../images/login.jpg'
+import "./login.css";
 
 const GlobeIcon = ({width = 20, height = 20}) =>(
   <svg xmlns="http://www.w3.org/2000/svg" width={width} height={height} fill="currentColor" className="bi bi-globe" viewBox="0 0 16 16">
@@ -66,13 +66,11 @@ function EmployeeLogin(){
       </div>
       <div className="auth-form">
         <div className="auth-form-label">
-        <img className="card-img-top" src={logo} style={{ maxWidth: "50px"}} alt="logo"/>
+        <img className="card-img-top" src={logo} style={{ maxWidth: "100px"}} alt="logo"/>
           <p className="primary-label" style={{color:'#D79D12'}}>F&M GLOBAL</p>
           
         </div>
-        <div className="auth-form-label">
-        <p className="primary-label" style={{fontSize:13, color:'#C9C9C9'}}>&#160;</p>
-        </div>
+
       <div style={{paddingLeft: '25px', paddingRight:'25px'}}  >
         <form onSubmit={handleSubmit}>
           <div>

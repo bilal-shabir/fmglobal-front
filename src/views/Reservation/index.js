@@ -37,13 +37,13 @@ const headerStyle = {
 }
 
 const filterValue = [
-    { name: 'name', operator: 'startsWith', type: 'string' },
-    { name: 'hotel_name', operator: 'eq', type: 'string' },
+    { name: 'name', operator: 'contains', type: 'string' },
+    { name: 'hotel_name', operator: 'contains', type: 'string' },
     { name: 'start_date', operator: 'eq', type: 'date'},
     { name: 'end_date', operator: 'eq', type: 'date'},
     { name: 'is_deleted', operator: 'eq', type: 'select', value:false},
-    { name: 'description',operator: 'eq', type: 'string'},
-    { name: 'customerId',operator: 'eq', type: 'number'},
+    { name: 'customer',operator: 'contains', type: 'string'},
+    { name: 'voucher_to',operator: 'contains', type: 'string'},
   ];
 const rtl = checkLanguage()
 
@@ -53,6 +53,7 @@ function Reservation () {
   const controller = new AbortController();
   const url= URL2+"reservation"
   const [reservations, refetch] = useGetFetch(controller, url)
+  console.log(reservations)
   const[customers , setCustomers] = useState([])
   useEffect(() => {
     async function fetchCustomers() {
@@ -108,7 +109,8 @@ function Reservation () {
           return value ? moment(value).format('MM-DD-YYYY') : "N/A"
         }
     },
-    { name: 'description', header: rtl ? 'تفصيل' : 'Description', defaultFlex: 1,headerProps: { style: headerStyle } },
+    { name: 'customer', header: rtl ? 'عميل' : 'Customer', defaultFlex: 1,headerProps: { style: headerStyle } },
+    { name: 'voucher_to', header: rtl ? 'قسيمة ل' : 'Voucher For', defaultFlex: 1,headerProps: { style: headerStyle } },
     // { name: 'customerId', header: rtl ? 'عميل' : 'Customer', defaultFlex: 1,headerProps: { style: headerStyle } },
     { name: 'is_deleted', header: rtl ? 'الحالة': 'Status', defaultFlex: 1, filterEditor: SelectFilter,headerProps: { style: headerStyle },
       filterEditorProps: {
@@ -120,7 +122,7 @@ function Reservation () {
     { 
       name: 'data', 
       header:rtl ? 'أجراءات' : 'Actions',
-      width: 160,
+      width: rtl ? 170 : 160,
       headerProps: { style: headerStyle } ,
       render: ({ value })=> 
       <div style={{textAlign:'center', display:'flex', justifyContent:'space-between', alignItems:'center', }}>

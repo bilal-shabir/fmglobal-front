@@ -4,8 +4,8 @@
     "email_placeholder": "البريد الإلكتروني",
     "password_placeholder": "كلمة المرور",
     "language": "English",
-    "employee_page_heading": "إدارة الموظفين",
-    "customer_page_heading": "إدارة العملاء",
+    "employee_page_heading": "الموظفين",
+    "customer_page_heading": "العملاء",
     "add_employee_button" : "موظف",
     "edit_employee_button" : "تعديل",
     "edit_employee_heading" : "تعديل الموظف",
@@ -15,7 +15,7 @@
     "add_customer_heading": "إضافة عميل",
     "add_employee_heading": "إضافة موظف",
     "manage_membership_button": "عضويه",
-    "manage_membership_heading": "إدارة العضوية",
+    "manage_membership_heading": "العضوية",
     "manage_customer_payment_button": "الدفعات",
     "manage_customer_payment_heading": "مدفوعات العملاء",
     "save": "حفظ",
@@ -25,11 +25,13 @@
     "add_membership_button": "عضوية",
     "add_membership_heading": "أضف عضوية",
     "contracts_page_heading": "انكماش",
-    "manage_reservation_heading" : "إدارة الحجوزات",
+    "manage_reservation_heading" : " الحجوزات",
     "add_reservation_button" : "تحفظ",
     "add_reservation_heading" : "تحفظ",
-    "manage_payment_heading" : "إدارة المدفوعات",
+    "manage_payment_heading" : " المدفوعات",
     "add_payment_button" : "دفع",
-    "add_payment_heading" : "إضافة المدفوعات"
+    "add_payment_heading" : "إضافة المدفوعات",
+    "edit_payment_heading": "تحرير الدفع",
+    "payment_notes_heading": "ملاحظات الدفع"
 
 }

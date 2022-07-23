@@ -31,7 +31,7 @@ const headerStyle = {
 }
 
 const filterValue = [
-    { name: 'name', operator: 'startsWith', type: 'string' },
+    { name: 'name', operator: 'contains', type: 'string' },
     { name: 'downpayment', operator: 'eq', type: 'number' },
     { name: 'cost', operator: 'eq', type: 'number'},
     { name: 'lodgings', operator: 'eq', type: 'number'},

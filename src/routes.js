@@ -15,6 +15,8 @@ import ReservationVoucherPDF from "./views/PDF/reservationVoucher";
 import Reservation from "./views/Reservation";
 import Contract from "./views/Contracts";
 import Payment from "./views/Payment";
+import Payment_Notes from "./views/Payment Notes";
+import Logout from "./views/logout";
 
 export default [
   {
@@ -64,6 +66,18 @@ export default [
     exact: true,
     layout: DefaultLayout,
     component: Payment,
+  },
+  {
+    path: "/Payment-Notes",
+    exact: true,
+    layout: DefaultLayout,
+    component: Payment_Notes,
+  },
+  {
+    path: "/logout",
+    exact: true,
+    layout: DefaultLayout,
+    component: Logout,
   },
   {
     path: "/ReservationVoucherPDF/:id",

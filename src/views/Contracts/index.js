@@ -34,7 +34,7 @@ const headerStyle = {
 
 const filterValue = [
     { name: 'is_deleted', operator: 'eq', type: 'select', value:false},
-    { name: 'status', operator: 'eq', type: 'string', value:''},
+    { name: 'status', operator: 'contains', type: 'string', value:''},
     {
         name: 'start_date',
         operator: 'eq',
@@ -116,9 +116,9 @@ function Contract () {
         <Row noGutters className="page-header py-4">
             <h4 style={{fontWeight:'600', color:'black'}}>{t('contracts_page_heading')}</h4>
         </Row>
-        {/* <div style={{padding:'10px 10px', textAlign: rtl ? 'left' : 'right', width:'100%'}}>
-          <AddMembership refetch = {refetch} rtl={rtl} />
-        </div> */}
+        <div style={{padding:'10px 10px', textAlign: rtl ? 'left' : 'right', width:'100%'}}>
+          {/* <AddMembership refetch = {refetch} rtl={rtl} /> */}
+        </div>
         <Row style={{padding:'0 20px'}}>
         <ReactDataGrid
             idProperty="id"

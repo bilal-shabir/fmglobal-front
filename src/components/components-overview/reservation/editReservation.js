@@ -31,7 +31,7 @@ export default ({ data, refetch, rtl}) => {
         end_date : document.getElementById("#end_date").value,
         current_year_lodgings: +document.getElementById("#current_year_lodgings").value
       }
-      console.log(body)
+
       PUT(URL2+"reservation",body, "Error: Failed to update reservation details", "Details updated successfully")
       refetch({})
       close_edit_modal()

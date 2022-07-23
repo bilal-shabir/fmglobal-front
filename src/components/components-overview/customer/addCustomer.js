@@ -3,13 +3,14 @@ import {
   Modal, Table,
 } from "react-bootstrap";
 import { useTranslation } from "react-i18next";
+import { toast } from "react-toastify";
 import { FormGroup, FormInput, FormSelect } from "shards-react";
 import { URL2 } from "../../../constants";
 import { useInputValue } from "../../../hooks/useInputValue";
 import { POST } from "../../API calls/POST";
 
 export default ({memberships,refetch}) => {
-    const membership = useInputValue("")
+    const [membership,setMembership] = useState()
     const name = useInputValue("")
     const email = useInputValue("")
     const nationality = useInputValue("")
@@ -33,17 +34,32 @@ export default ({memberships,refetch}) => {
     const close_add_modal =()=>{
         setShow(false)
     }
+    const membershipChange = (event) => {
+      setMembership(JSON.parse(event.target.value))
+    }
     async function handleSubmit(event) {
       event.preventDefault();
+      if((+downpayment1amount.value) + (+downpayment2amount.value) + (+downpayment3amount.value) + (+downpaymentpaid.value) > (+membership.cost) ){
+        toast.info("Down Payment should be less than or equal to the cost of the membership", {
+          position: "top-center",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: false,
+          draggable: true,
+          progress: undefined,
+      });
+        return
+      }
       let array = []
       if(downpayment1date.value){
-        array.push({payment_date: downpayment1date.value, amount: downpayment1amount.value})
+        array.push({payment_date: downpayment1date.value, amount: +downpayment1amount.value})
       }
       if(downpayment2date.value){
-        array.push({payment_date: downpayment2date.value, amount: downpayment2amount.value})
+        array.push({payment_date: downpayment2date.value, amount: +downpayment2amount.value})
       }
       if(downpayment3date.value){
-        array.push({payment_date: downpayment3date.value, amount: downpayment3amount.value})
+        array.push({payment_date: downpayment3date.value, amount:+ downpayment3amount.value})
       }
       const body ={
         name: name.value,
@@ -52,10 +68,10 @@ export default ({memberships,refetch}) => {
         nationality: nationality.value,
         CPR: CPR.value,
         mobile: mobile.value,
-        membership: membership.value.id,
-        downpayment_paid: downpaymentpaid.value,
+        membership: membership.id,
+        downpayment_paid: +downpaymentpaid.value,
         downpayments: array,
-        installments_amount: installment_amount.value,
+        installments_amount: +installment_amount.value,
         installment_date: installment_date.value
       }
       // console.log(body)
@@ -135,10 +151,10 @@ export default ({memberships,refetch}) => {
                       </FormGroup> 
                       <FormGroup>
                         <label htmlFor="#membership">Select Membership</label>
-                          <FormSelect id="#membership" onChange={membership.onChange} required>
+                          <FormSelect id="#membership" onChange={membershipChange} required>
                             <option value = ''>---Select Membership---</option>
                               {memberships.map(membership => 
-                              <option key={membership.id } value={membership}>   
+                              <option key={membership.id } value={JSON.stringify(membership)}>   
                                 { membership.name}
                               </option>
                             )}
@@ -245,7 +261,6 @@ export default ({memberships,refetch}) => {
                               const array = downpayments
                               array.push({id: downpayments.length + 1})
                               setDownpayments(array)
-                              console.log(downpayments)
                             
                           }}>+</button> */}
                         </th>

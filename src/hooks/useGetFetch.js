@@ -30,6 +30,9 @@ export const  useGetFetch =  (controller, url, errorMessage, successMessage) => 
             if(res[index].contracts){
               res[index]['membership'] = res[index].contracts.length > 0 ? res[index].contracts[0].membership ?  res[index].contracts[0].membership.name : null : null
             }
+            if(res[index].contract){
+              res[index]['customer'] = res[index].contract.customer  ?   res[index].contract.customer.name : null
+            }
             res[index]['data'] = res[index]
           }
           setData(res)

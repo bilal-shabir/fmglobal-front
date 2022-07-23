@@ -85,9 +85,6 @@ class ReservationVoucherPDF extends React.Component{
             ...(data.start_date && data.end_date) && {nights: moment.duration(moment(data.end_date, "YYYY-MM-DD").diff(moment(data.start_date, "YYYY-MM-DD"))).asDays()},
             isLoaded: true
         })
-
-        console.log()
-        console.log(data)
     }
     
     render(){

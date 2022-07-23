@@ -1,4 +1,4 @@
-import React, { Suspense, useEffect, useState } from "react";
+import React, { Suspense } from "react";
 import { Container, Row } from "shards-react";
 import { useTranslation } from "react-i18next";
 import '@inovua/reactdatagrid-community/index.css';
@@ -10,21 +10,19 @@ import DateFilter from '@inovua/reactdatagrid-community/DateFilter'
 import moment from "moment";
 import L from "../../components/components-overview/loader";
 import { URL2 } from "../../constants.js";
-import AddPayment from '../../components/components-overview/payment/addPayment';
 import EditPayment from '../../components/components-overview/payment/editPayment';
 import ReactDataGrid from '@inovua/reactdatagrid-community';
 import { useGetFetch } from "../../hooks/useGetFetch.js";
 import { checkLanguage } from "../../utils";
-import { GET } from "../../components/API calls/GET";
 
 const gridStyle = { minHeight: 600 }
 const status = [
   {
-    id: false,
+    id: true,
     label: "Paid"
   },
   {
-    id: true,
+    id: false,
     label: "unpaid"
   },
 ]
@@ -37,7 +35,7 @@ const filterValue = [
     { name: 'payment_date', operator: 'eq', type: 'date'},
     { name: 'paid', operator: 'eq', type: 'select', value:null},
     { name: 'amount',operator: 'eq', type: 'number'},
-    { name: 'type',operator: 'eq', type: 'string'}
+    { name: 'type',operator: 'contains', type: 'string'}
   ];
 const rtl = checkLanguage()
 
@@ -47,7 +45,6 @@ function Payment () {
   const controller = new AbortController();
   const url= URL2+"payment"
   const [memberships, refetch] = useGetFetch(controller, url)
-  const[customers , setCustomers] = useState([])
   const columns = [
     { name: 'id', header: 'Id', defaultVisible: false, defaultWidth: 80, type: 'number' },
     {
@@ -91,23 +88,14 @@ function Payment () {
         </div>
     },
   ];
-  useEffect(() => {
-    async function fetchCustomers() {
-      let response = await GET(URL2+'customer', "Error: Failed to fetch customers")
-      if(response){
-        setCustomers(response)
-      }
-    }
-    fetchCustomers()
-  }, []);
   return (
     <Suspense fallback={<L />}>
       <Container fluid className="main-content-container px-4">
         <Row noGutters className="page-header py-4">
-            <h4 style={{fontWeight:'600', color:'black'}}>{t('membership_page_heading')}</h4>
+            <h4 style={{fontWeight:'600', color:'black'}}>{t('manage_payment_heading')}</h4>
         </Row>
         <div style={{padding:'10px 10px', textAlign: rtl ? 'left' : 'right', width:'100%'}}>
-          <AddPayment customers={customers} refetch = {refetch} rtl={rtl} />
+          {/* <AddPayment customers={customers} refetch = {refetch} rtl={rtl} /> */}
         </div>
         <Row style={{padding:'0 20px'}}>
         <ReactDataGrid

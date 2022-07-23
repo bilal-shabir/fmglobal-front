@@ -9,8 +9,8 @@ import SelectFilter from '@inovua/reactdatagrid-community/SelectFilter';
 import { ToastContainer } from 'react-toastify';
 import AddCustomer from '../../components/components-overview/customer/addCustomer.js';
 import EditCustomer from '../../components/components-overview/customer/editCustomer.js';
-import ManageMembership from '../../components/components-overview/customer/manageMembership.js';
-// import ManagePayments from '../../components/components-overview/customer/managePayments.js';
+// import ManageMembership from '../../components/components-overview/customer/manageMembership.js';
+import ManagePayments from '../../components/components-overview/customer/managePayments.js';
 import L from "../../components/components-overview/loader";
 import { URL2 } from "../../constants.js";
 import { useGetFetch } from "../../hooks/useGetFetch.js";
@@ -35,12 +35,12 @@ const headerStyle = {
 }
 
 const filterValue = [
-    { name: 'name', operator: 'startsWith', type: 'string' },
-    { name: 'email', operator: 'eq', type: 'string' },
+    { name: 'name', operator: 'contains', type: 'string' },
+    { name: 'email', operator: 'contains', type: 'string' },
     { name: 'CPR', operator: 'eq', type: 'number'},
-    { name: 'nationality', operator: 'eq', type: 'string'},
-    { name: 'is_deleted', operator: 'eq', type: 'select', value:null},
-    { name: 'membership', operator: 'eq', type: 'select', value: null},
+    { name: 'nationality', operator: 'contains', type: 'string'},
+    { name: 'is_deleted', operator: 'contains', type: 'select', value:null},
+    { name: 'membership', operator: 'contains', type: 'select', value: null},
 ];
 
 function Customer () {
@@ -66,7 +66,6 @@ function Customer () {
       setMembershipFilterSource(membershipFilter)
       setMemberships(response)
       }
-      console.log(membershipFilter)
     }
     fetchMemberships()
   }, []);
@@ -102,12 +101,12 @@ function Customer () {
       defaultVisible: true,
       header: rtl ? 'أجراءات' : 'Actions',
       headerProps: { style: headerStyle },
-      width: rtl ? 180 : 200,
+      width: rtl ? 190 : 190,
       render: ({ value })=> 
         <div style={{textAlign:'center', display:'flex', justifyContent:'space-between', alignItems:'center', }}>
           <EditCustomer data={value} refetch={refetch} />
-          <ManageMembership />
-          {/* <ManagePayments /> */}
+          {/* <ManageMembership /> */}
+          <ManagePayments data={value} refetch={refetch}/>
         </div>
     },
   ];

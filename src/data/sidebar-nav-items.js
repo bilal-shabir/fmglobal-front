@@ -34,7 +34,7 @@ export default function() {
       title: "Payment Notes",
       title_ar: "ملاحظات الدفع",
       htmlBefore: '<i class="material-icons" >note</i>',
-      to: "/Payment Notes",
+      to: "/Payment-Notes",
     },
     {
       title: "Employees",

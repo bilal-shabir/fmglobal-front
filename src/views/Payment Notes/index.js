@@ -4,60 +4,60 @@ import { useTranslation } from "react-i18next";
 import '@inovua/reactdatagrid-community/index.css';
 import '@inovua/reactdatagrid-enterprise/theme/amber-light.css';
 import '@inovua/reactdatagrid-community/base.css';
-import SelectFilter from '@inovua/reactdatagrid-community/SelectFilter';
 import { ToastContainer } from 'react-toastify';
-import './style.css';
+import DateFilter from '@inovua/reactdatagrid-community/DateFilter'
+import moment from "moment";
 import L from "../../components/components-overview/loader";
 import { URL2 } from "../../constants.js";
-import AddEmployee from '../../components/components-overview/employee/addEmployee.js';
-import EditEmployee from '../../components/components-overview/employee/editEmployee.js'
+import EditPaymentNote from '../../components/components-overview/payment_note/editPaymentNote';
 import ReactDataGrid from '@inovua/reactdatagrid-community';
 import { useGetFetch } from "../../hooks/useGetFetch.js";
 import { checkLanguage } from "../../utils";
 
 const gridStyle = { minHeight: 600 }
-const status = [
-  {
-    id: false,
-    label: "Active"
-  },
-  {
-    id: true,
-    label: "In-Active"
-  },
-]
 const headerStyle = {
   backgroundColor: '#D79D12',
   color: 'black',
 }
+
 const filterValue = [
-    { name: 'name', operator: 'contains', type: 'string' },
-    { name: 'email', operator: 'contains', type: 'string' },
-    { name: 'CPR', operator: 'eq', type: 'number'},
-    { name: 'nationality', operator: 'contains', type: 'string'},
-    { name: 'is_deleted', operator: 'eq', type: 'select', value:false},
+    { name: 'payment_date', operator: 'eq', type: 'date'},
+    { name: 'amount',operator: 'eq', type: 'number'},
+    { name: 'status',operator: 'contains', type: 'string'}
   ];
 const rtl = checkLanguage()
 
-function Employee () {
+
+function Payment_Notes () {
   const {t} = useTranslation()
   const controller = new AbortController();
-  const url= URL2+"employee"
-  const [employees, refetch] = useGetFetch(controller, url)
+  const url= URL2+"payment-note"
+  const [memberships, refetch] = useGetFetch(controller, url)
   const columns = [
-    { name: 'id', header: 'Id', defaultVisible: false, defaultWidth: 80, type: 'number',  },
-    { name: 'name', header: rtl ? 'اسم' : 'Name', defaultFlex: 1 ,headerProps: { style: headerStyle }},
-    { name: 'email', header: rtl ? 'البريد الإلكتروني' : 'Email', defaultFlex: 1,headerProps: { style: headerStyle } },
-    { name: 'CPR', header: 'CPR', defaultFlex: 1,headerProps: { style: headerStyle } },
-    { name: 'nationality', header: rtl ? 'جنسية' : 'Nationality', defaultFlex: 1,headerProps: { style: headerStyle } },
-    { name: 'mobile', header: rtl ? 'رقم الهاتف' : 'Mobile', defaultFlex: 1,headerProps: { style: headerStyle } },
-    { name: 'is_deleted', header: rtl ? 'الحالة': 'Status', defaultFlex: 1, filterEditor: SelectFilter,headerProps: { style: headerStyle },
-      filterEditorProps: {
-        placeholder: 'All',
-        dataSource: status
-      },
-      render: ({ value })=> value === true ? "In-Active": "Active"
+    { name: 'id', header: 'Id', defaultVisible: false, defaultWidth: 80, type: 'number' },
+    {
+        name: 'payment_date',
+        header: rtl ? ' موعد الدفع' : 'Payment Date',
+        defualtFlex: 1,
+        filterEditor: DateFilter,
+        // enableColumnFilterContextMenu: false,
+        width: 200,
+        headerProps: { style: headerStyle },
+        filterEditorProps: (props, { index }) => {
+          // for range and notinrange operators, the index is 1 for the after field
+          return {
+            dateFormat: 'MM-DD-YYYY',
+            cancelButton: false,
+            highlightWeekends: false,
+            placeholder: index === 1 ? 'To': 'From'
+          }
+        },
+        render: ({ value, cellProps }) => {
+          return value ? moment(value).format('MM-DD-YYYY') : "N/A"
+        }
     },
+    { name: 'amount', header: rtl ? 'مقدار' : 'Amount', defaultFlex: 1,headerProps: { style: headerStyle } },
+    { name: 'status', header: rtl ? 'نوع' : 'status', defaultFlex: 1,headerProps: { style: headerStyle } },
     { 
       name: 'data', 
       header: rtl ? 'أجراءات' : 'Actions',
@@ -65,7 +65,7 @@ function Employee () {
       width: 100,
       render: ({ value })=> 
         <div style={{textAlign:'center'}}>
-          <EditEmployee data={value} refetch={refetch} />
+          <EditPaymentNote data={value} refetch={refetch} rtl={rtl} />
         </div>
     },
   ];
@@ -73,10 +73,10 @@ function Employee () {
     <Suspense fallback={<L />}>
       <Container fluid className="main-content-container px-4">
         <Row noGutters className="page-header py-4">
-            <h4 style={{fontWeight:'600', color:'black'}}>{t('employee_page_heading')}</h4>
+            <h4 style={{fontWeight:'600', color:'black'}}>{t('payment_notes_heading')}</h4>
         </Row>
         <div style={{padding:'10px 10px', textAlign: rtl ? 'left' : 'right', width:'100%'}}>
-          <AddEmployee refetch = {refetch} />
+          {/* <AddPayment customers={customers} refetch = {refetch} rtl={rtl} /> */}
         </div>
         <Row style={{padding:'0 20px'}}>
         <ReactDataGrid
@@ -84,7 +84,7 @@ function Employee () {
             style={gridStyle}
             defaultFilterValue={filterValue}
             columns={columns}
-            dataSource={employees}
+            dataSource={memberships}
             rtl={rtl}
             theme="amber-light"
             rowHeight={50}
@@ -102,10 +102,10 @@ function Employee () {
               pauseOnFocusLoss={false}
               draggable
               pauseOnHover={false}
-              style={{marginLeft:'6%'}}
+              style={!rtl ? {marginLeft:'6%'} : {marginLeft:'-6%'}}
             />
       </Container>
-    </Suspense>     
+      </Suspense>     
   );
 }
-export default Employee;
+export default Payment_Notes;
