@@ -3,7 +3,7 @@ import {
   Modal,
 } from "react-bootstrap";
 import { useTranslation } from "react-i18next";
-import { FormGroup, FormInput, FormSelect } from "shards-react";
+import { FormGroup, FormInput } from "shards-react";
 import { URL2 } from "../../../constants";
 import { useInputValue } from "../../../hooks/useInputValue";
 import { PUT } from "../../API calls/PUT";
@@ -25,7 +25,7 @@ export default ({data, refetch}) => {
     const close_edit_modal =()=>{
         setEdit(false)
     }
-    function handleEdit (event){
+    async function handleEdit (event){
       event.preventDefault(); 
       const body = {
         id: data.id,
@@ -35,9 +35,12 @@ export default ({data, refetch}) => {
         nationality: nationality.value,
         CPR: CPR.value
       }
-      PUT(URL2+"employee",body)
+      const update = await PUT(URL2+"employee",body, "Error: Failed to update details", "Details updated successfully")
+      if(update){
+        close_edit_modal()
+      }
       refetch({})
-      close_edit_modal()
+     
     }
     return (
         <div>
@@ -81,18 +84,7 @@ export default ({data, refetch}) => {
                           required
                         />
                       </FormGroup>
-                      <FormGroup>
-                        <label htmlFor="#email">Email</label>
-                        <FormInput 
-                          type= "text"
-                          id="#email"
-                          placeholder="Email*" 
-                          autoComplete="off"
-                          defaultValue={data.email}
-                          onChange= {email.onChange}
-                          required
-                        />
-                      </FormGroup>
+                     
                       <FormGroup>
                         <label htmlFor="#mobile">Mobile</label>
                         <FormInput 
@@ -112,6 +104,18 @@ export default ({data, refetch}) => {
                     <div className="col-sm-12 col-md-6">
                       <div>
                       <FormGroup>
+                        <label htmlFor="#email">Email</label>
+                        <FormInput 
+                          type= "text"
+                          id="#email"
+                          placeholder="Email*" 
+                          autoComplete="off"
+                          defaultValue={data.email}
+                          onChange= {email.onChange}
+                          required
+                        />
+                      </FormGroup>
+                      {/* <FormGroup>
                         <label htmlFor="#nationality">Nationality</label>
                         <FormInput 
                           type= "text"
@@ -122,14 +126,14 @@ export default ({data, refetch}) => {
                           onChange= {nationality.onChange}
                           required
                         />
-                      </FormGroup>
-                      <FormGroup>
+                      </FormGroup> */}
+                      {/* <FormGroup>
                         <label htmlFor="#role">Role</label>
                           <FormSelect id="#role">
                             <option>Role</option>
                             <option>...</option>
                           </FormSelect>
-                      </FormGroup>
+                      </FormGroup> */}
                       </div>
                     </div>
                   </div>
