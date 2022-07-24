@@ -69,6 +69,7 @@ function Contract () {
         defualtFlex: 1,
         filterEditor: DateFilter,
         // enableColumnFilterContextMenu: false,
+        dateFormat: 'MM-DD-YYYY',
         width: 200,
         headerProps: { style: headerStyle },
         filterEditorProps: (props, { index }) => {
@@ -90,6 +91,7 @@ function Contract () {
         defualtFlex: 1,
         filterEditor: DateFilter,
         // enableColumnFilterContextMenu: false,
+        dateFormat: 'MM-DD-YYYY',
         width: 200,
         headerProps: { style: headerStyle },
         filterEditorProps: (props, { index }) => {

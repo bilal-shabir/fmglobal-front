@@ -45,7 +45,7 @@ const filterValue = [
     { name: 'is_deleted', operator: 'eq', type: 'select', value:false},
     { name: 'customer',operator: 'eq', type: 'string'},
     { name: 'voucher_to',operator: 'eq', type: 'string'},
-    { name: 'customer',operator: 'contains', type: 'string'}
+    { name: 'customer_cpr',operator: 'contains', type: 'string'}
   ];
 const rtl = checkLanguage()
 
@@ -80,6 +80,7 @@ function Reservation () {
         defualtFlex: 1,
         filterEditor: DateFilter,
         // enableColumnFilterContextMenu: false,
+        dateFormat: 'MM-DD-YYYY',
         width: 200,
         headerProps: { style: headerStyle },
         filterEditorProps: (props, { index }) => {
@@ -101,6 +102,7 @@ function Reservation () {
         defualtFlex: 1,
         filterEditor: DateFilter,
         // enableColumnFilterContextMenu: false,
+        dateFormat: 'MM-DD-YYYY',
         width: 200,
         headerProps: { style: headerStyle },
         filterEditorProps: (props, { index }) => {
