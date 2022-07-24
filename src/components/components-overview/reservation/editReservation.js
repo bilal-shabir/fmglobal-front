@@ -21,6 +21,7 @@ export default ({ data, refetch, rtl}) => {
     function handleEdit (event){
       event.preventDefault(); 
       const body = {
+        id: data.id,
         hotel_name: document.getElementById("#name").value,
         hotel_address: document.getElementById("#hotel_address").value,
         hotel_contact: document.getElementById("#hotel_contact").value,
@@ -29,7 +30,7 @@ export default ({ data, refetch, rtl}) => {
         guests_number: +document.getElementById("#guests_number").value,
         start_date: document.getElementById("#start_date").value,
         end_date : document.getElementById("#end_date").value,
-        current_year_lodgings: +document.getElementById("#current_year_lodgings").value
+        // current_year_lodgings: +document.getElementById("#current_year_lodgings").value
       }
 
       PUT(URL2+"reservation",body, "Error: Failed to update reservation details", "Details updated successfully")
@@ -118,7 +119,7 @@ export default ({ data, refetch, rtl}) => {
                           defaultValue = {data.start_date ? moment(data.start_date).format('YYYY-MM-DD') : null}
                         />
                       </FormGroup>
-                      <FormGroup>
+                      {/* <FormGroup>
                         <label htmlFor="#current_year_lodgings">Free nights to be redeemed</label>
                         <FormInput 
                           type= "number"
@@ -127,7 +128,7 @@ export default ({ data, refetch, rtl}) => {
                           autoComplete="off"
                           defaultValue = {data.current_year_lodgings}
                         />
-                      </FormGroup>               
+                      </FormGroup>                */}
                     </div>
                     <div className="col-sm-12 col-md-6">
                     <FormGroup>
@@ -141,10 +142,10 @@ export default ({ data, refetch, rtl}) => {
                         />
                     </FormGroup>
                     <FormGroup>
-                        <label htmlFor="#guests ">Guests (Adults)</label>
+                        <label htmlFor="#guests">Guests (Adults)</label>
                         <FormInput 
                           type= "number"
-                          id="#guests"
+                          id="#guests_number"
                           placeholder="Guests*" 
                           autoComplete="off"
                           required
