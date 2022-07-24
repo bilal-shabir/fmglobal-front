@@ -73,7 +73,7 @@ function Customer () {
       }
     }
     fetchMemberships()
-  }, []);
+  }, [rtl]);
   
   const columns = [
     { name: 'id', header: 'Id', defaultVisible: false, type: 'number',  },

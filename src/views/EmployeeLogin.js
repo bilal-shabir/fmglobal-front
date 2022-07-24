@@ -53,6 +53,7 @@ function EmployeeLogin(){
 
     const login = await POST(URL2+'login', body, "Invalid email or password", null)
     if(login){
+      localStorage.setItem("access_token", login.access_token)
       history.push("/customer");
     }
   }

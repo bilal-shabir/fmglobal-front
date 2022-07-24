@@ -10,10 +10,11 @@ class Logout extends React.Component {
       headers : { 
         'Content-Type': 'application/json',
         'Accept': 'application/json',
-
+        "Authorization": 'Bearer ' + localStorage.getItem("access_token")
        },
        credentials: 'include'
     })
+    localStorage.removeItem("access_token")
     this.props.history.push("login");
 
   }
