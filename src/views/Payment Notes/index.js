@@ -15,6 +15,7 @@ import { useGetFetch } from "../../hooks/useGetFetch.js";
 import { checkLanguage } from "../../utils";
 import exportCSV  from "../../components/components-overview/Data Exports/excel.js";
 
+window.moment = moment
 const gridStyle = { minHeight: 600 }
 const headerStyle = {
   backgroundColor: '#D79D12',
