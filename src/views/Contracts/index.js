@@ -81,7 +81,7 @@ function Contract () {
           }
         },
         render: ({ value, cellProps }) => {
-          return moment(value).format('MM-DD-YYYY')
+          return value ? moment(value).format('MM-DD-YYYY') : "N/A"
         }
     },
     {
