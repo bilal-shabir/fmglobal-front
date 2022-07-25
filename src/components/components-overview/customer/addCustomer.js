@@ -51,6 +51,19 @@ export default ({memberships,refetch}) => {
       });
         return
       }
+      const installment_validation = (+membership.cost) - (+membership.downpayment);
+      if(installment_validation % (+installment_amount.value) !== 0 ){
+        toast.info("Invalid Installment Amount", {
+          position: "top-center",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: false,
+          draggable: true,
+          progress: undefined,
+      });
+        return
+      }
       let array = []
       if(downpayment1date.value){
         array.push({payment_date: downpayment1date.value, amount: +downpayment1amount.value})
