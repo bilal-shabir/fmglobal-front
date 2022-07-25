@@ -30,7 +30,7 @@ export default ({refetch, rtl}) => {
       const lodgings = +document.getElementById("#lodgings").value;
       const contract = +document.getElementById("#contract_duration").value;
       
-      if(contract % lodgings !==0){
+      if(lodgings % contract !==0){
       toast.info("contract duration is invalid for the specified lodgings", {
           position: "top-center",
           autoClose: 3000,
