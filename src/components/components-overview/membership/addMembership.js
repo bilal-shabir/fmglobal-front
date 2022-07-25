@@ -27,8 +27,8 @@ export default ({refetch, rtl}) => {
     }
     async function handleSubmit(event) {
       event.preventDefault(); 
-      const lodgings = lodgings.value;
-      const contract = contract_duration.value
+      const lodgings = document.getElementById("#lodgings").value;
+      const contract =document.getElementById("#contract_duration").value;
       
       if(contract % lodgings !==0){
       toast.info("contract duration is invalid for the specified lodgings", {
