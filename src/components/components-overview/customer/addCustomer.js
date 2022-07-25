@@ -39,7 +39,7 @@ export default ({memberships,refetch}) => {
     }
     async function handleSubmit(event) {
       event.preventDefault();
-      if((+downpayment1amount.value) + (+downpayment2amount.value) + (+downpayment3amount.value) + (+downpaymentpaid.value) > (+membership.cost) ){
+      if((+downpayment1amount.value) + (+downpayment2amount.value) + (+downpayment3amount.value) + (+downpaymentpaid.value) > (+membership.downpayment) ){
         toast.info("Down Payment should be less than or equal to the cost of the membership", {
           position: "top-center",
           autoClose: 3000,
