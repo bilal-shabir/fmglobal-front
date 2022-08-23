@@ -31,7 +31,7 @@ MainFooter.propTypes = {
 
 MainFooter.defaultProps = {
   contained: false,
-  copyright: "Copyright © 2022 Pavilion Renewables",
+  copyright: "Copyright © 2022",
   menuItems: [
     {
       title: "Home",

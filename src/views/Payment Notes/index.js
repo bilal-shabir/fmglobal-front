@@ -4,68 +4,43 @@ import { useTranslation } from "react-i18next";
 import '@inovua/reactdatagrid-community/index.css';
 import '@inovua/reactdatagrid-enterprise/theme/amber-light.css';
 import '@inovua/reactdatagrid-community/base.css';
-import moment from "moment";
-// import SelectFilter from '@inovua/reactdatagrid-community/SelectFilter';
 import { ToastContainer } from 'react-toastify';
-// import AddMembership from '../../components/components-overview/membership/addMembership';
-import NumberFilter from '@inovua/reactdatagrid-community/NumberFilter';
 import DateFilter from '@inovua/reactdatagrid-community/DateFilter'
+import moment from "moment";
+import L from "../../components/components-overview/loader";
+import { URL2 } from "../../constants.js";
+import EditPaymentNote from '../../components/components-overview/payment_note/editPaymentNote';
 import ReactDataGrid from '@inovua/reactdatagrid-community';
 import { useGetFetch } from "../../hooks/useGetFetch.js";
 import { checkLanguage } from "../../utils";
-import L from "../../components/components-overview/loader";
-import { URL2 } from "../../constants.js";
 import exportCSV  from "../../components/components-overview/Data Exports/excel.js";
-
 
 window.moment = moment
 const gridStyle = { minHeight: 600 }
-// const status = [
-//   {
-//     id: false,
-//     label: "Active"
-//   },
-//   {
-//     id: true,
-//     label: "In-Active"
-//   },
-// ]
 const headerStyle = {
   backgroundColor: '#D79D12',
   color: 'black',
 }
 
 const filterValue = [
-    { name: 'is_deleted', operator: 'eq', type: 'select', value:false},
-    { name: 'status', operator: 'contains', type: 'string', value:''},
-    { name: 'downpayment_paid', operator: 'eq', type: 'number'},
-    {
-        name: 'start_date',
-        operator: 'eq',
-        type: 'date',
-        value: ''
-    },
-    {
-        name: 'end_date',
-        operator: 'eq',
-        type: 'date',
-        value: ''
-    },
+    { name: 'payment_date', operator: 'eq', type: 'date'},
+    { name: 'amount',operator: 'eq', type: 'number'},
+    { name: 'status',operator: 'contains', type: 'string'}
   ];
 const rtl = checkLanguage()
 
 
-function Contract () {
+function Payment_Notes () {
   const {t} = useTranslation()
   const controller = new AbortController();
-  const url= URL2+"contract"
-  const [contracts] = useGetFetch(controller, url)
+  const url= URL2+"payment-note"
+  const [payment_notes, refetch] = useGetFetch(controller, url)
   const [gridRef, setGridRef] = useState(null);
   const columns = [
-    { name: 'id', header: 'Contract ID', defaultVisible: false, defaultWidth: 80, type: 'number',  },
+    { name: 'id', header: 'Payment-Note ID', defaultVisible: false, defaultWidth: 80, type: 'number' },
     {
-        name: 'start_date',
-        header: rtl ? 'تاريخ البدء' : 'Start date',
+        name: 'payment_date',
+        header: rtl ? ' موعد الدفع' : 'Payment Date',
         defualtFlex: 1,
         filterEditor: DateFilter,
         // enableColumnFilterContextMenu: false,
@@ -85,39 +60,21 @@ function Contract () {
           return value ? moment(value).format('MM-DD-YYYY') : "N/A"
         }
     },
-    {
-        name: 'end_date',
-        header: rtl ? 'تاريخ الانتهاء' : 'End date',
-        defualtFlex: 1,
-        filterEditor: DateFilter,
-        // enableColumnFilterContextMenu: false,
-        dateFormat: 'MM-DD-YYYY',
-        width: 200,
-        headerProps: { style: headerStyle },
-        filterEditorProps: (props, { index }) => {
-          // for range and notinrange operators, the index is 1 for the after field
-          return {
-            dateFormat: 'MM-DD-YYYY',
-            cancelButton: false,
-            highlightWeekends: false,
-            placeholder: index === 1 ? 'To': 'From'
-          }
-        },
-        render: ({ value, cellProps }) => {
-          return value ? moment(value).format('MM-DD-YYYY') : "N/A"
-        }
+    { name: 'amount', header: rtl ? 'مقدار' : 'Amount', defaultFlex: 1,headerProps: { style: headerStyle } },
+    { name: 'status', header: rtl ? 'نوع' : 'status', defaultFlex: 1,headerProps: { style: headerStyle } },
+    { 
+      name: 'data', 
+      header: rtl ? 'أجراءات' : 'Actions',
+      headerProps: { style: headerStyle },
+      width: 100,
+      render: ({ value })=> 
+        <div style={{textAlign:'center'}}>
+          <EditPaymentNote data={value} refetch={refetch} rtl={rtl} />
+        </div>
     },
-    // { name: 'is_deleted', header: rtl ? 'الحالة': 'Status', defaultFlex: 1, filterEditor: SelectFilter,headerProps: { style: headerStyle },
-    //   filterEditorProps: {
-    //     placeholder: 'All',
-    //     dataSource: status
-    //   },
-    //   render: ({ value })=> value === true ? "In-Active": "Active"
-    // },
-    { name: 'status', header: rtl ? 'الحالة': 'Status', defaultFlex: 1, headerProps: { style: headerStyle }},
-    { name: 'downpayment_paid', header: rtl ? 'دفعة مقدمة مدفوعة': 'Down Payment Paid', defaultFlex: 1, headerProps: { style: headerStyle }, type: "number", filterEditor: NumberFilter},
   ];
   const downloadCSV = () => {
+
     gridRef.current.visibleColumns = gridRef.current.allColumns.filter(object => {
       return object.name !== 'data'
     });
@@ -127,7 +84,7 @@ function Contract () {
     <Suspense fallback={<L />}>
       <Container fluid className="main-content-container px-4">
         <Row noGutters className="page-header py-4">
-            <h4 style={{fontWeight:'600', color:'black'}}>{t('contracts_page_heading')}</h4>
+            <h4 style={{fontWeight:'600', color:'black'}}>{t('payment_notes_heading')}</h4>
         </Row>
         <div className= "d-flex justify-content-end" style={{padding:'10px 10px', width:'100%'}}>
             <div style={{width: '10px'}}></div>
@@ -140,7 +97,7 @@ function Contract () {
               <i className="large material-icons">file_download</i> Export CSV
             </button>
             {/* <div style={{width: 10}}></div> */}
-          {/* <AddMembership refetch = {refetch} rtl={rtl} /> */}
+          {/* <AddPayment customers={customers} refetch = {refetch} rtl={rtl} /> */}
         </div>
         <Row style={{padding:'0 20px'}}>
         <ReactDataGrid
@@ -149,7 +106,7 @@ function Contract () {
             style={gridStyle}
             defaultFilterValue={filterValue}
             columns={columns}
-            dataSource={contracts}
+            dataSource={payment_notes}
             rtl={rtl}
             theme="amber-light"
             rowHeight={50}
@@ -173,4 +130,4 @@ function Contract () {
       </Suspense>     
   );
 }
-export default Contract;
+export default Payment_Notes;

@@ -5,8 +5,11 @@ import fontnormal from '../../fonts/OpenSans-Regular.ttf'
 import fontitalicbold from '../../fonts/OpenSans-BoldItalic.ttf'
 import fontitalic from '../../fonts/OpenSans-Italic.ttf'
 import { PDFViewer } from '@react-pdf/renderer';
+import moment from "moment";
 import logo from '../../images/fmlogo.png'; 
 import L from "../../components/components-overview/loader";
+import { GET } from "../../components/API calls/GET";
+import { URL2 } from "../../constants";
 
 
 Font.register({ family: 'Segoe UI', src: fonts });
@@ -50,9 +53,38 @@ class ReservationVoucherPDF extends React.Component{
     constructor(props){
         super(props);
         this.state ={
-            isLoaded: true,
+            id: this.props.match.params.id,
+            hotel_name: '',
+            end_date: '',
+            guests_number: '',
+            hotel_address: '',
+            hotel_contact: '',
+            hotel_room_type: '',
+            start_date: '',
+            voucher_to: '',
+            created_at: '',
+            isLoaded: false,
         }
         
+    }
+
+    async componentDidMount(){
+        const data = await GET(URL2+'reservation/'+this.state.id, "Error: Failed to load reservation details")
+        
+        data && 
+        this.setState({
+            ...(data.hotel_name) && {hotel_name: data.hotel_name},
+            ...(data.created_at) && {created_at: moment(data.created_at).format('DD-MM-YYYY')},
+            ...(data.end_date) && {end_date: moment(data.end_date).format('DD-MM-YYYY')},
+            ...(data.start_date) && {start_date: moment(data.start_date).format('DD-MM-YYYY')},
+            ...(data.hotel_address) && {hotel_address: data.hotel_address},
+            ...(data.hotel_contact) && {hotel_contact: data.hotel_contact},
+            ...(data.guests_number) && {guests_number: data.guests_number},
+            ...(data.hotel_room_type) && {hotel_room_type: data.hotel_room_type},
+            ...(data.voucher_to) && {voucher_to: data.voucher_to},
+            ...(data.start_date && data.end_date) && {nights: moment.duration(moment(data.end_date, "YYYY-MM-DD").diff(moment(data.start_date, "YYYY-MM-DD"))).asDays()},
+            isLoaded: true
+        })
     }
     
     render(){
@@ -77,11 +109,11 @@ class ReservationVoucherPDF extends React.Component{
                 </View>
                 <View style={{width:'100%', marginTop:'140px', height:'50px', position:'absolute' }}>
                     <View style={{width:'50%', height:'50px', fontSize:'13px',  backgroundColor:'#AA9E4D', position:'absolute', color:'white',  justifyContent:'center', alignContent:'center', display:'flex'}}>
-                        <Text style={{width:'100%', textAlign:'center'}}>Booking ID#:  16974</Text>
+                        <Text style={{width:'100%', textAlign:'center'}}>Booking ID#: {this.state.id}</Text>
                         <Text style={{width:'100%', textAlign:'center'}}>External Reference: 701657649</Text>
                     </View>
                     <View style={{width:'50%', height:'50px', marginLeft:'50%',  backgroundColor:'black',  justifyContent:'center', alignContent:'center', display:'flex'}}>
-                        <Text style={{width:'100%', textAlign:'center', color:'white'}}>Date: 02-07-2022</Text>
+                        <Text style={{width:'100%', textAlign:'center', color:'white'}}>Date: {this.state.created_at}</Text>
                     </View>
                 </View>
                 <View style={{width:'88%', marginLeft:'6%',height:'50px', marginTop:'190px', position:'absolute'}}>
@@ -89,7 +121,7 @@ class ReservationVoucherPDF extends React.Component{
                         <Text style={{width:'100%', textAlign:'center'}}>Voucher to:</Text>
                     </View>
                     <View style={{width:'70%', height:'50px', marginLeft:'30%',  justifyContent:'center', alignContent:'center', display:'flex', fontFamily: 'Segoe UI'}}>
-                        <Text style={{width:'100%', textAlign:'center', }}>Mr. MOHAMMED  ABDULNABI</Text>
+                        <Text style={{width:'100%', textAlign:'center', }}>{this.state.voucher_to}</Text>
                     </View>
                 </View>
                 <View style={{width:'88%', marginLeft:'6%',height:'50px', marginTop:'240px', position:'absolute'}}>
@@ -97,7 +129,7 @@ class ReservationVoucherPDF extends React.Component{
                         <Text style={{width:'100%', textAlign:'left',  marginLeft:'8px', fontSize:'14px'}}>Hotel Name</Text>
                     </View>
                     <View style={{width:'75%', height:'50px', marginLeft:'25%', fontSize:'14px', justifyContent:'center', backgroundColor:'#E5DFDB', alignContent:'center', display:'flex', fontFamily: 'Segoe UI'}}>
-                        <Text style={{width:'100%', textAlign:'center', }}>RAMADA ENCORE KUWAIT DOWNTOWN</Text>
+                        <Text style={{width:'100%', textAlign:'center', }}>{this.state.hotel_name}</Text>
                     </View>
                 </View>
                 <View style={{width:'88%', marginLeft:'6%',height:'50px', marginTop:'295px', position:'absolute'}}>
@@ -106,9 +138,8 @@ class ReservationVoucherPDF extends React.Component{
                         <Text style={{width:'100%', textAlign:'left', marginLeft:'8px', fontSize:'14px'}}>Tel.</Text>
                     </View>
                     <View style={{width:'75%', height:'50px', marginLeft:'25%', fontSize:'14px', justifyContent:'center', backgroundColor:'#E5DFDB', alignContent:'center', display:'flex', fontFamily: 'Segoe UI'}}>
-                        <Text style={{width:'100%', textAlign:'center', fontSize:'11px' }}>113 Jaber Al Mubarak Street Block 8, Sharq District, 32026, Kuwait City,KUWAIT CITY, Kuwait
-                        </Text>
-                        <Text style={{width:'100%', textAlign:'center', fontSize:'11px'}}>+001800112</Text>
+                        <Text style={{width:'100%', textAlign:'center', fontSize:'11px' }}>{this.state.hotel_address}</Text>
+                        <Text style={{width:'100%', textAlign:'center', fontSize:'11px'}}>{this.state.hotel_contact}</Text>
                     </View>
                 </View>
                 
@@ -118,7 +149,7 @@ class ReservationVoucherPDF extends React.Component{
                             <Text style={{width:'100%', textAlign:'center', fontSize:'14px', color:'#454141'}}>Check-in</Text>
                         </View>
                         <View style={{width:'75%', height:'50px', marginLeft:'25%', fontSize:'14px', justifyContent:'center', backgroundColor:'#E5DFDB', alignContent:'center', display:'flex', fontFamily: 'Segoe UI'}}>
-                            <Text style={{width:'100%', textAlign:'center',fontSize:'14px' }}>04-07-2022</Text>
+                            <Text style={{width:'100%', textAlign:'center',fontSize:'14px' }}>{this.state.start_date}</Text>
                         </View>
                     </View>
                     <View style={{width:'100%',height:'50px', position:'absolute', borderBottom:'2px solid #A09992', marginTop:'50px'}}>
@@ -126,7 +157,7 @@ class ReservationVoucherPDF extends React.Component{
                             <Text style={{width:'100%', textAlign:'center', fontSize:'14px', color:'#454141'}}>Check-out</Text>
                         </View>
                         <View style={{width:'75%', height:'50px', marginLeft:'25%', fontSize:'14px', justifyContent:'center', backgroundColor:'#E5DFDB', alignContent:'center', display:'flex', fontFamily: 'Segoe UI'}}>
-                            <Text style={{width:'100%', textAlign:'center',fontSize:'14px' }}>06-07-2022</Text>
+                            <Text style={{width:'100%', textAlign:'center',fontSize:'14px' }}>{this.state.end_date}</Text>
                         </View>
                     </View>
                     <View style={{width:'100%',height:'50px', position:'absolute', borderBottom:'2px solid #A09992', marginTop:'100px'}}>
@@ -134,7 +165,7 @@ class ReservationVoucherPDF extends React.Component{
                             <Text style={{width:'100%', textAlign:'center', fontSize:'14px', color:'#454141'}}>Nights</Text>
                         </View>
                         <View style={{width:'75%', height:'50px', marginLeft:'25%', fontSize:'14px', justifyContent:'center', backgroundColor:'#E5DFDB', alignContent:'center', display:'flex', fontFamily: 'Segoe UI'}}>
-                            <Text style={{width:'100%', textAlign:'center',fontSize:'14px' }}>2</Text>
+                            <Text style={{width:'100%', textAlign:'center',fontSize:'14px' }}>{this.state.nights}</Text>
                         </View>
                     </View>
                     <View style={{width:'100%',height:'50px', position:'absolute', borderBottom:'2px solid #A09992', marginTop:'150px'}}>
@@ -142,7 +173,7 @@ class ReservationVoucherPDF extends React.Component{
                             <Text style={{width:'100%', textAlign:'center', fontSize:'14px', color:'#454141'}}>Room Type</Text>
                         </View>
                         <View style={{width:'75%', height:'50px', marginLeft:'25%', fontSize:'14px', justifyContent:'center', backgroundColor:'#E5DFDB', alignContent:'center', display:'flex', fontFamily: 'Segoe UI'}}>
-                            <Text style={{width:'100%', textAlign:'center',fontSize:'14px' }}>1 Queen Bed Smoking Room only</Text>
+                            <Text style={{width:'100%', textAlign:'center',fontSize:'14px' }}>{this.state.hotel_room_type}</Text>
                         </View>
                     </View>
                     <View style={{width:'100%',height:'50px', position:'absolute', borderBottom:'2px solid #A09992', marginTop:'200px'}}>
@@ -150,7 +181,7 @@ class ReservationVoucherPDF extends React.Component{
                             <Text style={{width:'100%', textAlign:'center', fontSize:'14px',  color:'#454141'}}>Guest(s) In-Room </Text>
                         </View>
                         <View style={{width:'75%', height:'50px', marginLeft:'25%', fontSize:'14px', justifyContent:'center', backgroundColor:'#E5DFDB', alignContent:'center', display:'flex', fontFamily: 'Segoe UI'}}>
-                            <Text style={{width:'100%', textAlign:'center',fontSize:'14px' }}>Adults: 2</Text>
+                            <Text style={{width:'100%', textAlign:'center',fontSize:'14px' }}>Adults: {this.state.guests_number}</Text>
                         </View>
                     </View>
                 </View>

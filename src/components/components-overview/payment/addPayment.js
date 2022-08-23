@@ -30,9 +30,9 @@ export default ({customers, refetch, rtl}) => {
     async function handleSubmit(event) {
       event.preventDefault(); 
       const body ={
-        hotel_name: hotelname.value,
-        hotel_address: hotel_address.value,
-        hotel_contact: hotel_contact.value,
+        payment_date: hotelname.value,
+        amount: hotel_address.value,
+        type: hotel_contact.value,
         hotel_room_type: hotel_room_type.value,
         voucher_to: voucher_to.value,
         guests_number: +guests_number.value,
@@ -41,12 +41,9 @@ export default ({customers, refetch, rtl}) => {
         current_year_lodgings: +current_year_lodgings.value,
         customer: +customer.value
       }
-      const insert = await POST(URL2+"reservation", body ,"Error: Failed to create reservation","Reservation created successfully")
-      if(insert){
-        close_add_modal()
-      }
+      await POST(URL2+"reservation", body ,"Error: Failed to create reservation","Reservation created successfully")
       refetch({})
-      
+      close_add_modal()
     }
     return (
         <div>
@@ -56,7 +53,7 @@ export default ({customers, refetch, rtl}) => {
                 type="button" 
                 style={{ color:'#D79D12'}}
             >
-                <i className="large material-icons">add</i>{t('add_reservation_button')}
+                <i className="large material-icons">add</i>{t('add_payment_button')}
             </button>
             <Modal
                 show={show}
@@ -68,7 +65,7 @@ export default ({customers, refetch, rtl}) => {
             >
                 <Modal.Header closeButton>
                 <Modal.Title id="contained-modal-title-vcenter">
-                    <span style={{color:'black'}}>{t('add_reservation_heading')}</span>
+                    <span style={{color:'black'}}>{t('add_payment_heading')}</span>
                 </Modal.Title>
                 </Modal.Header>
                 <form onSubmit={handleSubmit }>

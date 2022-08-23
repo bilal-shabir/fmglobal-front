@@ -33,7 +33,7 @@ class Systemsinfo2 extends React.Component{
     }
 
   componentDidMount() {
-        //console.log('hi');
+
       fetch(URL+'customers/getAldurPower', {
           headers : { 
             'Content-Type': 'application/json',
@@ -42,14 +42,11 @@ class Systemsinfo2 extends React.Component{
         })
         .then(res => res.json())
         .then(result => {
-          //console.log('hi');
           if(result.status=='success'){
-            //console.log(result);
             this.setState({
               isLoaded: true,
               TP: result.data.TP
             });
-           // console.log(result.data.TP);
           }
           else if(result.status=='failed'){
             alert('failed')

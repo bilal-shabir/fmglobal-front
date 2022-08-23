@@ -44,12 +44,11 @@ class Systemsinfo extends React.Component{
         .then(res => res.json())
         .then(result => {
           if(result.status=='success'){
-            //console.log(result);
             this.setState({
               isLoaded: true,
               TP: result.data.TP
             });
-            //console.log(result.data.TP);
+
           }
           else if(result.status=='failed'){
             alert('failed')

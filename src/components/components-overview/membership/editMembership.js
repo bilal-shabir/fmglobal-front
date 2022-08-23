@@ -3,6 +3,7 @@ import {
   Modal,
 } from "react-bootstrap";
 import { useTranslation } from "react-i18next";
+import { toast } from "react-toastify";
 import { FormGroup, FormInput } from "shards-react";
 import { URL2 } from "../../../constants";
 import { PUT } from "../../API calls/PUT";
@@ -19,6 +20,21 @@ export default ({data, refetch, rtl}) => {
     }
     function handleEdit (event){
       event.preventDefault(); 
+      
+      const lodgings = +document.getElementById("#lodgings").value;
+      const contract = +document.getElementById("#contract_duration").value;
+      if(lodgings % contract !==0){
+      toast.info("contract duration is invalid for the specified lodgings", {
+          position: "top-center",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: false,
+          draggable: true,
+          progress: undefined,
+      });
+        return
+      }
       const body = {
         id: data.id,
         name: document.getElementById("#name").value,

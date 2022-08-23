@@ -9,13 +9,14 @@ import SelectFilter from '@inovua/reactdatagrid-community/SelectFilter';
 import { ToastContainer } from 'react-toastify';
 import AddCustomer from '../../components/components-overview/customer/addCustomer.js';
 import EditCustomer from '../../components/components-overview/customer/editCustomer.js';
-import ManageMembership from '../../components/components-overview/customer/manageMembership.js';
-// import ManagePayments from '../../components/components-overview/customer/managePayments.js';
+// import ManageMembership from '../../components/components-overview/customer/manageMembership.js';
+import ManagePayments from '../../components/components-overview/customer/managePayments.js';
 import L from "../../components/components-overview/loader";
 import { URL2 } from "../../constants.js";
 import { useGetFetch } from "../../hooks/useGetFetch.js";
 import { checkLanguage } from "../../utils.js";
 import { GET } from "../../components/API calls/GET.js";
+import exportCSV  from "../../components/components-overview/Data Exports/excel.js";
 
 const rtl = checkLanguage()
 const gridStyle = { minHeight: 600 }
@@ -35,18 +36,22 @@ const headerStyle = {
 }
 
 const filterValue = [
-    { name: 'name', operator: 'startsWith', type: 'string' },
+    { name: 'name', operator: 'eq', type: 'string' },
     { name: 'email', operator: 'eq', type: 'string' },
+    { name: 'mobile', operator: 'eq', type: 'string' },
     { name: 'CPR', operator: 'eq', type: 'number'},
     { name: 'nationality', operator: 'eq', type: 'string'},
     { name: 'is_deleted', operator: 'eq', type: 'select', value:null},
     { name: 'membership', operator: 'eq', type: 'select', value: null},
 ];
 
+
+
 function Customer () {
   const {t} = useTranslation()
   const controller = new AbortController();
-  const url= URL2+"customer"
+  const url= URL2+"customer";
+  const [gridRef, setGridRef] = useState(null);
   let [customers, refetch] = useGetFetch(controller, url)
   const[memberships , setMemberships] = useState([])
   const[membershipFilterSource , setMembershipFilterSource] = useState([])
@@ -66,10 +71,9 @@ function Customer () {
       setMembershipFilterSource(membershipFilter)
       setMemberships(response)
       }
-      console.log(membershipFilter)
     }
     fetchMemberships()
-  }, []);
+  }, [rtl]);
   
   const columns = [
     { name: 'id', header: 'Id', defaultVisible: false, type: 'number',  },
@@ -77,6 +81,7 @@ function Customer () {
     { name: 'email', header: 'Email', defaultFlex: 1,headerProps: { style: headerStyle } },
     { name: 'CPR', header: 'CPR', defaultFlex: 1,headerProps: { style: headerStyle } },
     { name: 'nationality', header: 'Nationality', defaultFlex: 1,headerProps: { style: headerStyle } },
+    { name: 'mobile', header: 'Mobile', defaultFlex: 1,headerProps: { style: headerStyle }},
     { 
       name: 'membership', 
       header: 'Membership', 
@@ -100,27 +105,47 @@ function Customer () {
     { 
       name: 'data',
       defaultVisible: true,
-      header: ()=> (<div style={{width:'100%', textAlign:'center'}}>Actions</div>), headerProps: { style: headerStyle },
-      width: rtl ? 180 : 200,
+      header: rtl ? 'أجراءات' : 'Actions',
+      headerProps: { style: headerStyle },
+      width: rtl ? 190 : 190,
       render: ({ value })=> 
         <div style={{textAlign:'center', display:'flex', justifyContent:'space-between', alignItems:'center', }}>
           <EditCustomer data={value} refetch={refetch} />
-          <ManageMembership />
-          {/* <ManagePayments /> */}
+          {/* <ManageMembership /> */}
+          <ManagePayments data={value} refetch={refetch}/>
         </div>
     },
   ];
+  const downloadCSV = () => {
+    gridRef.current.visibleColumns = gridRef.current.allColumns.filter(object => {
+      return object.name !== 'data' && 
+      object.name !== 'id' && 
+      object.name !== 'is_deleted'
+    });
+    exportCSV(gridRef)
+  }
   return (
     <Suspense fallback={<L></L>}>
         <Container fluid className="main-content-container px-4">
           <Row noGutters className="page-header py-4">
               <h4 style={{fontWeight:'600', color:'black'}}>{t('customer_page_heading')}</h4>
           </Row>
-          <div style={{padding:'10px 10px', textAlign: rtl ? 'left' : 'right', width:'100%'}}>
+          <div className= "d-flex justify-content-end" style={{padding:'10px 10px', width:'100%'}}>
+            <div style={{width: '10px'}}></div>
+            <button 
+              className="btn btn-dark"  
+              type="button" 
+              style={{ color:'#D79D12'}} 
+              onClick={downloadCSV}
+            >
+              <i className="large material-icons">file_download</i> Export CSV
+            </button>
+            <div style={{width: 10}}></div>
             <AddCustomer memberships = {memberships} refetch={refetch} />
           </div>
           <Row style={{padding:'0 20px'}}>
           <ReactDataGrid
+              handle={setGridRef}
               idProperty="id"
               style={gridStyle}
               defaultFilterValue={filterValue}

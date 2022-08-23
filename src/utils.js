@@ -9,7 +9,7 @@ export var checkpermision =function(input) {
       var CryptoJS = require("crypto-js");
       var bytes = CryptoJS.AES.decrypt(permission, DKEY);
       var permissions = JSON.parse(bytes.toString(CryptoJS.enc.Utf8));
-      console.log(permissions)
+
       if(!permissions.find((permission) => permission.name === input ) ){
         window.location.replace("/"+permissions[0].name);
       }

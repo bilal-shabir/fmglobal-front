@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import {
   Modal,
 } from "react-bootstrap";
+import { toast } from "react-toastify";
 import { useTranslation } from "react-i18next";
 import { FormGroup, FormInput } from "shards-react";
 import { URL2 } from "../../../constants";
@@ -26,11 +27,28 @@ export default ({refetch, rtl}) => {
     }
     async function handleSubmit(event) {
       event.preventDefault(); 
+      const lodgings = +document.getElementById("#lodgings").value;
+      const contract = +document.getElementById("#contract_duration").value;
+      
+      if(lodgings % contract !==0){
+      toast.info("contract duration is invalid for the specified lodgings", {
+          position: "top-center",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: false,
+          draggable: true,
+          progress: undefined,
+      });
+        return
+      }
+        
+      
       const body ={
         name: name.value,
         cost: cost.value,
         contract_duration: contract_duration.value,
-        lodgings: lodgings.value,
+        lodgings: lodgings,
         downpayment: downpayment.value,
         supervisor_commision: supervisor_commision.value ? supervisor_commision.value : null,
         employee_commision: employee_commision.value ? employee_commision.value : null
