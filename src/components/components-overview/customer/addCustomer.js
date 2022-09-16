@@ -41,7 +41,7 @@ export default ({ memberships, refetch }) => {
       +downpayment1amount.value +
         +downpayment2amount.value +
         +downpayment3amount.value +
-        +downpaymentpaid.value !=
+        +downpaymentpaid.value !==
       +membership.downpayment
     ) {
       toast.info(
@@ -58,7 +58,7 @@ export default ({ memberships, refetch }) => {
       );
       return;
     }
-    const installment_validation = +membership.cost - +membership.downpayment;
+    // const installment_validation = +membership.cost - +membership.downpayment;
     // if(installment_validation % (+installment_amount.value) !== 0 ){
     //   toast.info("Invalid Installment Amount", {
     //     position: "top-center",

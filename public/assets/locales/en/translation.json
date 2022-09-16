@@ -32,5 +32,10 @@
     "add_payment_button" : "Payment",
     "add_payment_heading" : "Add Payment",
     "edit_payment_heading": "Edit Payment",
-    "payment_notes_heading": "Payment Notes"
+    "payment_notes_heading": "Payment Notes",
+    "add_role_heading": "Add Role",
+    "add_role_button": "Role",
+    "role_page_heading": "Roles",
+    "analytics_page_heading": "Analytics"
+
 }

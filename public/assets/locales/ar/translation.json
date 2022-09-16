@@ -32,6 +32,9 @@
     "add_payment_button" : "دفع",
     "add_payment_heading" : "إضافة المدفوعات",
     "edit_payment_heading": "تحرير الدفع",
-    "payment_notes_heading": "ملاحظات الدفع"
-
+    "payment_notes_heading": "ملاحظات الدفع",
+    "add_role_heading": "إضافة دور",
+    "add_role_button": "وظيفة",
+    "role_page_heading": "الأدوار",
+    "analytics_page_heading": "التحليلات"
 }

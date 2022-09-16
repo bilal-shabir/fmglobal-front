@@ -42,6 +42,20 @@ export default function() {
       to: "/Employee",
       htmlBefore: '<i class="material-icons" >assignment_ind</i>',
       htmlAfter: ""
+    },
+    {
+      title: "Roles",
+      title_ar: "الأدوار",
+      to: "/Roles",
+      htmlBefore: '<i class="material-icons" >settings</i>',
+      htmlAfter: ""
+    },
+    {
+      title: "Analytics",
+      title_ar: "التحليلات",
+      to: "/Analytics",
+      htmlBefore: '<i class="material-icons" >insert_chart</i>',
+      htmlAfter: ""
     }
   ];
 }

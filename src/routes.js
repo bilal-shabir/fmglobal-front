@@ -17,6 +17,8 @@ import Contract from "./views/Contracts";
 import Payment from "./views/Payment";
 import Payment_Notes from "./views/Payment Notes";
 import Logout from "./views/logout";
+import Role from "./views/Roles";
+import Analytics from "./views/Analytics";
 
 export default [
   {
@@ -72,6 +74,18 @@ export default [
     exact: true,
     layout: DefaultLayout,
     component: Payment_Notes,
+  },
+  {
+    path: "/Roles",
+    exact: true,
+    layout: DefaultLayout,
+    component: Role,
+  },
+  {
+    path: "/Analytics",
+    exact: true,
+    layout: DefaultLayout,
+    component: Analytics,
   },
   {
     path: "/logout",
