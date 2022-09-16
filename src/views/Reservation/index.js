@@ -69,14 +69,14 @@ function Reservation () {
   const columns = [
     { name: 'id', header: 'Reservation Number', defaultVisible: false, defaultWidth: 80, type: 'number'  },
     { name: 'created_at', header: 'Created on', defaultVisible: false, defaultWidth: 80, type: 'number' },
-    { name: 'hotel_name', header: rtl ? 'الدفع لأسفل' : 'Hotel Name', defaultFlex: 1,headerProps: { style: headerStyle } },
+    { name: 'hotel_name', header: rtl ? ' اسم الفندق' : 'Hotel Name', defaultFlex: 1,headerProps: { style: headerStyle } },
     { name: 'hotel_address', header: 'Hotel Address', defaultVisible: false },
     { name: 'hotel_contact', header: 'Hotel Contact', defaultVisible: false },
     { name: 'hotel_room_type', header: 'Hotel Room Type', defaultVisible: false },
     { name: 'guests_number', header: 'Guests', defaultVisible: false },
     {
         name: 'start_date',
-        header: rtl ? 'تاريخ البدء' : 'Start date',
+        header: rtl ? 'تاريخ الدخول' : 'Check In',
         defualtFlex: 1,
         filterEditor: DateFilter,
         // enableColumnFilterContextMenu: false,
@@ -98,7 +98,7 @@ function Reservation () {
     },
     {
         name: 'end_date',
-        header: rtl ? 'تاريخ الانتهاء' : 'End date',
+        header: rtl ? 'تاريخ الخروج' : 'Check Out',
         defualtFlex: 1,
         filterEditor: DateFilter,
         // enableColumnFilterContextMenu: false,
@@ -118,9 +118,9 @@ function Reservation () {
           return value ? moment(value).format('MM-DD-YYYY') : "N/A"
         }
     },
-    { name: 'customer', header: rtl ? 'عميل' : 'Customer', defaultFlex: 1,headerProps: { style: headerStyle } },
-    { name: 'customer_cpr', header: rtl ? 'عميل' : 'Customer CPR', defaultFlex: 1,headerProps: { style: headerStyle } },
-    { name: 'voucher_to', header: rtl ? 'قسيمة ل' : 'Voucher For', defaultFlex: 1,headerProps: { style: headerStyle } },
+    { name: 'customer', header: rtl ? 'العميل' : 'Customer', defaultFlex: 1,headerProps: { style: headerStyle } },
+    { name: 'customer_cpr', header: rtl ? ' الرقم الشخصي' : 'Customer CPR', defaultFlex: 1,headerProps: { style: headerStyle } },
+    { name: 'voucher_to', header: rtl ? ' المستفيد من  الحجز' : 'Voucher For', defaultFlex: 1,headerProps: { style: headerStyle } },
     // { name: 'customerId', header: rtl ? 'عميل' : 'Customer', defaultFlex: 1,headerProps: { style: headerStyle } },
     { name: 'is_deleted', header: rtl ? 'الحالة': 'Status', defaultFlex: 1, filterEditor: SelectFilter,headerProps: { style: headerStyle },
       filterEditorProps: {

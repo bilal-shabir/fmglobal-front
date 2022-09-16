@@ -66,7 +66,7 @@ function Membership() {
     },
     {
       name: "downpayment",
-      header: rtl ? "الدفع لأسفل" : "Down Payment",
+      header: rtl ? "المقدم" : "Down Payment",
       defaultFlex: 1,
       headerProps: { style: headerStyle },
       type: "number",
@@ -74,7 +74,7 @@ function Membership() {
     },
     {
       name: "cost",
-      header: rtl ? "قدر" : "Cost",
+      header: rtl ? "السعر" : "Cost",
       defaultFlex: 1,
       headerProps: { style: headerStyle },
       type: "number",
@@ -82,7 +82,7 @@ function Membership() {
     },
     {
       name: "lodgings",
-      header: rtl ? "غرف مفروشة" : "Lodgings",
+      header: rtl ? "الليالي المجانية" : "Free Nights",
       defaultFlex: 1,
       headerProps: { style: headerStyle },
       type: "number",
@@ -98,7 +98,7 @@ function Membership() {
     },
     {
       name: "employee_commision",
-      header: rtl ? "عمولة الموظف" : "Employee Commission",
+      header: rtl ? "عمولة مندوب المبيعات" : "Sales Person Commission",
       defaultFlex: 1,
       headerProps: { style: headerStyle },
       type: "number",
@@ -106,7 +106,7 @@ function Membership() {
     },
     {
       name: "supervisor_commision",
-      header: rtl ? "عمولة المشرف" : "Supervisor Commission",
+      header: rtl ? "TO عمولة" : "TO Commission",
       defaultFlex: 1,
       headerProps: { style: headerStyle },
       type: "number",
